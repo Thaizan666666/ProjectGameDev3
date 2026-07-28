@@ -535,37 +535,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &343113593
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 343113594}
-  m_Layer: 0
-  m_Name: ----------------------------------------
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &343113594
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 343113593}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.60157, y: 0.1162, z: -4.36701}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484824781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,37 +2404,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1903173861
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1903173862}
-  m_Layer: 0
-  m_Name: ----------------------------------------
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1903173862
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903173861}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.60157, y: 0.1162, z: -4.36701}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117034448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,6 +2670,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 341502622088980672, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
+      propertyPath: fishStatsAssets.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 341502622088980672, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
+      propertyPath: 'fishStatsAssets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cd645863afb28864eb3a213b8135f817, type: 2}
+    - target: {fileID: 341502622088980672, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
+      propertyPath: 'fishStatsAssets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 51233478c82d7654b89892e34b3b3287, type: 2}
+    - target: {fileID: 341502622088980672, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
+      propertyPath: 'fishStatsAssets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1cc123b35fb8e964fa8e02025a94f2da, type: 2}
+    - target: {fileID: 341502622088980672, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
+      propertyPath: 'fishStatsAssets.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cf619ca5ef0a64941ad8538f30d29ef2, type: 2}
+    - target: {fileID: 341502622088980672, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
+      propertyPath: 'fishStatsAssets.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0102181a69a661a40bfc6863b9162760, type: 2}
+    - target: {fileID: 341502622088980672, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
+      propertyPath: 'fishStatsAssets.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3480b2c6bac30f746be7a5f87c78d210, type: 2}
     - target: {fileID: 2540633237709498034, guid: f311d9f7084303240bbc3ce3487938ca, type: 3}
       propertyPath: m_Name
       value: FishDatabase
@@ -2794,7 +2760,5 @@ SceneRoots:
   - {fileID: 827330700}
   - {fileID: 2117034450}
   - {fileID: 1087523509}
-  - {fileID: 1903173862}
   - {fileID: 1432078714}
   - {fileID: 2958060641697104974}
-  - {fileID: 343113594}
