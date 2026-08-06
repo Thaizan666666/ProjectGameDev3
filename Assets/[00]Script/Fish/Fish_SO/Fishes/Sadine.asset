@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d4684f404ee8346a7b6fecd3f983a4, type: 3}
   m_Name: Sadine
   m_EditorClassIdentifier: Assembly-CSharp::TableForge.Fish.FishStats
-  fishName: 802
+  fishName: 801
   fishTier: 0
-  minWeight: 0
-  maxWeight: 0
-  percentRate: 20
-  Price: 0
+  minWeight: 5
+  maxWeight: 8
+  percentRate: 30
+  Price: 200
   Icon: {fileID: 0}
   Prefab: {fileID: 0}

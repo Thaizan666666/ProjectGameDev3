@@ -1,39 +1,3 @@
-// using System.Collections.Generic;
-// using System.Linq;
-// using UnityEngine;
-
-// public class FishDatabase : MonoBehaviour, IFishRepository
-// {
-//     [SerializeField]
-//     private List<FishData> fishes = new()
-//     {
-//         new FishData { fishName = FishName.Sardine, fishTier = FishTier.Common, minWeight = 5, maxWeight = 20, percentRate = 70 },
-//         new FishData { fishName = FishName.Salmon, fishTier = FishTier.Common, minWeight = 15, maxWeight = 35, percentRate = 40 },
-//         new FishData { fishName = FishName.WhiteSnapper, fishTier = FishTier.Common, minWeight = 10, maxWeight = 35, percentRate = 60 },
-//         new FishData { fishName = FishName.Tuna, fishTier = FishTier.Rare, minWeight = 80, maxWeight = 200, percentRate = 10 },
-//         new FishData { fishName = FishName.Swordfish, fishTier = FishTier.Rare, minWeight = 100, maxWeight = 300, percentRate = 5 },
-//         new FishData { fishName = FishName.Dunkleosteus, fishTier = FishTier.Boss, minWeight = 500, maxWeight = 1200, percentRate = 1 }
-//     };
-
-//     public IReadOnlyList<FishData> GetAll() => fishes;
-
-//     public IReadOnlyList<FishData> GetByTier(FishTier tier) =>
-//         fishes.Where(f => f.fishTier == tier).ToList();
-
-//     public FishData GetByName(FishName fishName) =>
-//         fishes.FirstOrDefault(f => f.fishName == fishName);
-
-//     // Random pick within a tier, ignores zone
-//     public FishData GetRandomFish(FishTier tier)
-//     {
-//         FishData result = WeightedRandomPicker.Pick(GetByTier(tier), f => f.percentRate);
-
-//         if (result == null)
-//             Debug.LogWarning($"No fish for tier: {tier}");
-
-//         return result;
-//     }
-// }
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -41,12 +5,24 @@ using TableForge.Fish;
 
 public class FishDatabase : MonoBehaviour, IFishRepository
 {
-    [SerializeField] private FishStats[] fishStatsAssets; // Drag FishStats assets จาก Fishes folder มาใน Inspector
+    [SerializeField] private FishStats[] fishStatsAssets;
 
     private List<FishData> fishes = new();
+    private bool isLoaded = false;
+    private int lastAssetsHash = -1;
 
-    private void Awake()
+    private void Awake() => EnsureLoaded();
+
+    public void EnsureLoaded()
     {
+        int currentHash = ComputeAssetsHash();
+
+        // ★ ถ้า array เปลี่ยน (เพิ่ม/ลบ/สลับ asset) → บังคับ reload แม้ isLoaded จะเป็น true
+        if (isLoaded && currentHash == lastAssetsHash)
+            return;
+
+        isLoaded = true;
+        lastAssetsHash = currentHash;
         fishes.Clear();
 
         // 1. โหลดจาก Inspector-assigned assets
@@ -59,7 +35,7 @@ public class FishDatabase : MonoBehaviour, IFishRepository
             }
         }
 
-        // 2. Fallback: โหลดจาก Resources ถ้ายังไม่ได้ assign ใน Inspector
+        // 2. Fallback: โหลดจาก Resources
         if (fishes.Count == 0)
         {
             var loaded = Resources.LoadAll<FishStats>("Fish_SO/Fishes");
@@ -70,29 +46,54 @@ public class FishDatabase : MonoBehaviour, IFishRepository
         }
     }
 
-    private FishData ConvertToFishData(FishStats stats) => new FishData
+    /// <summary>คำนวณ hash จาก instanceID ของทุก asset ใน array — เปลี่ยนเมื่อเพิ่ม/ลบ/เปลี่ยน asset</summary>
+    private int ComputeAssetsHash()
     {
-        fishName   = stats.fishName,
-        fishTier   = stats.fishTier,
-        minWeight  = stats.minWeight,
-        maxWeight  = stats.maxWeight,
+        if (fishStatsAssets == null || fishStatsAssets.Length == 0)
+            return 0;
+
+        unchecked
+        {
+            int hash = 17;
+            foreach (var stats in fishStatsAssets)
+                hash = hash * 31 + (stats != null ? stats.GetInstanceID() : 0);
+            return hash;
+        }
+    }
+
+    private static FishData ConvertToFishData(FishStats stats) => new FishData
+    {
+        fishName    = stats.fishName,
+        fishTier    = stats.fishTier,
+        minWeight   = stats.minWeight,
+        maxWeight   = stats.maxWeight,
         percentRate = stats.percentRate,
-        Price      = stats.Price,
-        Icon       = stats.Icon,
-        Prefab     = stats.Prefab
+        Price       = stats.Price,
+        Icon        = stats.Icon,
+        Prefab      = stats.Prefab
     };
 
-    public IReadOnlyList<FishData> GetAll() => fishes;
+    public IReadOnlyList<FishData> GetAll()
+    {
+        EnsureLoaded();
+        return fishes;
+    }
 
-    public IReadOnlyList<FishData> GetByTier(FishTier tier) =>
-        fishes.Where(f => f.fishTier == tier).ToList();
+    public IReadOnlyList<FishData> GetByTier(FishTier tier)
+    {
+        EnsureLoaded();
+        return fishes.Where(f => f.fishTier == tier).ToList();
+    }
 
-    public FishData GetByName(FishName fishName) =>
-        fishes.FirstOrDefault(f => f.fishName == fishName);
+    public FishData GetByName(FishName fishName)
+    {
+        EnsureLoaded();
+        return fishes.FirstOrDefault(f => f.fishName == fishName);
+    }
 
-    // Random pick within a tier, ignores zone
     public FishData GetRandomFish(FishTier tier)
     {
+        EnsureLoaded();
         FishData result = WeightedRandomPicker.Pick(GetByTier(tier), f => f.percentRate);
         if (result == null) Debug.LogWarning($"No fish for tier: {tier}");
         return result;

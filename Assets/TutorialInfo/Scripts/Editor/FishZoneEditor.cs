@@ -26,7 +26,20 @@ public class FishZoneEditor : Editor
             return;
         }
 
-        EditorGUILayout.LabelField("Allowed Fish", EditorStyles.boldLabel);
+        database.EnsureLoaded();
+
+        List<FishData> allFish = database.GetAll().ToList();
+
+        if (allFish.Count == 0)
+        {
+            EditorGUILayout.HelpBox(
+                "FishDatabase has no fish.\n" +
+                "Assign FishStats assets to FishDatabase's 'Fish Stats Assets' array.",
+                MessageType.Warning);
+            return;
+        }
+
+        EditorGUILayout.LabelField($"Allowed Fish  ({allFish.Count} species in DB)", EditorStyles.boldLabel);
         EditorGUILayout.LabelField("Pick Tier, then Fish", EditorStyles.miniLabel);
         EditorGUILayout.Space(4);
 
@@ -40,11 +53,11 @@ public class FishZoneEditor : Editor
 
             FishTier newTier = (FishTier)EditorGUILayout.EnumPopup(entry.tier, GUILayout.Width(100));
 
-            List<FishData> fishInTier = database.GetAll().Where(f => f.fishTier == newTier).ToList();
+            List<FishData> fishInTier = allFish.Where(f => f.fishTier == newTier).ToList();
 
             if (fishInTier.Count == 0)
             {
-                EditorGUILayout.LabelField($"No {newTier} fish");
+                EditorGUILayout.LabelField($"No {newTier} fish in DB");
             }
             else
             {
@@ -88,18 +101,14 @@ public class FishZoneEditor : Editor
 
         if (GUILayout.Button("+ Add Fish"))
         {
-            FishData defaultFish = database.GetAll().FirstOrDefault(f => f.fishTier == FishTier.Common)
-                                    ?? database.GetAll().FirstOrDefault();
+            FishData defaultFish = allFish.FirstOrDefault(f => f.fishTier == FishTier.Common)
+                                  ?? allFish.FirstOrDefault();
 
             if (defaultFish != null)
             {
                 Undo.RecordObject(zone, "Add Entry");
                 zone.AddEntry(defaultFish.fishTier, defaultFish.fishName);
                 EditorUtility.SetDirty(zone);
-            }
-            else
-            {
-                Debug.LogWarning("FishDatabase is empty");
             }
         }
     }

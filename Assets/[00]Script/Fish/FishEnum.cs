@@ -5,7 +5,9 @@ public enum FishName
     WhiteSnapper,
     Tuna,
     Swordfish,
-    Dunkleosteus
+    Dunkleosteus,
+    LegendFish,
+    CommonFish
 }
 
 public enum FishTier

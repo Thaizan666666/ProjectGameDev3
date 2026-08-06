@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d4684f404ee8346a7b6fecd3f983a4, type: 3}
   m_Name: Swordfish
   m_EditorClassIdentifier: Assembly-CSharp::TableForge.Fish.FishStats
-  fishName: 804
+  fishName: 805
   fishTier: 1
-  minWeight: 0
-  maxWeight: 0
-  percentRate: 100
-  Price: 0
+  minWeight: 30
+  maxWeight: 56
+  percentRate: 15
+  Price: 1200
   Icon: {fileID: 0}
   Prefab: {fileID: 0}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d4684f404ee8346a7b6fecd3f983a4, type: 3}
   m_Name: Dunkleosteus
   m_EditorClassIdentifier: Assembly-CSharp::TableForge.Fish.FishStats
-  fishName: 801
-  fishTier: 0
-  minWeight: 0
-  maxWeight: 0
-  percentRate: 100
-  Price: 0
+  fishName: 806
+  fishTier: 2
+  minWeight: 900
+  maxWeight: 2100
+  percentRate: 2
+  Price: 50000
   Icon: {fileID: 0}
   Prefab: {fileID: 0}

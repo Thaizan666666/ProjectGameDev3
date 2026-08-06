@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6d4684f404ee8346a7b6fecd3f983a4, type: 3}
-  m_Name: Salmon
+  m_Name: LengendFStat
   m_EditorClassIdentifier: Assembly-CSharp::TableForge.Fish.FishStats
-  fishName: 802
-  fishTier: 0
-  minWeight: 10
-  maxWeight: 14
-  percentRate: 30
-  Price: 400
+  fishName: 807
+  fishTier: 2
+  minWeight: 90
+  maxWeight: 200
+  percentRate: 4
+  Price: 45000
   Icon: {fileID: 0}
   Prefab: {fileID: 0}
