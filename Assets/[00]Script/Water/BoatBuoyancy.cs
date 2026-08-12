@@ -140,7 +140,7 @@ namespace WaterSystem
 
         [Header("ค่าฟิสิกส์การลอยตัว")]
         [Tooltip("แรงลอยตัวต่อจุด ยิ่งมากเรือยิ่งลอยเร็ว/แข็งกระด้าง")]
-        public float buoyancyForce = 8f;
+        public float buoyancyForce = 3f;
         [Tooltip("ความหน่วงตอนอยู่ในน้ำ ลดการโยกที่แรงเกินไป")]
         public float waterDrag = 0.6f;
         public float waterAngularDrag = 0.3f;
