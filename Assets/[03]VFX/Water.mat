@@ -79,9 +79,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Deep_Water: {r: 0.63529414, g: 0.49019608, b: 1, a: 0.5882353}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Deep_Water: {r: 0.124549605, g: 0.2942487, b: 0.554717, a: 0.7529412}
+    - _FoamColor: {r: 0.72224283, g: 0.72224283, b: 0.83396226, a: 1}
     - _LineColor: {r: 0.72955966, g: 0, b: 0, a: 1}
-    - _Shallow_Water: {r: 0.8, g: 0.8509804, b: 1, a: 0.8509804}
+    - _Shallow_Water: {r: 0.17254902, g: 0.5176471, b: 0.61960787, a: 0.83137256}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
