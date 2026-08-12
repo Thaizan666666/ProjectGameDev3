@@ -37,7 +37,7 @@ Material:
   - DepthOnly
   - SHADOWCASTER
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _FoamScale
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -60,13 +60,13 @@ Material:
     - _Blend: 0
     - _CastShadows: 0
     - _Cull: 2
-    - _Distance: 2
+    - _Distance: 19
     - _DstBlend: 10
     - _DstBlendAlpha: 10
-    - _FoamAmount: 3
+    - _FoamAmount: 40.1
     - _FoamCutoff: 1
-    - _FoamScale: 3
-    - _FoamSpeed: 2
+    - _FoamScale: 2
+    - _FoamSpeed: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RefactionScale: 1
@@ -79,9 +79,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Deep_Water: {r: 0.70110214, g: 0.7454045, b: 1, a: 0}
-    - _FoamColor: {r: 0.60549414, g: 0.87958306, b: 0.98742133, a: 0.5254902}
-    - _LineColor: {r: 0.854902, g: 0.87843144, b: 1, a: 0.44705883}
-    - _Shallow_Water: {r: 0.7012578, g: 0.7465219, b: 1, a: 1}
+    - _Deep_Water: {r: 0.63529414, g: 0.49019608, b: 1, a: 0.5882353}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LineColor: {r: 0.72955966, g: 0, b: 0, a: 1}
+    - _Shallow_Water: {r: 0.8, g: 0.8509804, b: 1, a: 0.8509804}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
