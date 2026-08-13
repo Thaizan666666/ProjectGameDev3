@@ -19,4 +19,4 @@ MonoBehaviour:
   percentRate: 2
   Price: 50000
   Icon: {fileID: 0}
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 4847272728496316168, guid: d7599a2e2f7aece4ab2cbf5d8cec51fe, type: 3}
