@@ -68,7 +68,8 @@ namespace WaterSystem
 
             float w = 6.28318f / wavelength;              // wave number (2*PI / wavelength)
             float speed = Mathf.Sqrt(9.8f * w);            // dispersion relation (น้ำลึก)
-            float steepness = amplitude * w;
+            // Clamp กันยอดคลื่นพับทับตัวเอง (self-intersect) เวลา amplitude สูงเทียบกับ wavelength — เกิดเป็นเส้นคมตัดผิวน้ำ
+            float steepness = Mathf.Clamp01(amplitude * w);
 
             Vector2 dir = WaveDirection(wave, worldPos);
 
@@ -102,7 +103,7 @@ namespace WaterSystem
 
             float w = 6.28318f / wavelength;
             float speed = Mathf.Sqrt(9.8f * w);
-            float steepness = amplitude * w;
+            float steepness = Mathf.Clamp01(amplitude * w);
 
             Vector2 dir = WaveDirection(wave, worldPos);
 
@@ -194,7 +195,7 @@ namespace WaterSystem
                 {
                     submergedCount++;
                     // แรงลอยตัวตามความลึกที่จม (Archimedes: ยิ่งจมลึก แรงยิ่งมาก แต่ clamp ไว้กันเรือดีดหลุด)
-                    float force = Mathf.Clamp01(depth) * buoyancyForce;
+                    float force = Mathf.Clamp01(depth) * buoyancyForce / floatPoints.Length;
                     _rb.AddForceAtPosition(Vector3.up * force, point.position, ForceMode.Acceleration);
 
                     // เพิ่มแรงเอียงตาม normal ของคลื่น เพื่อให้เรือ "โยก" ตามความชันผิวน้ำ ไม่ใช่แค่ลอยตรงๆ

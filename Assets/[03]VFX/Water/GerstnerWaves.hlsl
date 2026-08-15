@@ -23,7 +23,8 @@ void GerstnerWave(float4 wave, float2 origin, bool omni, float3 worldPos, float 
 
     float w = 6.28318 / wavelength;      // wave number (2*PI / wavelength)
     float speed = sqrt(9.8 * w);         // ความเร็วคลื่นตามฟิสิกส์น้ำลึก (dispersion relation)
-    float steepness = amplitude * w;     // ความชันของคลื่น (Q factor แบบง่าย)
+    // Clamp กันยอดคลื่นพับทับตัวเอง (self-intersect) เวลา amplitude สูงเทียบกับ wavelength — เกิดเป็นเส้นคมตัดผิวน้ำ
+    float steepness = saturate(amplitude * w);     // ความชันของคลื่น (Q factor แบบง่าย)
 
     float2 dir;
     if (omni)
