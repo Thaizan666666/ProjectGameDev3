@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuildingStats
   m_EditorClassIdentifier: TableForge.Editor::TableForge.Editor.UI.TableMetadata
   expandedTables:
-    values: 
+    values: e99e13c2
   transposedTables:
     values: 
   hiddenFields:
@@ -24,9 +24,23 @@ MonoBehaviour:
   itemGUIDs:
     values: []
   cellAnchorMetadata:
-    mKeys: 7ec562e7
+    mKeys: 7ec562e71f472a0dbf97a9de6c12b8dcf4abc3abbc2d3fb17b5c4b2c1832f72a
     mValues:
     - position: 1
+      size: {x: 0, y: 0}
+    - position: 1
+      size: {x: 0, y: 100}
+    - position: 0
+      size: {x: 263, y: 0}
+    - position: 2
+      size: {x: 0, y: 0}
+    - position: 3
+      size: {x: 0, y: 0}
+    - position: 4
+      size: {x: 0, y: 0}
+    - position: 5
+      size: {x: 0, y: 0}
+    - position: 6
       size: {x: 0, y: 0}
   functions:
     mKeys: 

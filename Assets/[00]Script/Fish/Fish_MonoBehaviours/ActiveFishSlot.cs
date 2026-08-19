@@ -5,7 +5,7 @@ public class ActiveFishSlot : MonoBehaviour
 {
     [SerializeField] private FishSlotManager slotManager;
 
-    private int currentIndex = -1;
+    [SerializeField] private int currentIndex = -1;
 
     public void SetActiveSlot(int index)
     {

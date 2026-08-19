@@ -14,7 +14,7 @@ namespace PlayerNormal.Project_wide
 
         void Awake()
         {
-            swingRodAction = InputSystem.actions.FindAction("Player/Interact");
+            swingRodAction = InputSystem.actions.FindAction("Player/SwingRod");
         }
 
         void Start()

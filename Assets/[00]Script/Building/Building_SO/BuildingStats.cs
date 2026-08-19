@@ -1,5 +1,4 @@
-using UnityEditor;
-using UnityEditor.SceneManagement;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TableForge.Building
@@ -9,14 +8,9 @@ namespace TableForge.Building
     {
         public BuildingName buildingName;
         public BuildingType buildingType;
-        public int costToRepaired;
-        public int costToUpgrade_2;
-        public int costToUpgrade_3;
 
-        public GameObject buildingLV_1;
-        public GameObject buildingLV_2;
-        public GameObject buildingLV_3;
-
+        // Dynamic levels: each entry = one level (prefab + cost to reach this level)
+        // Level 1 = repair cost, Level 2 = upgrade to level 2, etc.
+        public List<BuildingLevelData> levels = new();
     }
-    
 }
