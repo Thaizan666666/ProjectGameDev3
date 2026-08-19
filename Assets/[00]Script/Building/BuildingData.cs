@@ -1,35 +1,39 @@
+using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-[Serializable]
+[System.Serializable]
 public class BuildingData
 {
     public BuildingName buildingName;
     public BuildingType buildingType;
-    public int costToRepaired;
-    public int costToUpgrade_2;
-    public int costToUpgrade_3;
+    
+    // Dynamic levels from BuildingStats
+    public List<BuildingLevelData> levels = new();
 
-    public GameObject buildingLV_1;
-    public GameObject buildingLV_2;
-    public GameObject buildingLV_3;
-
-    public int GetUpgradeCost(int targetLevel) => targetLevel switch
+    /// <summary>Cost to upgrade TO targetLevel (1 = repair, 2 = upgrade to Lv2, etc.)</summary>
+    public int GetUpgradeCost(int targetLevel)
     {
-        1 => costToRepaired,
-        2 => costToUpgrade_2,
-        3 => costToUpgrade_3,
-        _ => -1
-    };
+        if (targetLevel <= 0 || targetLevel > levels.Count) return -1;
+        return levels[targetLevel - 1].upgradeCost;
+    }
 
-    public GameObject GetPrefab(int level) => level switch
+    /// <summary>Prefab for the given level (1-indexed)</summary>
+    public GameObject GetPrefab(int level)
     {
-        1 => buildingLV_1,
-        2 => buildingLV_2,
-        3 => buildingLV_3,
-        _ => null
-    };
+        if (level <= 0 || level > levels.Count) return null;
+        return levels[level - 1].prefab;
+    }
 
-    // Highest level this building actually has a prefab for
-    public int MaxLevel => buildingLV_3 != null ? 3 : buildingLV_2 != null ? 2 : 1;
+    /// <summary>Highest level that has a valid prefab</summary>
+    public int MaxLevel
+    {
+        get
+        {
+            for (int i = levels.Count - 1; i >= 0; i--)
+            {
+                if (levels[i].prefab != null) return i + 1;
+            }
+            return 0;
+        }
+    }
 }

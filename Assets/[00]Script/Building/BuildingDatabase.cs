@@ -12,6 +12,7 @@ public class BuildingDatabase : MonoBehaviour
     private int lastAssetsHash = -1;
 
     public BuildingData GetByName(BuildingName buildingName) => buildings.Find(b => b.buildingName == buildingName);
+
     void Awake()
     {
         EnsureLoadBuilding();
@@ -26,19 +27,20 @@ public class BuildingDatabase : MonoBehaviour
 
         isLoaded = true;
         lastAssetsHash = currentHash;
+        buildings.Clear();
 
-        //1. โหลดจาก Inspector-assigned assets
+        // 1. โหลดจาก Inspector-assigned assets
         if (buildingStatsAssets != null)
         {
             foreach (var stats in buildingStatsAssets)
             {
-                if(stats == null) continue;
+                if (stats == null) continue;
                 buildings.Add(ConvertToBuildingData(stats));
             }
         }
 
         // 2. Fallback: โหลดจาก Resources
-        if(buildings.Count == 0)
+        if (buildings.Count == 0)
         {
             var loaded = Resources.LoadAll<BuildingStats>("Building_SO/Buildings");
             foreach (var stats in loaded)
@@ -64,10 +66,8 @@ public class BuildingDatabase : MonoBehaviour
 
     private static BuildingData ConvertToBuildingData(BuildingStats stats) => new BuildingData
     {
-        buildingName    = stats.buildingName,
-        buildingType    = stats.buildingType,
-        buildingLV_1    = stats.buildingLV_1,
-        buildingLV_2    = stats.buildingLV_2,
-        buildingLV_3    = stats.buildingLV_3
+        buildingName = stats.buildingName,
+        buildingType = stats.buildingType,
+        levels = stats.levels != null ? new List<BuildingLevelData>(stats.levels) : new List<BuildingLevelData>()
     };
 }
