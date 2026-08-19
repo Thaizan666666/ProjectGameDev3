@@ -30,7 +30,7 @@ namespace KinematicCharacterController.Examples
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_controls.Player.LeftClick.WasPressedThisFrame())
             {

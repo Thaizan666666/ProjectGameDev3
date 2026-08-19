@@ -539,6 +539,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Interacting",
+            "id": "6dd08b37-ac8f-4b9a-b6ec-33cbc6b0a25a",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "74299edb-7b24-4fcc-95f6-e002ca004c90",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Select",
+                    "type": "Value",
+                    "id": "bbe2df4e-2de2-4677-85b0-d6614d9a63dd",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bce5968a-4c14-4598-93a5-b777b58b90a8",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "489e0c88-9fad-4e47-bcc6-2143b02cddd5",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

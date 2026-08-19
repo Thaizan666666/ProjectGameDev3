@@ -227,6 +227,8 @@ GameObject:
   - component: {fileID: 8240590497259820679}
   - component: {fileID: 1959496134836003210}
   - component: {fileID: 6827459535876760247}
+  - component: {fileID: 4723381450178870910}
+  - component: {fileID: 461727405091093900}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -388,6 +390,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KinematicCharacterController.Examples.ExamplePlayer
   Character: {fileID: 8240590497259820679}
+--- !u!114 &4723381450178870910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4826605492073644485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b13e94e8d3cb394d9d2510e19a25a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  examplePlayer: {fileID: 6827459535876760247}
+  arriveDistance: 0.15
+--- !u!114 &461727405091093900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4826605492073644485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34c44a71c972c549ac1b029af01b70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
+  selectMode: 1
 --- !u!1 &6149092390579054370
 GameObject:
   m_ObjectHideFlags: 0
