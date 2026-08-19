@@ -1,5 +1,3 @@
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace TableForge.Building

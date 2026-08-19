@@ -17,6 +17,6 @@ MonoBehaviour:
   costToRepaired: 1000
   costToUpgrade_2: 5000
   costToUpgrade_3: 10000
-  buildingLV_1: {fileID: 1262997341367454496, guid: 25bd02d106c22bf4e9c8c7000da8feeb, type: 3}
-  buildingLV_2: {fileID: 5199210123535827692, guid: 3a8aadf814b36884fa6cb06cfc47573b, type: 3}
-  buildingLV_3: {fileID: 2017759565560960355, guid: f9b001c6588636e4797c0754468b3aac, type: 3}
+  buildingLV_1: {fileID: 5799307493306275374, guid: 25bd02d106c22bf4e9c8c7000da8feeb, type: 3}
+  buildingLV_2: {fileID: 7443505339705050501, guid: 3a8aadf814b36884fa6cb06cfc47573b, type: 3}
+  buildingLV_3: {fileID: 4097771801010635987, guid: f9b001c6588636e4797c0754468b3aac, type: 3}
