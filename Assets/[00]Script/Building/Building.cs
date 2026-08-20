@@ -1,7 +1,9 @@
 using PlayerNormal.Project_wide;
 using UnityEngine;
 
-public class Building : MonoBehaviour, IInteractable, IUpgradable
+namespace PlayerNormal.Project_wide
+{
+    public class Building : MonoBehaviour, IInteractable, IUpgradable
 {
     [Header("Select building in Inspector (data loads at runtime)")]
     [SerializeField] private BuildingName buildingName;
@@ -141,3 +143,5 @@ public class Building : MonoBehaviour, IInteractable, IUpgradable
         Debug.Log($"[Building] {buildingName} OnDisactive");
     }
 }
+}
+

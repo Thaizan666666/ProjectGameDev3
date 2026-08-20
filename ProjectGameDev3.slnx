@@ -1,7 +1,21 @@
 ﻿<Solution>
+  <Project Path="YarnSpinner.Addons.Snaaake.csproj" />
   <Project Path="TableForge.Editor.csproj" />
+  <Project Path="YarnSpinner.Unity.csproj" />
+  <Project Path="YarnSpinner.Addons.ClassicRPG.csproj" />
   <Project Path="TableForge.Demo.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="YarnSpinner.Unity.Editor.csproj" />
+  <Project Path="Febucci.TextAnimatorForUnity.Runtime.csproj" />
+  <Project Path="Febucci.TextAnimator.Demo.Runtime.csproj" />
   <Project Path="TableForge.Runtime.csproj" />
+  <Project Path="YarnSpinner.Addons.TextAnimatorIntegration.Editor.csproj" />
+  <Project Path="Febucci.TextAnimatorForUnity.UITk.Runtime.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Febucci.TextAnimatorForUnity.TMP.Runtime.csproj" />
+  <Project Path="YarnSpinner.Addons.TextAnimatorIntegration.csproj" />
+  <Project Path="Febucci.TextAnimatorForUnity.Input.Runtime.csproj" />
+  <Project Path="Febucci.Attributes.Runtime.csproj" />
+  <Project Path="Febucci.TextAnimator.Demo.CurvesAndPlaybacks.Runtime.csproj" />
+  <Project Path="Febucci.TextAnimator.Demo.Sounds.Runtime.csproj" />
 </Solution>

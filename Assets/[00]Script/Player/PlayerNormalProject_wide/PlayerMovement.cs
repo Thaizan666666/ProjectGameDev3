@@ -32,6 +32,10 @@ namespace PlayerNormal.Project_wide
 
         void Update()
         {
+        }
+
+        void FixedUpdate()
+        {
             Vector2 move = moveAction.ReadValue<Vector2>();
 
             transform.Translate(new Vector3(move.x, 0.0f, move.y) * Time.deltaTime * 5.0f);

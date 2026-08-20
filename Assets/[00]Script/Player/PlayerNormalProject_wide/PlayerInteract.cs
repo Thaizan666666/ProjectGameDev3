@@ -11,7 +11,7 @@ namespace PlayerNormal.Project_wide
 
         void Awake()
         {
-            interactAction = InputSystem.actions.FindAction("Player/Interact");
+            interactAction = InputSystem.actions.FindAction("Interacting/Interact");
         }
 
         void Start()
