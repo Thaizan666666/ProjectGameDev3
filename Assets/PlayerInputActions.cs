@@ -647,6 +647,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwingRod"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca2e5364-6db9-45b9-9860-428706dea736"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -669,6 +678,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3f3d442-02f8-4271-86c4-388ef94d68cb"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwingRod"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -699,6 +719,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Interacting = asset.FindActionMap("Interacting", throwIfNotFound: true);
         m_Interacting_Interact = m_Interacting.FindAction("Interact", throwIfNotFound: true);
         m_Interacting_Select = m_Interacting.FindAction("Select", throwIfNotFound: true);
+        m_Interacting_SwingRod = m_Interacting.FindAction("SwingRod", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -1107,6 +1128,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IInteractingActions> m_InteractingActionsCallbackInterfaces = new List<IInteractingActions>();
     private readonly InputAction m_Interacting_Interact;
     private readonly InputAction m_Interacting_Select;
+    private readonly InputAction m_Interacting_SwingRod;
     /// <summary>
     /// Provides access to input actions defined in input action map "Interacting".
     /// </summary>
@@ -1126,6 +1148,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Interacting/Select".
         /// </summary>
         public InputAction @Select => m_Wrapper.m_Interacting_Select;
+        /// <summary>
+        /// Provides access to the underlying input action "Interacting/SwingRod".
+        /// </summary>
+        public InputAction @SwingRod => m_Wrapper.m_Interacting_SwingRod;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1158,6 +1184,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @SwingRod.started += instance.OnSwingRod;
+            @SwingRod.performed += instance.OnSwingRod;
+            @SwingRod.canceled += instance.OnSwingRod;
         }
 
         /// <summary>
@@ -1175,6 +1204,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @SwingRod.started -= instance.OnSwingRod;
+            @SwingRod.performed -= instance.OnSwingRod;
+            @SwingRod.canceled -= instance.OnSwingRod;
         }
 
         /// <summary>
@@ -1343,5 +1375,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelect(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwingRod" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwingRod(InputAction.CallbackContext context);
     }
 }
