@@ -3,22 +3,7 @@ guid: 6e8c28327cd303a4d9cdbfad1273696a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: smootship
-    second: {fileID: 2100000, guid: b58d88aaeeecea948a504318f0667007, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: ship
-    second: {fileID: 2800000, guid: c27c613e8d48adc459cb88e90c5e2d9c, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: ship_Normal
-    second: {fileID: 2800000, guid: cf64166af976ca54f8ae5c9eeb0aa077, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

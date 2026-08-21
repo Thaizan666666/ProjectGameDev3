@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 976b5d134b2bf1543854f9f4d23271d0
+guid: 3e871764b2225c84eadf3a5b30da561b
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -13,17 +13,17 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: fishing_rob_BaseColor
-    second: {fileID: 2800000, guid: 5a32136916372e24188bd83a73a089c4, type: 3}
+    second: {fileID: 2800000, guid: e0b6e31e74f9c184c848c93761200098, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: fishing_rob_Emission
-    second: {fileID: 2800000, guid: 911b4f37973cfd649b5d2a4b5d6269e3, type: 3}
+    second: {fileID: 2800000, guid: 767874cf505d47b42969f92d261ecb04, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: fishing_rob_Normal
-    second: {fileID: 2800000, guid: 72b8c0eb5aef73d409b7b6b21f74245c, type: 3}
+    second: {fileID: 2800000, guid: 9b1364c6ad283d940ba33af25e59aef7, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

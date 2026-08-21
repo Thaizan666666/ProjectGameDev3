@@ -14,9 +14,8 @@ Material:
   m_ValidKeywords:
   - _EMISSION
   - _NORMALMAP
-  - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -29,11 +28,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 5a32136916372e24188bd83a73a089c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: e0b6e31e74f9c184c848c93761200098, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 72b8c0eb5aef73d409b7b6b21f74245c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b1364c6ad283d940ba33af25e59aef7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -49,11 +48,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 911b4f37973cfd649b5d2a4b5d6269e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 767874cf505d47b42969f92d261ecb04, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5a32136916372e24188bd83a73a089c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: e0b6e31e74f9c184c848c93761200098, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -109,7 +108,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
-    - _ReceiveShadows: 0
+    - _ReceiveShadows: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -123,11 +122,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
-    - _EmissionColor: {r: 311.49713, g: 311.49713, b: 311.49713, a: 1}
+    - _EmissionColor: {r: 183.5241, g: 21.456936, b: 421.19238, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &9057552053258676303
+--- !u!114 &5011764264286487184
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
