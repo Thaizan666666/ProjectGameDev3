@@ -1910,7 +1910,7 @@ namespace KinematicCharacterController
                         {
                             hitCharacterMotor.BaseVelocity += velocityChangeOnCharacter;
                         }
-                        else if (hitBodyIsDynamic)
+                        else if (hitBodyIsDynamic && RigidbodyInteractionType != RigidbodyInteractionType.None)
                         {
                             bodyHit.Rigidbody.AddForceAtPosition(velocityChangeOnBody, bodyHit.HitPoint, ForceMode.VelocityChange);
                         }
