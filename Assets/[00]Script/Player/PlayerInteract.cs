@@ -27,7 +27,7 @@ public class PlayerInteract : MonoBehaviour
         _controls.Interacting.Disable();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         HandleScrollInput();
         HandleAutoSelect();
