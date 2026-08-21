@@ -22,9 +22,10 @@ public class BoatControll : MonoBehaviour
 
     private void OnEnable()
     {
-        _actions.BoatPlayer.Enable();
         _actions.BoatPlayer.Move.performed += OnMove;
         _actions.BoatPlayer.Move.canceled += OnMove;
+        // หมายเหตุ: ไม่ Enable() action map ตรงนี้ตั้งแต่แรกแล้ว — ต้องมีคนขึ้นเรือก่อน (ดู BoatBoardZone)
+        // ถึงจะเปิดผ่าน SetControlEnabled(true) ไม่งั้น WASD จะไปโดนทั้งเรือและตัวละครพร้อมกันตลอดเวลา
     }
 
     private void OnDisable()
@@ -36,10 +37,29 @@ public class BoatControll : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext ctx) => _moveInput = ctx.ReadValue<Vector2>();
 
+    /// <summary>
+    /// เปิด/ปิดการรับ input ควบคุมเรือ (เรียกจาก BoatBoardZone ตอนขึ้น/ลงเรือ)
+    /// </summary>
+    public void SetControlEnabled(bool isEnabled)
+    {
+        if (isEnabled)
+        {
+            _actions.BoatPlayer.Enable();
+        }
+        else
+        {
+            _moveInput = Vector2.zero;
+            _actions.BoatPlayer.Disable();
+        }
+    }
+
     private void FixedUpdate()
     {
-        // y (W/S) = แรงขับไปข้างหน้าตามหัวเรือ, x (A/D) = แรงบิดเลี้ยวรอบแกน Y
-        _rb.AddForce(transform.forward * _moveInput.y * moveForce, ForceMode.Force);
+        // project หัวเรือลงระนาบราบก่อน กันแรงขับพุ่งเอียงขึ้น/ลงตามมุมปิทช์/โคลงของเรือ (คลื่นโยกเรือ)
+        Vector3 flatForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
+
+        // y (W/S) = แรงขับไปข้างหน้าตามหัวเรือ (แนวราบเท่านั้น), x (A/D) = แรงบิดเลี้ยวรอบแกน Y
+        _rb.AddForce(flatForward * _moveInput.y * moveForce, ForceMode.Force);
         _rb.AddTorque(Vector3.up * _moveInput.x * turnTorque, ForceMode.Force);
     }
 }

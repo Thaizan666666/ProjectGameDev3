@@ -12,6 +12,7 @@ namespace KinematicCharacterController.Examples
     {
         public ExampleCharacterController Character;
         private PlayerInputActions _controls;
+        private bool _isControlEnabled = true;
         private void Awake()
         {
             _controls = new PlayerInputActions();
@@ -25,13 +26,34 @@ namespace KinematicCharacterController.Examples
         {
             _controls.Player.Disable();
         }
+
+        /// <summary>
+        /// เปิด/ปิดการรับ input ควบคุมตัวละคร (ใช้ตอนสลับไปคุมเรือ)
+        /// ต้องเช็ค flag นี้ใน Update() ด้วย ไม่งั้น HandleCharacterInput() จะยังเรียก
+        /// Character.SetInputs() ทุกเฟรมอยู่ดี (ด้วยค่า 0) ไปเขียนทับ input ที่สคริปต์อื่น (เช่น BoatBoardZone
+        /// ตอน auto-walk) เพิ่งสั่งไว้ในเฟรมเดียวกัน — แค่ Disable() action map ไม่พอ
+        /// </summary>
+        public void SetControlEnabled(bool isEnabled)
+        {
+            _isControlEnabled = isEnabled;
+            if (isEnabled)
+            {
+                _controls.Player.Enable();
+            }
+            else
+            {
+                _controls.Player.Disable();
+            }
+        }
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
+            if (!_isControlEnabled) return;
+
             if (_controls.Player.LeftClick.WasPressedThisFrame())
             {
                 Cursor.lockState = CursorLockMode.Locked;

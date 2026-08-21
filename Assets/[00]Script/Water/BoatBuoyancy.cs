@@ -145,6 +145,18 @@ namespace WaterSystem
         [Tooltip("ความหน่วงตอนอยู่ในน้ำ ลดการโยกที่แรงเกินไป")]
         public float waterDrag = 0.6f;
         public float waterAngularDrag = 0.3f;
+        [Tooltip("หน่วงความเร็วแนวตั้ง ณ จุดลอยตัวแต่ละจุดตอนจมน้ำ (ยิ่งมากยิ่งกันเรือ 'เด้ง/จมเกิน' equilibrium — แรงลอยตัวเฉยๆ ไม่มี damping จะทำให้เรือแกว่งขึ้นลงเป็นสปริงได้)")]
+        public float buoyancyDamping = 2f;
+
+        [Header("ป้องกันเรือปลิว (เวลาชนกับ kinematic collider เช่นตัวละคร KCC)")]
+        [Tooltip("จำกัดความเร็วที่ PhysX ใช้ 'ดีด' เรือออกตอน resolve การซ้อนทับกับ collider อื่น (ค่า default ของ Unity แทบไม่จำกัด ทำให้เรือดีดแรงผิดปกติได้)")]
+        public float maxDepenetrationVelocity = 2f;
+        [Tooltip("เพดานความเร็วเชิงเส้นของเรือ กันแรงกระชากผิดปกติจากทุกแหล่ง")]
+        public float maxLinearVelocity = 15f;
+        [Tooltip("เพดานความเร็วเชิงมุม (rad/s) ของเรือ กันเรือหมุนติ้วผิดปกติ")]
+        public float maxAngularVelocity = 5f;
+        [Tooltip("ลาก Collider ของตัวละคร (เช่น Capsule Collider บน Player) มาใส่ — เรือจะไม่ชนทาง physics กับ collider เหล่านี้เลย ไม่ว่าจะกระโดด/ลงกระแทกแรงแค่ไหนก็ไม่มีแรงส่งถึงเรือ (KCC ยังคงยืน/เดินบนเรือได้ปกติ เพราะ KCC ตรวจพื้นด้วย raycast ของตัวเอง ไม่เกี่ยวกับ physics collision ตรงนี้)")]
+        public Collider[] ignoreCollisionWith;
 
         [Header("อ้างอิงข้อมูลคลื่น")]
         [Tooltip("ถ้าใส่ WaterManager จะดึงชุดคลื่นจากตรงนี้แทน (แนะนำ — การันตี CPU/GPU sync กันทั้งฉาก)")]
@@ -163,6 +175,20 @@ namespace WaterSystem
             _rb = GetComponent<Rigidbody>();
             _defaultDrag = _rb.linearDamping;
             _defaultAngularDrag = _rb.angularDamping;
+            _rb.maxDepenetrationVelocity = maxDepenetrationVelocity;
+
+            if (ignoreCollisionWith != null)
+            {
+                Collider[] myColliders = GetComponentsInChildren<Collider>();
+                foreach (var playerCol in ignoreCollisionWith)
+                {
+                    if (playerCol == null) continue;
+                    foreach (var myCol in myColliders)
+                    {
+                        Physics.IgnoreCollision(myCol, playerCol, true);
+                    }
+                }
+            }
 
             if (floatPoints == null || floatPoints.Length == 0)
                 Debug.LogWarning($"[BoatBuoyancy] {name} ยังไม่ได้ตั้งค่า floatPoints — เรือจะไม่ลอยน้ำ");
@@ -196,7 +222,12 @@ namespace WaterSystem
                     submergedCount++;
                     // แรงลอยตัวตามความลึกที่จม (Archimedes: ยิ่งจมลึก แรงยิ่งมาก แต่ clamp ไว้กันเรือดีดหลุด)
                     float force = Mathf.Clamp01(depth) * buoyancyForce / floatPoints.Length;
-                    _rb.AddForceAtPosition(Vector3.up * force, point.position, ForceMode.Acceleration);
+
+                    // หน่วงตามความเร็วแนวตั้ง ณ จุดนี้ (spring damping) กันเรือแกว่งเกิน equilibrium แล้วจมลึกกว่าปกติเป็นพักๆ
+                    float pointVelocityY = _rb.GetPointVelocity(point.position).y;
+                    float damping = -pointVelocityY * buoyancyDamping;
+
+                    _rb.AddForceAtPosition(Vector3.up * (force + damping), point.position, ForceMode.Acceleration);
 
                     // เพิ่มแรงเอียงตาม normal ของคลื่น เพื่อให้เรือ "โยก" ตามความชันผิวน้ำ ไม่ใช่แค่ลอยตรงๆ
                     Vector3 tiltForce = Vector3.Cross(waveNormal, Vector3.up) * force * 0.15f;
@@ -208,6 +239,16 @@ namespace WaterSystem
             float submergedRatio = (float)submergedCount / floatPoints.Length;
             _rb.linearDamping = Mathf.Lerp(_defaultDrag, waterDrag, submergedRatio);
             _rb.angularDamping = Mathf.Lerp(_defaultAngularDrag, waterAngularDrag, submergedRatio);
+
+            // กันเรือปลิว: clamp ความเร็วหลังใส่แรงทุกอย่างแล้ว เผื่อโดนแรงกระชากผิดปกติ (เช่น ตัวละครกระโดดชน collider)
+            if (_rb.linearVelocity.sqrMagnitude > maxLinearVelocity * maxLinearVelocity)
+            {
+                _rb.linearVelocity = _rb.linearVelocity.normalized * maxLinearVelocity;
+            }
+            if (_rb.angularVelocity.sqrMagnitude > maxAngularVelocity * maxAngularVelocity)
+            {
+                _rb.angularVelocity = _rb.angularVelocity.normalized * maxAngularVelocity;
+            }
         }
 
         private void OnDrawGizmosSelected()
