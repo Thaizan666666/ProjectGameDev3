@@ -44,6 +44,9 @@
         },
         {
             "m_Id": "1d8c4b55375d4aed93f604eecbc03a1b"
+        },
+        {
+            "m_Id": "a8b5e269d68c48f6ad46c7b97dba661b"
         }
     ],
     "m_Keywords": [],
@@ -3530,6 +3533,9 @@
         },
         {
             "m_Id": "1d8c4b55375d4aed93f604eecbc03a1b"
+        },
+        {
+            "m_Id": "a8b5e269d68c48f6ad46c7b97dba661b"
         }
     ]
 }
@@ -4247,9 +4253,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2068.000244140625,
-            "y": 197.33331298828126,
-            "width": 171.3333740234375,
+            "x": -2262.666748046875,
+            "y": 215.3332977294922,
+            "width": 171.33349609375,
             "height": 36.0
         }
     },
@@ -5321,10 +5327,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 961.333251953125,
-            "y": 177.9999542236328,
-            "width": 209.333251953125,
-            "height": 304.0
+            "x": 888.0000610351563,
+            "y": 161.33331298828126,
+            "width": 209.33331298828126,
+            "height": 304.0000305175781
         }
     },
     "m_Slots": [
@@ -5734,6 +5740,50 @@
         "w": 0.0
     },
     "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "a8b5e269d68c48f6ad46c7b97dba661b",
+    "m_Guid": {
+        "m_GuidSerialized": "896fa763-4d24-4507-8d82-e495f3695727"
+    },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
+    "m_Name": "_FresnelPower",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "_FresnelPower",
+    "m_DefaultReferenceName": "_FresnelPower",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": 1.0,
+    "m_FloatType": 0,
+    "m_LiteralFloatMode": false,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "m_SliderType": 0,
+    "m_SliderPower": 3.0,
+    "m_EnumType": 0,
+    "m_CSharpEnumString": "",
+    "m_EnumNames": [
+        "Default"
+    ],
+    "m_EnumValues": [
+        0
+    ]
 }
 
 {

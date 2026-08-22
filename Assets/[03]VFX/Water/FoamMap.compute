@@ -1,0 +1,72 @@
+#pragma kernel CSMain
+
+// เขียนค่า foam (0..1) ลง RenderTexture รอบๆ followTarget (กล้อง/เรือ) ให้ VFX Graph
+// อ่านไปตัดสินใจว่าจะ spawn ฟองคลื่นตรงจุดไหน
+// สูตร Jacobian เดียวกับ WaterSystem.GerstnerWaveMath.AccumulateJacobian (GerstnerWaveMath.cs)
+// และ GerstnerWaves.hlsl ทุกประการ — ใช้ waveData/_WaveCount ชุดเดียวกับที่ OceanFoamMapGenerator.cs
+// อ่านมาจาก WaterManager.Waves แล้ว set เข้า compute shader นี้ทุกเฟรม (ComputeShader ไม่รับ
+// global shader property อัตโนมัติเหมือน material จึงต้อง set เองจากสคริปต์)
+
+RWTexture2D<float> _FoamMap;
+
+// [0..9]   = (amplitude, direction(deg), wavelength, omniDir 0/1)
+// [10..19] = (origin.x, origin.y, 0, 0)
+float4 waveData[20];
+int _WaveCount;
+
+float2 _MapCenterWS;
+float _MapSize;
+int _MapResolution;
+float _TimeValue;
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= (uint)_MapResolution || id.y >= (uint)_MapResolution) return;
+
+    float2 uv = (float2(id.xy) + 0.5) / (float)_MapResolution;
+    float2 worldXZ = _MapCenterWS + (uv - 0.5) * _MapSize;
+
+    float dDxDx = 0, dDxDz = 0, dDzDz = 0;
+
+    int count = min(_WaveCount, 10);
+    for (int i = 0; i < count; i++)
+    {
+        float4 wd = waveData[i];
+        float amplitude = wd.x;
+        float directionDeg = wd.y;
+        float wavelength = max(wd.z, 0.001);
+        bool omniDir = wd.w > 0.5;
+        float2 origin = waveData[i + 10].xy;
+
+        float w = 6.28318 / wavelength;
+        float speed = sqrt(9.8 * w);
+        float steepness = saturate(amplitude * w);
+
+        float2 dir;
+        if (omniDir)
+        {
+            float2 toPoint = worldXZ - origin;
+            float lenSq = dot(toPoint, toPoint);
+            dir = lenSq > 1e-6 ? toPoint * rsqrt(lenSq) : float2(1, 0);
+        }
+        else
+        {
+            float rad = radians(directionDeg);
+            dir = float2(cos(rad), sin(rad));
+        }
+
+        float phase = (dir.x * worldXZ.x + dir.y * worldXZ.y) * w + _TimeValue * speed;
+        float sinP = sin(phase);
+
+        float k = steepness * amplitude * w * sinP;
+        dDxDx += -k * dir.x * dir.x;
+        dDxDz += -k * dir.x * dir.y;
+        dDzDz += -k * dir.y * dir.y;
+    }
+
+    float jacobian = (1.0 + dDxDx) * (1.0 + dDzDz) - dDxDz * dDxDz;
+    float foam = saturate(1.0 - jacobian);
+
+    _FoamMap[id.xy] = foam;
+}

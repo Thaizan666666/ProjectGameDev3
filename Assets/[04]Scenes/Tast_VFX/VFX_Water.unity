@@ -450,6 +450,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1249384834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &798483626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798483628}
+  - component: {fileID: 798483627}
+  m_Layer: 0
+  m_Name: Sea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &798483627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798483626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb084476a3112a54f8376455c68b086d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterSystem.OceanFoamMapGenerator
+  waterManager: {fileID: 1741752608}
+  followTarget: {fileID: 961739753}
+  mapSize: 60
+  resolution: 256
+  recenterThreshold: 5
+  foamMapCompute: {fileID: 7200000, guid: 32cd7ac8445e5594eb8d253673f49649, type: 3}
+  targetVfx: {fileID: 0}
+  vfxTextureProperty: FoamMap
+  vfxCenterProperty: MapCenter
+  vfxSizeProperty: MapSize
+--- !u!4 &798483628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798483626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -5.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &951234052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6827459535876760247, guid: e5289b3a37c07374d8d00a79bce37a18, type: 3}
@@ -1296,7 +1350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1741752608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,3 +1522,4 @@ SceneRoots:
   - {fileID: 347564935}
   - {fileID: 1591639574}
   - {fileID: 1650764431}
+  - {fileID: 798483628}
