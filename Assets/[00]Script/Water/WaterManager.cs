@@ -17,9 +17,9 @@ namespace WaterSystem
         [SerializeField]
         private Wave[] baseWaves =
         {
-            new Wave(0.3f, 30f, 10f, Vector2.zero, false),
-            new Wave(0.2f, 75f, 6f, Vector2.zero, false),
-            new Wave(0.1f, 110f, 3f, Vector2.zero, false),
+            new Wave(0.4f, 20f, 22f, Vector2.zero, false),
+            new Wave(0.35f, 70f, 14f, Vector2.zero, false),
+            new Wave(0.25f, 130f, 9f, Vector2.zero, false)
         };
 
         [Header("Wind Zone (ไม่บังคับ — ไม่ใส่ก็ใช้ baseWaves ตรงๆ)")]
