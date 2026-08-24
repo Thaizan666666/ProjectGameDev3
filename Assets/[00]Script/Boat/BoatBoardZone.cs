@@ -31,6 +31,7 @@ public class BoatBoardZone : MonoBehaviour
     private bool _isWalkingToSeat;
     private bool _isControllingBoat;
 
+
     private void Awake()
     {
         _controls = new PlayerInputActions();
@@ -94,6 +95,27 @@ public class BoatBoardZone : MonoBehaviour
         {
             WalkTowardSeat();
         }
+        else if (_isControllingBoat)
+        {
+            FaceBoatDirection();
+        }
+    }
+
+    /// <summary>
+    /// ระหว่างคุมเรือ ให้ตัวละครหันหน้าตามทิศหัวเรือต่อเนื่องทุกเฟรม
+    /// (ตอน snap ขึ้นเรือหันแค่ครั้งเดียว ไม่พอเมื่อเรือหมุนต่อจาก BoatControll.AddTorque)
+    /// </summary>
+    private void FaceBoatDirection()
+    {
+        Vector3 flatForward = Vector3.ProjectOnPlane(boat.transform.forward, Vector3.up).normalized;
+        if (flatForward.sqrMagnitude < 0.0001f) return;
+
+        AICharacterInputs faceInputs = new AICharacterInputs
+        {
+            MoveVector = Vector3.zero,
+            LookVector = flatForward
+        };
+        player.SetInputs(ref faceInputs);
     }
 
     private void WalkTowardSeat()

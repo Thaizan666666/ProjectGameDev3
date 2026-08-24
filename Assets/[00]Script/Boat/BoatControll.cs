@@ -13,6 +13,7 @@ public class BoatControll : MonoBehaviour
     private PlayerInputActions _actions;
     private Rigidbody _rb;
     private Vector2 _moveInput;
+    [Tooltip("ต้องการPlayer")]
 
     private void Awake()
     {
