@@ -1279,18 +1279,21 @@ MonoBehaviour:
   - enabled: 1
     name: tree1
     seed: 1998
-    probability: 10
+    probability: 47.8
     collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 60}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 58
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.635
+    instanceCount: 211
     prefabs:
     - index: 0
       probability: 10
-      prefab: {fileID: 3588823009197462603, guid: 0d0ae35b003406b4eab71aff50e67cb0, type: 3}
+      prefab: {fileID: 4114704304083163043, guid: e5baaa86933f3cc4fa4aa5ddd419fcf9, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1298,17 +1301,20 @@ MonoBehaviour:
     name: tree2
     seed: 4845
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 60}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 59
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.603
+    instanceCount: 83
     prefabs:
     - index: 1
-      probability: 10
-      prefab: {fileID: 4631033360163761979, guid: 62981becd8d4e374fac5c187caf2b543, type: 3}
+      probability: 19.4
+      prefab: {fileID: 4587395868043604309, guid: 62981becd8d4e374fac5c187caf2b543, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1316,17 +1322,20 @@ MonoBehaviour:
     name: tree3
     seed: 843
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 60}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 69
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.795
+    instanceCount: 76
     prefabs:
     - index: 2
-      probability: 10
-      prefab: {fileID: 2502934518975676214, guid: 03c72b638d092c740aa50d4e00ba2705, type: 3}
+      probability: 20
+      prefab: {fileID: 7719796879909893745, guid: 03c72b638d092c740aa50d4e00ba2705, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1334,17 +1343,20 @@ MonoBehaviour:
     name: tree4
     seed: 909
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 55, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 221
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.79
+    instanceCount: 382
     prefabs:
     - index: 3
-      probability: 10
-      prefab: {fileID: 1790611425932198766, guid: ee6fcece791331042bb0c3b101a27982, type: 3}
+      probability: 20
+      prefab: {fileID: 8701072449510795811, guid: ee6fcece791331042bb0c3b101a27982, type: 3}
     distance: 3
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1352,17 +1364,20 @@ MonoBehaviour:
     name: tree5
     seed: 5820
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 55, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 130
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.808
+    instanceCount: 228
     prefabs:
     - index: 4
-      probability: 5
-      prefab: {fileID: 3671450748261499434, guid: b0544b0c2af0e4b46800e483c54ec83c, type: 3}
+      probability: 10
+      prefab: {fileID: 4248808876572246053, guid: b0544b0c2af0e4b46800e483c54ec83c, type: 3}
     distance: 3
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1370,17 +1385,20 @@ MonoBehaviour:
     name: tree6
     seed: 1034
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 55, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 119
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.826
+    instanceCount: 236
     prefabs:
     - index: 5
-      probability: 5
-      prefab: {fileID: 992224644973338540, guid: 1d0fce243ac697f40835ce58b1bddc88, type: 3}
+      probability: 10
+      prefab: {fileID: 5522347036349625531, guid: 1d0fce243ac697f40835ce58b1bddc88, type: 3}
     distance: 3
     scaleRange: {x: 0.8, y: 0.8584271}
     sinkAmount: 0
@@ -1388,17 +1406,17 @@ MonoBehaviour:
     name: tree8
     seed: 3170
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
     layerMasks: []
-    instanceCount: 24
+    instanceCount: 29
     prefabs:
     - index: 6
-      probability: 1
-      prefab: {fileID: 82440917538624900, guid: 6450c6e44972f2f4f8e73ba495bce313, type: 3}
+      probability: 2
+      prefab: {fileID: 5850392925715330819, guid: 6450c6e44972f2f4f8e73ba495bce313, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1406,17 +1424,20 @@ MonoBehaviour:
     name: tree9
     seed: 7358
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 19
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.741
+    instanceCount: 26
     prefabs:
     - index: 7
-      probability: 1
-      prefab: {fileID: 254452922495573262, guid: 8c24db38c390dcd468617ef25fc11852, type: 3}
+      probability: 2
+      prefab: {fileID: 2098994681220974089, guid: 8c24db38c390dcd468617ef25fc11852, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1424,17 +1445,20 @@ MonoBehaviour:
     name: tree10
     seed: 7238
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 16
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.831
+    instanceCount: 32
     prefabs:
     - index: 8
-      probability: 1
-      prefab: {fileID: 6063355741617271372, guid: 8c216e123191d6846b8917211944b240, type: 3}
+      probability: 2
+      prefab: {fileID: 3649009008773435960, guid: 8c216e123191d6846b8917211944b240, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1442,17 +1466,20 @@ MonoBehaviour:
     name: tree11
     seed: 1435
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 11
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.786
+    instanceCount: 16
     prefabs:
     - index: 9
-      probability: 1
-      prefab: {fileID: 2461101474393942893, guid: c8362b821836ec545aa0519f02b21d9d, type: 3}
+      probability: 2
+      prefab: {fileID: 5779474041520678147, guid: c8362b821836ec545aa0519f02b21d9d, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
@@ -1460,21 +1487,211 @@ MonoBehaviour:
     name: tree7
     seed: 8550
     probability: 10
-    collisionCheck: 0
+    collisionCheck: 1
     rejectUnderwater: 1
     heightRange: {x: 0, y: 1000}
     slopeRange: {x: 0, y: 60}
     curvatureRange: {x: 0, y: 1}
-    layerMasks: []
-    instanceCount: 0
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0
+    instanceCount: 21
     prefabs:
     - index: 10
-      probability: 0
-      prefab: {fileID: 6827189273400592335, guid: 92d7b40bac0b3cf4c81578f1261df2db, type: 3}
+      probability: 1
+      prefab: {fileID: 8688156821390710578, guid: 92d7b40bac0b3cf4c81578f1261df2db, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
-  grassPrefabs: []
+  - enabled: 1
+    name: grass4
+    seed: 54372
+    probability: 3.7
+    collisionCheck: 1
+    rejectUnderwater: 1
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.825
+    instanceCount: 441
+    prefabs:
+    - index: 11
+      probability: 16.7
+      prefab: {fileID: 2730402121595129741, guid: 26d5fad17a1761b40bac9f10f12849e0, type: 3}
+    distance: 1.9
+    scaleRange: {x: 0.43586215, y: 0.8358621}
+    sinkAmount: 0
+  - enabled: 1
+    name: grass5
+    seed: 22288
+    probability: 3
+    collisionCheck: 1
+    rejectUnderwater: 1
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.829
+    instanceCount: 86
+    prefabs:
+    - index: 12
+      probability: 36.6
+      prefab: {fileID: 2468586409543192973, guid: a5703143b8f961b42824f21f8906b1cd, type: 3}
+    distance: 5
+    scaleRange: {x: 0.43508798, y: 0.8350878}
+    sinkAmount: 0.167
+  - enabled: 1
+    name: grass6
+    seed: 4024
+    probability: 3
+    collisionCheck: 1
+    rejectUnderwater: 1
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.79
+    instanceCount: 2
+    prefabs:
+    - index: 13
+      probability: 46.2
+      prefab: {fileID: 1917629745566057955, guid: 784be30746e46434b9d993339c10de29, type: 3}
+    distance: 41.7
+    scaleRange: {x: 0.20116943, y: 0.6011695}
+    sinkAmount: 0
+  grassPrefabs:
+  - enabled: 1
+    name: sprite_0004
+    seed: 4555
+    probability: 65.9
+    collisionCheck: 0
+    rejectUnderwater: 0
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.734
+    instanceCount: 431364
+    index: 0
+    type: 1
+    renderAsBillboard: 1
+    prefab: {fileID: 0}
+    gpuInstancing: 1
+    holeEdgePadding: 2
+    alignToGround: 100
+    positionJitter: 0
+    useDensityScaling: 1
+    density: 2.72
+    billboard: {fileID: 2800000, guid: 5dac3dcaa34dea240b6832bdc617a492, type: 3}
+    mainColor: {r: 0.038709283, g: 0.18490559, b: 0.015001759, a: 1}
+    secondaryColor: {r: 1, g: 1, b: 1, a: 1}
+    linkColors: 1
+    minMaxHeight: {x: 0.13241367, y: 0.42946357}
+    minMaxWidth: {x: 0.099310406, y: 0.8364598}
+    noiseSize: 0.1
+  - enabled: 1
+    name: flower3
+    seed: 8860
+    probability: 2
+    collisionCheck: 1
+    rejectUnderwater: 1
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.501
+    instanceCount: 11717
+    index: 1
+    type: 0
+    renderAsBillboard: 0
+    prefab: {fileID: 9197168375719532713, guid: cf96bb75cfd166d4d85b0b131423bfdd, type: 3}
+    gpuInstancing: 1
+    holeEdgePadding: 2
+    alignToGround: 0
+    positionJitter: 0
+    useDensityScaling: 1
+    density: 1.01
+    billboard: {fileID: 0}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    secondaryColor: {r: 1, g: 1, b: 1, a: 1}
+    linkColors: 1
+    minMaxHeight: {x: 0.5, y: 1}
+    minMaxWidth: {x: 0.8, y: 1.2}
+    noiseSize: 0.1
+  - enabled: 1
+    name: flower2
+    seed: 981
+    probability: 6.4
+    collisionCheck: 1
+    rejectUnderwater: 1
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.679
+    instanceCount: 37971
+    index: 2
+    type: 0
+    renderAsBillboard: 0
+    prefab: {fileID: 8708748298352328652, guid: 4ac274621e84db04a8a833e2911a7cf4, type: 3}
+    gpuInstancing: 1
+    holeEdgePadding: 2
+    alignToGround: 100
+    positionJitter: 0
+    useDensityScaling: 1
+    density: 0.41
+    billboard: {fileID: 0}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    secondaryColor: {r: 1, g: 1, b: 1, a: 1}
+    linkColors: 1
+    minMaxHeight: {x: 0.5, y: 1}
+    minMaxWidth: {x: 0.8, y: 1.2}
+    noiseSize: 0.1
+  - enabled: 1
+    name: flower1
+    seed: 226
+    probability: 4.1
+    collisionCheck: 1
+    rejectUnderwater: 1
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: guss
+      layerID: 0
+      threshold: 0.75
+    instanceCount: 37864
+    index: 3
+    type: 0
+    renderAsBillboard: 0
+    prefab: {fileID: 2948354261657463070, guid: 8735b79044763af43bf4b413b0433d06, type: 3}
+    gpuInstancing: 1
+    holeEdgePadding: 2
+    alignToGround: 100
+    positionJitter: 0
+    useDensityScaling: 1
+    density: 0.36
+    billboard: {fileID: 0}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    secondaryColor: {r: 1, g: 1, b: 1, a: 1}
+    linkColors: 1
+    minMaxHeight: {x: 0.5, y: 1}
+    minMaxWidth: {x: 0.8, y: 1.2}
+    noiseSize: 0.1
   terrainSettings:
     drawTreesAndFoliage: 1
     preservePrefabLayer: 1
@@ -2823,11 +3040,11 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 3b8b03b905d284e468916817c2d0a4da, type: 2}
   m_TreeDistance: 1000
-  m_TreeBillboardDistance: 300
+  m_TreeBillboardDistance: 363
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 200
-  m_DetailObjectDensity: 1
+  m_DetailObjectDistance: 30
+  m_DetailObjectDensity: 0.621
   m_HeightmapPixelError: 1
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
@@ -3266,7 +3483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4916037395026696042, guid: 46d20a689cf5cbc4cb500c36fd8e745e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.000015258789
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 4916037395026696042, guid: 46d20a689cf5cbc4cb500c36fd8e745e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3440,7 +3657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3209184114929620009, guid: 747dbb4345c115444ae7ee83552c91dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.48
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 3209184114929620009, guid: 747dbb4345c115444ae7ee83552c91dc, type: 3}
       propertyPath: m_LocalPosition.z
