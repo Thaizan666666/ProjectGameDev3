@@ -931,27 +931,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055a7651e40bd434588282de88204941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaterSystem.WaterManager
-  baseWaves:
-  - amplitude: 0.3
-    direction: 30
-    wavelength: 10
-    origin: {x: 0, y: 0}
-    onmiDir: 0
-  - amplitude: 0.2
-    direction: 75
-    wavelength: 6
-    origin: {x: 0, y: 0}
-    onmiDir: 0
-  - amplitude: 0.1
-    direction: 110
-    wavelength: 3
-    origin: {x: 0, y: 0}
-    onmiDir: 0
+  baseWaves: []
   windZone: {fileID: 0}
   windMainMin: 0
   windMainMax: 20
   ampMultiplierMin: 0.4
-  ampMultiplierMax: 1.6
+  ampMultiplierMax: 0
   turbulenceDirectionJitterDeg: 25
 --- !u!64 &1741752609
 MeshCollider:

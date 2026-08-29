@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 95ac7172d7603124ab54ecd8df91c178
+guid: f889a957bb35eae4c9514c550edf79f9
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: grass_and_flower
-    second: {fileID: 2100000, guid: f1487968bcc10ac43b40713a2d3c3d45, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: 154dce506b4d9c242974f59044d5e591, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Material_BaseColor
+    second: {fileID: 2800000, guid: ab9ed600630358c45bbd1ac12512cb3d, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,7 +43,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 2
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -96,7 +101,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.02
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

@@ -63,10 +63,10 @@ Material:
     - _Distance: 19
     - _DstBlend: 10
     - _DstBlendAlpha: 10
-    - _FoamAmount: 6.2
+    - _FoamAmount: 1.4
     - _FoamCutoff: 1
-    - _FoamScale: 2
-    - _FoamScale2: 50
+    - _FoamScale: 16
+    - _FoamScale2: 100
     - _FoamSpeed: 0.1
     - _FoamSpeed2: 1
     - _QueueControl: 0
@@ -82,7 +82,7 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _Deep_Water: {r: 0.124549605, g: 0.2942487, b: 0.554717, a: 0.7529412}
-    - _FoamColor: {r: 0.72224283, g: 0.72224283, b: 0.83396226, a: 1}
+    - _FoamColor: {r: 0.51979345, g: 0.51979345, b: 0.5849056, a: 0.06666667}
     - _FoamColor2: {r: 1, g: 1, b: 1, a: 1}
     - _LineColor: {r: 0.72955966, g: 0, b: 0, a: 1}
     - _Shallow_Water: {r: 0.17254902, g: 0.5176471, b: 0.61960787, a: 0.83137256}
