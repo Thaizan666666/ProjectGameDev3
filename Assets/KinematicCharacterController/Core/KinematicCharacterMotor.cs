@@ -181,7 +181,7 @@ namespace KinematicCharacterController
         /// </summary>
         [SerializeField]
         [Tooltip("Height of the Character Capsule")]
-        private float CapsuleYOffset = 1f;
+        private float CapsuleYOffset = 0f;
         /// <summary>
         /// Physics material of the character's capsule
         /// </summary>
