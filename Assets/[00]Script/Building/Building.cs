@@ -1,4 +1,6 @@
+using System;
 using PlayerNormal.Project_wide;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PlayerNormal.Project_wide
@@ -12,7 +14,7 @@ namespace PlayerNormal.Project_wide
     public int currentLevel = 1;
     public bool canUpgrade;
 
-    private BuildingData data;
+    public BuildingData data;
     private PlayerInteract playerInteract;
     private Player player;
 
@@ -86,19 +88,21 @@ namespace PlayerNormal.Project_wide
         if (player == null || data == null) return;
 
         // Dynamic cost: next level's upgrade cost
-        int nextLevel = currentLevel + 1;
-        int cost = data.GetUpgradeCost(nextLevel);
+        // int nextLevel = currentLevel + 1;
+        // int cost = data.GetUpgradeCost(nextLevel);
 
-        Debug.Log($"[Building] {buildingName} Lv.{currentLevel} → next cost: {cost}, player money: {player.money}");
+        // Debug.Log($"[Building] {buildingName} Lv.{currentLevel} → next cost: {cost}, player money: {player.money}");
 
-        if (!canUpgrade || cost < 0 || player.money < cost)
-        {
-            Debug.LogWarning("[Building] Not enough money or can't upgrade right now.");
-            return;
-        }
+        // if (!canUpgrade || cost < 0 || player.money < cost)
+        // {
+        //     Debug.LogWarning("[Building] Not enough money or can't upgrade right now.");
+        //     return;
+        // }
 
-        player.money -= cost;
-        Upgrade();
+        // player.money -= cost;
+        // Upgrade();
+        Debug.Log("OnAcive");
+        UpgradeManager.Instance.TryRequestUpgrade(this);
     }
 
     public void Upgrade()

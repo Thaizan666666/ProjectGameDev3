@@ -367,6 +367,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &387711720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 387711722}
+  - component: {fileID: 387711721}
+  m_Layer: 0
+  m_Name: UpgradeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &387711721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387711720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d1afedf5fa9d54f830b252e0f814c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
+  walletComponent: {fileID: 9093151658798986146}
+--- !u!4 &387711722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387711720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.08831, y: 0.05404, z: 0.63593}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &433660801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1880,6 +1925,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1934699197461456234, guid: 25bd02d106c22bf4e9c8c7000da8feeb, type: 3}
+      propertyPath: upgradeManager
+      value: 
+      objectReference: {fileID: 387711721}
     - target: {fileID: 5799307493306275374, guid: 25bd02d106c22bf4e9c8c7000da8feeb, type: 3}
       propertyPath: m_Name
       value: The Seagull Inn_lv.1
@@ -2300,6 +2349,7 @@ GameObject:
   - component: {fileID: 7816576677261009992}
   - component: {fileID: 9093151658798986144}
   - component: {fileID: 9093151658798986145}
+  - component: {fileID: 9093151658798986146}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2732,6 +2782,10 @@ PrefabInstance:
       value: RefEquipment_Rod
       objectReference: {fileID: 0}
     - target: {fileID: 6851654249734054306, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851654249734054306, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
       propertyPath: m_TagString
       value: Equipment
       objectReference: {fileID: 0}
@@ -2821,6 +2875,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   money: 0
   playerName: A
+--- !u!114 &9093151658798986146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2948135565943724033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0278537b24a35224594951b0d1dda0cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWallet
+  money: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2836,6 +2903,7 @@ SceneRoots:
   - {fileID: 2958060641697104974}
   - {fileID: 827330700}
   - {fileID: 2117034450}
+  - {fileID: 387711722}
   - {fileID: 1710761442}
   - {fileID: 334735799}
   - {fileID: 1807204179}
