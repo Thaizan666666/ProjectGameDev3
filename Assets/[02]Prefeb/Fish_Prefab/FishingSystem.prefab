@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5280029910244325825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022343641305488907}
+  - component: {fileID: 8079774127055414006}
+  - component: {fileID: 1943401500348909772}
+  - component: {fileID: 5541079600397571569}
+  - component: {fileID: 4410944594667551167}
+  - component: {fileID: 8891580669949484226}
+  - component: {fileID: 8590909615532576478}
+  m_Layer: 0
+  m_Name: FishingSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1022343641305488907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280029910244325825}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.37828, y: 0, z: -1.11807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8079774127055414006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280029910244325825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010298063bd22b840ae520811ce80666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingGameManager
+  player: {fileID: 0}
+  reelController: {fileID: 1943401500348909772}
+  qteManager: {fileID: 5541079600397571569}
+  cameraRig: {fileID: 4410944594667551167}
+  qteSuccessStaminaBonus: 15
+  qteSuccessProgressBonus: 10
+  qteFailStaminaRecover: 20
+  qteFailProgressPenalty: 15
+--- !u!114 &1943401500348909772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280029910244325825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5f2ed2a7929b745b4059b12aebb49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerReelController
+  fish: {fileID: 0}
+  counterThreshold: 5
+  counterThresholdVertical: 50
+  reelKey: 1
+  pullWhileActiveBreakTime: 1.5
+  reelProgressPerSecond: 5
+  reelProgressMax: 100
+--- !u!114 &5541079600397571569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280029910244325825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e35a16d733ff349b630fd0b5c18743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingQTEManager
+  sequenceLength: 4
+  bossSequenceLength: 7
+  timePerKey: 1
+--- !u!114 &4410944594667551167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280029910244325825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c700bac8479a2f84eb01e0d635b9377c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingCameraRig
+  leftShoulderCamera: {fileID: 0}
+  rightShoulderCamera: {fileID: 0}
+  overHeadCamera: {fileID: 0}
+  mainPlayerCamera: {fileID: 0}
+  activePriority: 20
+  idlePriority: -100
+  inactivePriority: 10
+--- !u!114 &8891580669949484226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280029910244325825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7c7188dca08f54eb0069687dc796ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingDebugHud
+  gameManager: {fileID: 8079774127055414006}
+  reelController: {fileID: 1943401500348909772}
+--- !u!114 &8590909615532576478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280029910244325825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130367902200c284482bf30dbd7a70e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishController
+  tier: 0
+  player: {fileID: 0}
+  maxStamina: 100
+  tiredThreshold: 20
+  staminaDrainPerTensionUnit: 15
+  staminaRegenPerSecond: 6
+  swimSpeed: 1.5
+  swimRadius: 8
+  swimHeight: 0.5
+  directionChangeInterval: 1.5
+  maxReelSpeedMultiplier: 1.5
+  minDistanceFromPlayer: 2
+  dashChancePerSecond: 0.1
+  dashDuration: 1.2
+  dashSpeedMultiplier: 3
+  cooldownAfterQte: 2
+  forwardDominance: 0.6
+  qteEnabled: 1
+  qteChancePerDash: 1

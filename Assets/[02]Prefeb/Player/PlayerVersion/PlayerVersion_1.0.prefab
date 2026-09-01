@@ -441,13 +441,7 @@ PrefabInstance:
     - {fileID: 3554981695303207207, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 940493147710029101}
-    - targetCorrespondingSourceObject: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3182642359040120116}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
 --- !u!95 &2308779843516341230 stripped
 Animator:
@@ -459,42 +453,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1485290654769558073, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
   m_PrefabInstance: {fileID: 2641703665597537986}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9064254356585766097 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
-  m_PrefabInstance: {fileID: 2641703665597537986}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &940493147710029101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9064254356585766097}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b129970c062270e48b1e0141cbbf2cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.PlayerFishing
-  rodAnim: {fileID: 2308779843516341230}
-  fishingGameManager: {fileID: 0}
-  spawnDistance: 3
-  biteDelayMin: 0.2
-  biteDelayMax: 1
---- !u!114 &3182642359040120116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9064254356585766097}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b129970c062270e48b1e0141cbbf2cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.PlayerFishing
-  rodAnim: {fileID: 2308779843516341230}
-  fishingGameManager: {fileID: 0}
-  spawnDistance: 3
-  biteDelayMin: 0.2
-  biteDelayMax: 1

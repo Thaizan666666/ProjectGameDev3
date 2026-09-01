@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1622933532357300973}
   - component: {fileID: 1919100281041581196}
   - component: {fileID: 1433181270542412590}
+  - component: {fileID: -5334182822409477665}
   m_Layer: 0
   m_Name: FishZone_Rare
   m_TagString: Untagged
@@ -139,7 +140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4641468376303874773}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.86211, y: 0.56196, z: -1.7653098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -200,4 +201,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishSlotTrigger
   activeFishSlot: {fileID: 2724397328540410750, guid: e95ca6ac0357a774f9fae870c914fa56, type: 3}
   slotIndex: 1
+  playerTag: Player
+--- !u!114 &-5334182822409477665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641468376303874773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c650610236cf8448032bd493392353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishZoneTrigger
+  zone: {fileID: 1919100281041581196}
   playerTag: Player
