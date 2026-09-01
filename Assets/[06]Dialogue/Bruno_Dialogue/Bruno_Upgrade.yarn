@@ -1,0 +1,70 @@
+﻿title: Variable_Declare
+position: -163,-451
+---
+<<declare $The_Seagull_CurrentLv = 1>>
+
+===
+
+title: Bruno_Upgrade
+position: 100,-312
+---
+
+Bruno : Hi! How can I Help you?
+-> I want to upgrade building.
+    <<jump Select_Building_to_Upgrade>>
+-> Nothing.
+===
+
+title: Select_Building_to_Upgrade
+position: -32,-65
+---
+Bruno : Sure! Which one?
+-> The Seagull Inn.
+    <<jump Upgrade_The_Seagull_Inn>>
+-> On second thought, I'd rather not do it.
+    <<jump Cancel_Upgrade>>
+===
+
+title: Upgrade_The_Seagull_Inn
+position: -354,-66
+---
+<<if $The_Seagull_CurrentLv > 0 && $The_Seagull_CurrentLv < 3>>
+    <<if $The_Seagull_CurrentLv == 1>>
+        Bruno : 2,000 coins.
+        -> Here you are.
+            <<requestUpgradeBuilding "The Seagull Inn_lv.1">>
+            <<set $The_Seagull_CurrentLv += 1>>
+            <<jump Admited_Upgrade>>
+        -> I'll cancel it.
+            <<jump Cancel_Upgrade>>
+    <<endif>>
+    <<if $The_Seagull_CurrentLv == 2>>
+        Bruno : 3,000 coins.
+        -> Here you are.
+            <<requestUpgradeBuilding "The Seagull Inn_lv.2(Clone)">>
+            <<set $The_Seagull_CurrentLv += 1>>
+            <<jump Admited_Upgrade>>
+        -> I'll cancel it.
+            <<jump Cancel_Upgrade>>
+        
+    <<endif>>
+<<else>> 
+    <<set $The_Seagull_CurrentLv = -1>>
+    Bruno : Now you can't upgrade this building anymore.
+    -> Back to select building.
+        <<jump Select_Building_to_Upgrade>>
+    -> Ok then.
+<<endif>>
+===
+
+title: Admited_Upgrade
+position: -509,303
+---
+Bruno : Thank you!
+===
+
+title: Cancel_Upgrade
+position: -57,302
+---
+Bruno : It's Ok. Come back another time.
+===

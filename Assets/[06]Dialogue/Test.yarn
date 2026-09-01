@@ -1,8 +1,8 @@
 ﻿title: Test
 ---
-NPC : Hello, Guy.
-NPC : What do you do?
--> Player : I don't know.
-   Player : How I'am here.
--> Player : ......
+NPC : Hello, Guy. #line:0479cb6 
+NPC : What do you do? #line:042869f 
+-> Player : I don't know. #line:08f9108 
+   Player : How I'am here. #line:0f6878d 
+-> Player : ...... #line:0d5b63f 
 ===
