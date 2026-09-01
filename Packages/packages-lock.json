@@ -1,10 +1,11 @@
 {
   "dependencies": {
-    "com.febucci.text-animator-unity": {
-      "version": "file:com.febucci.text-animator-unity",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
+    "com.autodesk.fbx": {
+      "version": "5.1.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.10",
@@ -17,7 +18,7 @@
     },
     "com.unity.burst": {
       "version": "1.8.28",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -61,6 +62,16 @@
       "source": "builtin",
       "dependencies": {}
     },
+    "com.unity.formats.fbx": {
+      "version": "5.1.6",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.autodesk.fbx": "5.1.3",
+        "com.unity.timeline": "1.7.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ide.rider": {
       "version": "3.0.39",
       "depth": 0,
@@ -90,7 +101,7 @@
     },
     "com.unity.mathematics": {
       "version": "1.3.3",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -105,7 +116,7 @@
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
-      "depth": 1,
+      "depth": 3,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -115,6 +126,18 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.probuilder": {
+      "version": "6.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.shadergraph": "17.0.3",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
@@ -158,7 +181,7 @@
     },
     "com.unity.settings-manager": {
       "version": "2.1.1",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -195,7 +218,7 @@
     },
     "com.unity.test-framework.performance": {
       "version": "3.2.0",
-      "depth": 1,
+      "depth": 3,
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",
@@ -224,15 +247,6 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.unity.visualeffectgraph": {
-      "version": "17.3.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.shadergraph": "17.3.0",
-        "com.unity.render-pipelines.core": "17.3.0"
-      }
-    },
     "com.unity.visualscripting": {
       "version": "1.9.9",
       "depth": 0,
@@ -242,37 +256,6 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
-    },
-    "dev.yarnspinner.unity": {
-      "version": "file:dev.yarnspinner.unity",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "dev.yarnspinner.unity.addons.classicrpg": {
-      "version": "file:dev.yarnspinner.unity.addons.classicrpg",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "dev.yarnspinner.unity": "3.2.0",
-        "com.unity.cinemachine": "3.1.0"
-      }
-    },
-    "dev.yarnspinner.unity.addons.snaaake": {
-      "version": "file:dev.yarnspinner.unity.addons.snaaake",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "dev.yarnspinner.unity": "3.2.1"
-      }
-    },
-    "dev.yarnspinner.unity.addons.textanimator": {
-      "version": "file:dev.yarnspinner.unity.addons.textanimator",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "dev.yarnspinner.unity": "3.1.0"
-      }
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
