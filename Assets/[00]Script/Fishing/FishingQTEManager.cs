@@ -24,8 +24,10 @@ public class FishingQTEManager : MonoBehaviour
     private static readonly Key[] PossibleKeys = { Key.W, Key.A, Key.S, Key.D };
 
     [Header("QTE Tuning")]
-    [Tooltip("จำนวนปุ่มในลำดับ QTE แต่ละรอบ")]
+    [Tooltip("จำนวนปุ่มในลำดับ QTE แต่ละรอบ (ปลา Rare)")]
     [SerializeField] private int sequenceLength = 4;
+    [Tooltip("จำนวนปุ่มในลำดับ QTE ตอนสู้กับปลา Boss (ยากกว่า Rare)")]
+    [SerializeField] private int bossSequenceLength = 7;
     [Tooltip("เวลาที่ให้กดปุ่มแต่ละตัว (วินาที)")]
     [SerializeField] private float timePerKey = 0.8f;
 
@@ -39,20 +41,23 @@ public class FishingQTEManager : MonoBehaviour
     private int _index;
     private float _timer;
 
-    public bool StartQte()
+    /// <summary>เริ่ม QTE โดยความยาวลำดับปุ่มขึ้นกับระดับปลา (ปลา Boss จะยาว/เยอะกว่าปกติ)</summary>
+    public bool StartQte(FishTier tier)
     {
         if (IsActive) return false;
 
-        _sequence = new Key[sequenceLength];
-        for (int i = 0; i < sequenceLength; i++)
+        int length = tier == FishTier.Boss ? bossSequenceLength : sequenceLength;
+
+        _sequence = new Key[length];
+        for (int i = 0; i < length; i++)
             _sequence[i] = PossibleKeys[UnityEngine.Random.Range(0, PossibleKeys.Length)];
 
         _index = 0;
         _timer = timePerKey;
         IsActive = true;
 
-        var infos = new QtePromptInfo[sequenceLength];
-        for (int i = 0; i < sequenceLength; i++)
+        var infos = new QtePromptInfo[length];
+        for (int i = 0; i < length; i++)
             infos[i] = MakePrompt(i);
 
         OnQteStarted?.Invoke(infos);
@@ -106,6 +111,12 @@ public class FishingQTEManager : MonoBehaviour
     {
         IsActive = false;
         OnQteResult?.Invoke(success);
+    }
+
+    /// <summary>ยกเลิก QTE ทันทีโดยไม่ยิง OnQteResult — ใช้ตอน encounter จบไปแล้ว (จับปลาได้/เบ็ดขาด) ระหว่าง QTE ยังค้างอยู่ กัน QTE เก่ายิง result มาใส่ encounter ใหม่</summary>
+    public void CancelQte()
+    {
+        IsActive = false;
     }
 
     private QtePromptInfo MakePrompt(int index)

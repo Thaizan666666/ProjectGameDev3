@@ -10,6 +10,15 @@ public class FishZone : MonoBehaviour, IRandomFishProvider
 
     private IFishRepository Repository => fishDatabase;
 
+    // Zone นี้เป็นแค่ trigger volume สำหรับตรวจจับว่าผู้เล่นยืนอยู่ในจุดตกปลาไหม
+    // ถ้ามี Renderer ติดมาด้วย (เช่น sphere ที่ใส่ไว้ดูตำแหน่งตอนวางฉาก) ให้ซ่อนตอน Play
+    // ไม่งั้นจะโผล่มาเป็นก้อนกลม ๆ ลอยนิ่ง ๆ ปนกับปลาจริงที่กำลังว่ายอยู่
+    private void Awake()
+    {
+        foreach (var renderer in GetComponentsInChildren<Renderer>())
+            renderer.enabled = false;
+    }
+
     public string ZoneName => name;
     public FishDatabase Database => fishDatabase;
     public IReadOnlyList<FishZoneEntry> Entries => entries;
@@ -35,6 +44,20 @@ public class FishZone : MonoBehaviour, IRandomFishProvider
     public FishData GetRandomFish(FishTier tier) => PickFrom(GetCandidates(tier));
 
     public FishData GetRandomFish() => PickFrom(GetCandidates(null));
+
+    /// <summary>ปลาล่าสุดที่ถูกสุ่ม "โชว์" ไว้ (เช่นจากตู้ FishSlot) — ยังไม่ถูกใช้ตกจริง</summary>
+    public FishData PendingFish { get; private set; }
+
+    /// <summary>เรียกตอนสุ่มโชว์ปลา (เช่น FishSlot.TryRandomize) เพื่อจองไว้ว่าปลาตัวนี้คือตัวที่จะตกได้จริงตอนไปตกในโซนนี้</summary>
+    public void SetPendingFish(FishData data) => PendingFish = data;
+
+    /// <summary>ดึงปลาที่จองไว้มาใช้ (เรียกตอนเริ่ม encounter ตกจริง) แล้วเคลียร์ทิ้ง — คืน null ถ้าไม่มีปลาจองไว้ (ไม่ได้ไปโชว์ในตู้ก่อน)</summary>
+    public FishData ConsumePendingFish()
+    {
+        FishData result = PendingFish;
+        PendingFish = null;
+        return result;
+    }
 
     private bool IsValidIndex(int index) => index >= 0 && index < entries.Count;
 

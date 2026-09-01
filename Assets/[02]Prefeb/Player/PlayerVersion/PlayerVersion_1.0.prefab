@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3702458803601467801}
   m_Layer: 6
   m_Name: Root
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7263495194065023821}
   m_Layer: 6
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 8543654068640793656}
   - component: {fileID: 2527683982261858800}
   - component: {fileID: 8360793614620200386}
+  - component: {fileID: 3390327992091487789}
   m_Layer: 6
   m_Name: PlayerVersion_1.0
   m_TagString: Player
@@ -327,6 +328,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
   selectMode: 1
+--- !u!114 &3390327992091487789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8100798265563457680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b129970c062270e48b1e0141cbbf2cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.PlayerFishing
+  rodAnim: {fileID: 2308779843516341230}
+  fishingGameManager: {fileID: 0}
+  spawnDistance: 3
+  biteDelayMin: 0.2
+  biteDelayMax: 1
 --- !u!1001 &2641703665597537986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -375,17 +393,108 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1647768350206847356, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143653082659179316, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149421778195937423, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554084436269384209, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6851654249734054306, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
       propertyPath: m_Name
       value: RefEquipment_Rod
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6851654249734054306, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851654249734054306, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956119420268709180, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956119420268709180, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3554981695303207207, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 940493147710029101}
+    - targetCorrespondingSourceObject: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3182642359040120116}
   m_SourcePrefab: {fileID: 100100000, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+--- !u!95 &2308779843516341230 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 334208060255257900, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+  m_PrefabInstance: {fileID: 2641703665597537986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3473955950123478267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1485290654769558073, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
   m_PrefabInstance: {fileID: 2641703665597537986}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9064254356585766097 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6441137220272062995, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
+  m_PrefabInstance: {fileID: 2641703665597537986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &940493147710029101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064254356585766097}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b129970c062270e48b1e0141cbbf2cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.PlayerFishing
+  rodAnim: {fileID: 2308779843516341230}
+  fishingGameManager: {fileID: 0}
+  spawnDistance: 3
+  biteDelayMin: 0.2
+  biteDelayMax: 1
+--- !u!114 &3182642359040120116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064254356585766097}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b129970c062270e48b1e0141cbbf2cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.PlayerFishing
+  rodAnim: {fileID: 2308779843516341230}
+  fishingGameManager: {fileID: 0}
+  spawnDistance: 3
+  biteDelayMin: 0.2
+  biteDelayMax: 1

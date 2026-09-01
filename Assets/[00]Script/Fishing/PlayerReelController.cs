@@ -16,8 +16,10 @@ public class PlayerReelController : MonoBehaviour
     [SerializeField] private FishController fish;
 
     [Header("Counter-Direction Input")]
-    [Tooltip("ระยะห่างจากกึ่งกลางจอ (พิกเซล) ที่ต้องวางเมาส์เกินไปถึงจะนับว่า 'สวนทางสำเร็จ'")]
+    [Tooltip("ระยะห่างจากกึ่งกลางจอ (พิกเซล) ที่ต้องวางเมาส์เกินไปถึงจะนับว่า 'สวนทางสำเร็จ' — ใช้กับ Left/Right (แกน X)")]
     [SerializeField] private float counterThreshold = 50f;
+    [Tooltip("ระยะห่างจากกึ่งกลางจอ (พิกเซล) ที่ต้องดึงเมาส์ลงเกินไปถึงจะนับว่า 'สวนทางสำเร็จ' — ใช้กับ Forward/ดึงลง (แกน Y)")]
+    [SerializeField] private float counterThresholdVertical = 50f;
 
     [Header("Reel Button")]
     [SerializeField] private Key reelKey = Key.Space;
@@ -48,6 +50,7 @@ public class PlayerReelController : MonoBehaviour
         ReelProgress = 0f;
         _pullBreakTimer = 0f;
         _resolved = false;
+        fish?.SetPullProgress(0f);
     }
 
     private void Update()
@@ -58,27 +61,32 @@ public class PlayerReelController : MonoBehaviour
         HandleReelButton();
     }
 
-    // ── สวนทางปลาด้วยตำแหน่งเมาส์ ─────────────────────────────
+    // ── สวนทางปลาด้วยตำแหน่งเมาส์ (ทำงานทั้งตอน Swimming และ Dashing — ตอน Dash จะวิ่งคู่กับ WASD QTE) ──
     private void HandleCounterDirection()
     {
-        if (fish.State != FishState.Swimming) return;
+        if (fish.State != FishState.Swimming && fish.State != FishState.Dashing) return;
 
         var mouse = Mouse.current;
         if (mouse == null) return;
 
+        Vector2 mousePos = mouse.position.ReadValue();
         float screenCenterX = Screen.width * 0.5f;
-        float offsetFromCenter = mouse.position.ReadValue().x - screenCenterX;
+        float screenCenterY = Screen.height * 0.5f;
+        float offsetX = mousePos.x - screenCenterX;
+        float offsetY = mousePos.y - screenCenterY;
 
-        // ปลาอยู่ฝั่งไหน ผู้เล่นต้องวางเมาส์ไว้ฝั่งตรงข้ามถึงจะนับว่าสวนทางสำเร็จ
+        // ซ้าย/ขวา -> วางเมาส์ไว้ฝั่งตรงข้าม (แกน X) | Forward (ปลาพุ่งเข้าหา) -> ดึงเมาส์ลง (แกน Y)
+        // ให้ผล full tension ทันทีที่ผ่าน threshold (ไม่ scale ตามระยะทางถึงขอบจอ) เพราะแค่ผ่าน threshold นิดเดียว
+        // ก็ควรลด stamina ได้จริง ไม่งั้น drain จะแพ้ regen เกือบตลอด กลายเป็น stamina ขึ้นทั้งที่กำลังสวนทางถูกอยู่
         bool counteringCorrectly = fish.RelativeDir switch
         {
-            RelativeDirection.Left => offsetFromCenter > counterThreshold,
-            RelativeDirection.Right => offsetFromCenter < -counterThreshold,
+            RelativeDirection.Left => offsetX > counterThreshold,
+            RelativeDirection.Right => offsetX < -counterThreshold,
+            RelativeDirection.Forward => offsetY < -counterThresholdVertical,
             _ => false
         };
 
-        float tension = counteringCorrectly ? Mathf.Clamp01(Mathf.Abs(offsetFromCenter) / screenCenterX) : 0f;
-        fish.ApplyTension(tension);
+        fish.ApplyTension(counteringCorrectly ? 1f : 0f);
     }
 
     // ── ปุ่มดึง ────────────────────────────────────────────────
@@ -116,6 +124,7 @@ public class PlayerReelController : MonoBehaviour
         if (_resolved) return;
 
         ReelProgress = Mathf.Clamp(ReelProgress + delta, 0f, reelProgressMax);
+        fish?.SetPullProgress(ReelProgressPercent);
         if (ReelProgress >= reelProgressMax) TriggerFishCaught();
     }
 

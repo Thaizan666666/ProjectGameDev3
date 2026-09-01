@@ -22,7 +22,7 @@ public class FishingDebugHud : MonoBehaviour
         gameManager.OnQteStarted += _ => _qteActive = true;
         gameManager.OnQteResult += success => { _qteActive = false; _lastResult = success ? "QTE SUCCESS" : "QTE FAIL"; };
         gameManager.OnLineBroken += () => _lastResult = "LINE BROKEN";
-        gameManager.OnFishCaught += () => _lastResult = "FISH CAUGHT";
+        gameManager.OnFishCaught += data => _lastResult = data != null ? $"FISH CAUGHT: {data.fishName}" : "FISH CAUGHT";
     }
 
     private void OnGUI()

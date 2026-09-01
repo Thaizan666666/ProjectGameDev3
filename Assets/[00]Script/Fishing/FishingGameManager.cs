@@ -36,7 +36,8 @@ public class FishingGameManager : MonoBehaviour
 
     // ── Events สำหรับ UI ──────────────────────────────────────
     public event Action OnLineBroken;
-    public event Action OnFishCaught;
+    /// <summary>ยิงพร้อม FishData ของปลาที่จับได้ (จาก FishStats SO) — null ได้ถ้าเป็นปลาทดสอบที่ไม่ได้ผ่าน spawn flow จริง</summary>
+    public event Action<FishData> OnFishCaught;
     public event Action<QtePromptInfo[]> OnQteStarted;
     public event Action<QtePromptInfo> OnPromptChanged;
     public event Action<bool> OnQteResult;
@@ -87,9 +88,10 @@ public class FishingGameManager : MonoBehaviour
     {
         if (State != FishingEncounterState.Fighting || CurrentFish == null) return;
 
-        if (CurrentFish.IsDashing && qteManager != null && !qteManager.IsActive)
+        if (CurrentFish.IsDashing && CurrentFish.WantsQteThisDash && qteManager != null && !qteManager.IsActive)
         {
-            qteManager.StartQte();
+            qteManager.StartQte(CurrentFish.Tier);
+            CurrentFish.ConsumeQteRequest();
         }
     }
 
@@ -146,19 +148,28 @@ public class FishingGameManager : MonoBehaviour
     private void HandleLineBroken()
     {
         State = FishingEncounterState.Resolved;
-        if (cameraRig != null) cameraRig.SetActive(false);
-        if (_playerControl != null) _playerControl.SetControlEnabled(true);
-        SetCursorForFishing(false);
+        StopEncounterSystems();
+        CurrentFish = null;
         OnLineBroken?.Invoke();
     }
 
     private void HandleFishCaught()
     {
+        FishData caughtData = CurrentFish != null ? CurrentFish.Data : null;
+
         State = FishingEncounterState.Resolved;
+        StopEncounterSystems();
+        CurrentFish = null;
+        OnFishCaught?.Invoke(caughtData);
+    }
+
+    /// <summary>เรียกทุกครั้งที่ encounter จบ (จับได้/เบ็ดขาด) — ปิดทุกระบบย่อยที่ยังทำงานค้างอยู่ กันไม่ให้ QTE/กล้อง/คอนโทรลทำงานต่อหลังตกปลาเสร็จแล้ว</summary>
+    private void StopEncounterSystems()
+    {
+        if (qteManager != null && qteManager.IsActive) qteManager.CancelQte();
         if (cameraRig != null) cameraRig.SetActive(false);
         if (_playerControl != null) _playerControl.SetControlEnabled(true);
         SetCursorForFishing(false);
-        OnFishCaught?.Invoke();
     }
 
     private void HandleQteResult(bool success)

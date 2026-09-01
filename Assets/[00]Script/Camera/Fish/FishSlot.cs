@@ -18,6 +18,7 @@ public class FishSlot
 
         lastResult = data;
         targetFish?.SetData(data);
+        zone.SetPendingFish(data);   // จองไว้ให้ตัวที่ตกจริงในโซนนี้ต้องเป็นปลาตัวเดียวกับที่โชว์ในตู้
         return true;
     }
 }
