@@ -10,6 +10,7 @@ namespace WaterSystem
     ///   3. (ไม่บังคับ) ปรับ amplitude/direction ของคลื่นตาม Wind Zone ในฉาก
     /// การมี "single source of truth" นี้คือสิ่งที่ทำให้ CPU (buoyancy) กับ GPU (shader) เห็นคลื่นตรงกันเสมอ
     /// </summary>
+    [ExecuteAlways]
     public class WaterManager : MonoBehaviour
     {
         [ExecuteAlways]
