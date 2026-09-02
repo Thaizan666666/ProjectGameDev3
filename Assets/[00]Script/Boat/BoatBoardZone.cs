@@ -59,6 +59,7 @@ public class BoatBoardZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (IsPlayerCollider(other)) _playerInRange = true;
+        Debug.Log($"[BoardZone] OnTriggerEnter: {other.name}, isPlayer={IsPlayerCollider(other)}, playerField={player}");
     }
 
     private void OnTriggerExit(Collider other)
@@ -73,10 +74,12 @@ public class BoatBoardZone : MonoBehaviour
 
     private void OnEnterPressed(InputAction.CallbackContext ctx)
     {
+        Debug.Log($"[BoardZone] E pressed. inRange={_playerInRange}, walking={_isWalkingToSeat}, controlling={_isControllingBoat}, seat={seatPoint}, player={player}, inputScript={playerInputScript}, boat={boat}");
         if (!_playerInRange || _isWalkingToSeat || _isControllingBoat) return;
         if (seatPoint == null || player == null || playerInputScript == null || boat == null) return;
 
         _isWalkingToSeat = true;
+        Debug.Log("Walkkkkkkkkkk");
         playerInputScript.SetControlEnabled(false);
     }
 
@@ -123,6 +126,7 @@ public class BoatBoardZone : MonoBehaviour
         Vector3 toSeat = seatPoint.position - player.transform.position;
         toSeat.y = 0f;
         float distance = toSeat.magnitude;
+        Debug.Log($"[BoardZone] Walking, distance={distance}");
 
         if (distance <= arriveDistance)
         {

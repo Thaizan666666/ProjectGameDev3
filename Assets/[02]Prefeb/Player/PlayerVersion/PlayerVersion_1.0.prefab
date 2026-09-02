@@ -134,8 +134,8 @@ GameObject:
   - component: {fileID: 8025231588390615759}
   - component: {fileID: 3913642689316982574}
   - component: {fileID: 8614587132579473190}
-  - component: {fileID: 5908894994743692193}
   - component: {fileID: 8543654068640793656}
+  - component: {fileID: 5908894994743692193}
   - component: {fileID: 2527683982261858800}
   - component: {fileID: 8360793614620200386}
   - component: {fileID: 3390327992091487789}
@@ -208,8 +208,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -245,19 +245,6 @@ MonoBehaviour:
   MeshRoot: {fileID: 2874987383658071695}
   CameraFollowPoint: {fileID: 6529024755504427957}
   CrouchedCapsuleHeight: 1
---- !u!114 &5908894994743692193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8100798265563457680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461cd396e3fc7cc4eb9c92bde05c1b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KinematicCharacterController.Examples.ExamplePlayer
-  Character: {fileID: 8614587132579473190}
 --- !u!114 &8543654068640793656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +287,19 @@ MonoBehaviour:
   CheckMovementInitialOverlaps: 1
   KillVelocityWhenExceedMaxMovementIterations: 1
   KillRemainingMovementWhenExceedMaxMovementIterations: 1
+--- !u!114 &5908894994743692193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8100798265563457680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461cd396e3fc7cc4eb9c92bde05c1b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KinematicCharacterController.Examples.ExamplePlayer
+  Character: {fileID: 8614587132579473190}
 --- !u!114 &2527683982261858800
 MonoBehaviour:
   m_ObjectHideFlags: 0
