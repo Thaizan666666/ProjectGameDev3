@@ -182,3 +182,7 @@ MonoBehaviour:
   buildingName: 5
   currentLevel: 1
   canUpgrade: 0
+  data:
+    buildingName: 5
+    buildingType: 0
+    levels: []
