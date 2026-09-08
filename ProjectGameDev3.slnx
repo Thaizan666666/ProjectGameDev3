@@ -1,8 +1,8 @@
 ﻿<Solution>
   <Project Path="YarnSpinner.Addons.Snaaake.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="TableForge.Editor.csproj" />
   <Project Path="YarnSpinner.Unity.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="YarnSpinner.Addons.ClassicRPG.csproj" />
   <Project Path="TableForge.Demo.csproj" />
   <Project Path="YarnSpinner.Unity.Editor.csproj" />
