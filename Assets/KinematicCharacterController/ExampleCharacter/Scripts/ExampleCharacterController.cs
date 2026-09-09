@@ -464,7 +464,7 @@ namespace KinematicCharacterController.Examples
 
         public bool IsColliderValidForCollisions(Collider coll)
         {
-            if (IgnoredColliders.Count == 0)
+            if (IgnoredColliders.Count <= 0)
             {
                 return true;
             }
