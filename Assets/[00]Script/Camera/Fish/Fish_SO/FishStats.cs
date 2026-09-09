@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TableForge.Fish
 {
-    [CreateAssetMenu(fileName = "FishStats", menuName = "Fish_SO/Fish Stats")]    
+    [CreateAssetMenu(fileName = "FishStats", menuName = "Scriptable Objects/Fish Stats")]    
     public class FishStats : ScriptableObject
     {
         public FishName fishName;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TableForge.Building
 {
-    [CreateAssetMenu(fileName = "BuildingStat", menuName = "Building_SO/Building Stats")]
+    [CreateAssetMenu(fileName = "BuildingStat", menuName = "Scriptable Objects/Building Stats")]
     public class BuildingStats : ScriptableObject
     {
         public BuildingName buildingName;
