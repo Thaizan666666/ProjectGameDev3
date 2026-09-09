@@ -4,6 +4,7 @@ using System;
 public class GameTimeSystem : MonoBehaviour
 {
     public event Action<int, int, int> OnTimeChanged;
+    public event Action<int> OnDayChanged;
 
     [SerializeField] private float realSecondsPerGameMinute = 1f;
 
@@ -38,6 +39,7 @@ public class GameTimeSystem : MonoBehaviour
         {
             Hour = 0;
             Day++;
+            OnDayChanged?.Invoke(Day);
         }
 
         OnTimeChanged?.Invoke(Day, Hour, Minute);
