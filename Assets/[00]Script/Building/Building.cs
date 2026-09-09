@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PlayerNormal.Project_wide;
 using UnityEngine;
 using Yarn.Unity;
@@ -7,6 +8,12 @@ namespace PlayerNormal.Project_wide
 {
     public class Building : MonoBehaviour, IInteractable, IUpgradable
     {
+        // ── Static Registry: หา Building instance จาก BuildingName ได้ O(1) ──
+        private static readonly Dictionary<BuildingName, Building> _instances = new();
+
+        public static Building GetByName(BuildingName name)
+            => _instances.TryGetValue(name, out var b) ? b : null;
+
         [Header("Select building in Inspector (data loads at runtime)")]
         [SerializeField] private BuildingName buildingName;
 
@@ -24,6 +31,21 @@ namespace PlayerNormal.Project_wide
         private void Awake()
         {
             canUpgrade = false;
+        }
+
+        private void OnEnable()
+        {
+            if (_instances.ContainsKey(buildingName))
+            {
+                Debug.LogWarning($"[Building] Duplicate BuildingName {buildingName} on {name} — replacing previous instance.");
+            }
+            _instances[buildingName] = this;
+        }
+
+        private void OnDisable()
+        {
+            if (_instances.TryGetValue(buildingName, out var b) && b == this)
+                _instances.Remove(buildingName);
         }
 
         private void Start()
@@ -89,15 +111,6 @@ namespace PlayerNormal.Project_wide
         {
             player = interactor.GetComponent<Player>();
             if (player == null || data == null) return;
-
-            // Debug.Log("OnAcive");
-            // UpgradeManager.Instance.TryRequestUpgrade(this);
-        }
-        
-        [YarnCommand("requestUpgradeBuilding")]
-        public void RequestUpgradeFromDialogue()
-        {
-            UpgradeManager.Instance.TryRequestUpgrade(this);
         }
 
         public void Upgrade()

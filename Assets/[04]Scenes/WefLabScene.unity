@@ -921,7 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc9606034d0d514d96bdec5821e3115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimeSystem
-  realSecondsPerGameMinute: 1
+  realSecondsPerGameMinute: 0.5
 --- !u!4 &1139932291
 Transform:
   m_ObjectHideFlags: 0
@@ -2779,6 +2779,10 @@ PrefabInstance:
       value: UpgradeManager
       objectReference: {fileID: 0}
     - target: {fileID: 8079516207050693102, guid: 85a5e1d9080cec54cb090ca05af1a821, type: 3}
+      propertyPath: gameTime
+      value: 
+      objectReference: {fileID: 1139932290}
+    - target: {fileID: 8079516207050693102, guid: 85a5e1d9080cec54cb090ca05af1a821, type: 3}
       propertyPath: walletComponent
       value: 
       objectReference: {fileID: 9093151658798986146}
@@ -3248,7 +3252,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1485290654769558073, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.714
+      value: 0.7140002
       objectReference: {fileID: 0}
     - target: {fileID: 1485290654769558073, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3256,7 +3260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1485290654769558073, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.399
+      value: 0.39900017
       objectReference: {fileID: 0}
     - target: {fileID: 1485290654769558073, guid: 9f89d5ac208f2164f896bcb249c8a801, type: 3}
       propertyPath: m_LocalRotation.w
