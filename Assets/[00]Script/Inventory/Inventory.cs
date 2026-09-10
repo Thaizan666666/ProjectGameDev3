@@ -2,29 +2,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System.ComponentModel;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory instance;
+
     public ItemSO keyItem;
     public GameObject hotbatObj;
     public GameObject inventorySlotParent;
+    public GameObject container;
+    public Transform chestUI;
 
     public Image dragIcon;
 
     private List<Slot> inventorySlots = new List<Slot>();
     private List<Slot> hotbarSlots = new List<Slot>();
     private List<Slot> allSlots = new List<Slot>();
+    private List<Slot> chesUISlots = new List<Slot>();
 
     private Slot draggedSlot = null;
     private bool isDragging = false;
+
+    private PlayerInputActions inputActions;
 
     private void Awake()
     {
         inventorySlots.AddRange(inventorySlotParent.GetComponentsInChildren<Slot>());
         hotbarSlots.AddRange(hotbatObj.GetComponentsInChildren<Slot>());
+        chesUISlots.AddRange(chestUI.GetComponentsInChildren<Slot>());
 
         allSlots.AddRange(inventorySlots);
         allSlots.AddRange(hotbarSlots);
+
+        chestUI.gameObject.SetActive(false);
+
+        inputActions = new PlayerInputActions();
     }
 
     void Start()
@@ -32,11 +45,39 @@ public class Inventory : MonoBehaviour
         AddItem(keyItem, 1);
     }
 
+    void OnEnable()
+    {
+        inputActions.Interacting.Enable();
+    }
+    void OnDisable()
+    {
+        inputActions.Interacting.Disable();
+    }
+
     void Update()
     {
+        if (inputActions.Interacting.OpenInventory.WasPressedThisFrame())
+        {
+            Debug.Log("B has pressed.");
+            ToggleInventory();
+        }
+
         StartDrag();
         UpdateDragItemPosition();
         EndDrag();
+    }
+
+    public void ToggleInventory()
+    {
+        container.SetActive(!container.activeInHierarchy);
+        Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = !Cursor.visible;
+
+        StorageChest[] storageChests = FindObjectsByType<StorageChest>(FindObjectsSortMode.None);
+        for(int i = 0; i < storageChests.Length; i++)
+        {
+            storageChests[i].CloseChest();
+        }
     }
 
     public void AddItem(ItemSO itemToAdd, int amount)
@@ -126,6 +167,11 @@ public class Inventory : MonoBehaviour
     private Slot GetHoveredSlot()
     {
         foreach(Slot s in allSlots)
+        {
+            if(s.hovering) return s;
+        }
+
+        foreach(Slot s in chesUISlots)
         {
             if(s.hovering) return s;
         }

@@ -616,6 +616,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""8afa93b1-3916-461a-9a1b-3e100a009770"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -643,23 +652,23 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cc0b3c61-a803-4b6b-a2ae-73986f65568b"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a3f3d442-02f8-4271-86c4-388ef94d68cb"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwingRod"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76cea646-4850-45ec-8bcd-157c6c31a64f"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -689,6 +698,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Interacting_Interact = m_Interacting.FindAction("Interact", throwIfNotFound: true);
         m_Interacting_Select = m_Interacting.FindAction("Select", throwIfNotFound: true);
         m_Interacting_SwingRod = m_Interacting.FindAction("SwingRod", throwIfNotFound: true);
+        m_Interacting_OpenInventory = m_Interacting.FindAction("OpenInventory", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -1076,6 +1086,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Interacting_Interact;
     private readonly InputAction m_Interacting_Select;
     private readonly InputAction m_Interacting_SwingRod;
+    private readonly InputAction m_Interacting_OpenInventory;
     /// <summary>
     /// Provides access to input actions defined in input action map "Interacting".
     /// </summary>
@@ -1099,6 +1110,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Interacting/SwingRod".
         /// </summary>
         public InputAction @SwingRod => m_Wrapper.m_Interacting_SwingRod;
+        /// <summary>
+        /// Provides access to the underlying input action "Interacting/OpenInventory".
+        /// </summary>
+        public InputAction @OpenInventory => m_Wrapper.m_Interacting_OpenInventory;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1134,6 +1149,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SwingRod.started += instance.OnSwingRod;
             @SwingRod.performed += instance.OnSwingRod;
             @SwingRod.canceled += instance.OnSwingRod;
+            @OpenInventory.started += instance.OnOpenInventory;
+            @OpenInventory.performed += instance.OnOpenInventory;
+            @OpenInventory.canceled += instance.OnOpenInventory;
         }
 
         /// <summary>
@@ -1154,6 +1172,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SwingRod.started -= instance.OnSwingRod;
             @SwingRod.performed -= instance.OnSwingRod;
             @SwingRod.canceled -= instance.OnSwingRod;
+            @OpenInventory.started -= instance.OnOpenInventory;
+            @OpenInventory.performed -= instance.OnOpenInventory;
+            @OpenInventory.canceled -= instance.OnOpenInventory;
         }
 
         /// <summary>
@@ -1315,5 +1336,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwingRod(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenInventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenInventory(InputAction.CallbackContext context);
     }
 }
