@@ -12,32 +12,22 @@ public class StorageChest : MonoBehaviour, IInteractable
     public int chestSize = 15;
     public ChestItem[] storedItems;
 
-    private static GameObject chestUI;
-    private static Slot[] slots;
-
+    // ไม่ใช่ static แล้ว — แต่ละ chest จะดึง UI จาก Inventory instance
     private bool isOpen;
 
     private void Awake()
     {
         storedItems = new ChestItem[chestSize];
 
-        for(int i = 0; i< chestSize; i++)
+        for (int i = 0; i < chestSize; i++)
         {
             storedItems[i] = new ChestItem();
-        }
-
-        if(chestUI == null)
-        {
-            chestUI = Inventory.instance.chestUI.gameObject;
-            slots = chestUI.GetComponentsInChildren<Slot>(true);
-
-            chestUI.SetActive(false);
         }
     }
 
     public void Interact()
     {
-        if(!isOpen)
+        if (!isOpen)
             OpenChest();
         else
             CloseChest();
@@ -45,15 +35,20 @@ public class StorageChest : MonoBehaviour, IInteractable
 
     void OpenChest()
     {
-        Inventory.instance.ToggleInventory();
-        isOpen = true;
-        chestUI.SetActive(true);
+        // ขอให้ Inventory เปิด main inventory + chest UI
+        Inventory.instance.OpenInventory();
+        Inventory.instance.ShowChestUI(this);
 
-        for(int i = 0; i< slots.Length; i++)
+        isOpen = true;
+
+        // โหลด item เข้า chest UI slots
+        Slot[] slots = Inventory.instance.GetChestSlots();
+        int limit = Mathf.Min(slots.Length, storedItems.Length);
+
+        for (int i = 0; i < limit; i++)
         {
             var data = storedItems[i];
-
-            if(data.item != null)
+            if (data.item != null)
                 slots[i].SetItem(data.item, data.amount);
             else
                 slots[i].ClearSlot();
@@ -62,10 +57,13 @@ public class StorageChest : MonoBehaviour, IInteractable
 
     public void CloseChest()
     {
-        if(!isOpen) return;
-        isOpen = false;
+        if (!isOpen) return;
 
-        for(int i = 0; i< slots.Length; i++)
+        // บันทึก item จาก chest UI กลับ array
+        Slot[] slots = Inventory.instance.GetChestSlots();
+        int limit = Mathf.Min(slots.Length, storedItems.Length);
+
+        for (int i = 0; i < limit; i++)
         {
             if (slots[i].HasItem())
             {
@@ -79,21 +77,22 @@ public class StorageChest : MonoBehaviour, IInteractable
             }
         }
 
-        chestUI.SetActive(false);
+        isOpen = false;
+
+        // ขอให้ Inventory ปิดทั้ง chest UI + main inventory
+        Inventory.instance.HideChestUI();
+        Inventory.instance.CloseInventory();
     }
 
-    public void SetHighlighted(bool isHighlighted)
+    // เรียกจาก Inventory.HandleToggleAll() — บันทึก item แล้วปิด UI ทั้งคู่
+    public void ForceClose()
     {
-        throw new System.NotImplementedException();
+        CloseChest();
     }
 
-    public Transform GetTransform()
-    {
-        throw new System.NotImplementedException();
-    }
+    public void SetHighlighted(bool isHighlighted) { }
 
-    public bool CanInteract()
-    {
-        throw new System.NotImplementedException();
-    }
+    public Transform GetTransform() => transform;
+
+    public bool CanInteract() => true;
 }

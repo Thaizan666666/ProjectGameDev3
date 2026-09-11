@@ -54,10 +54,10 @@ namespace KinematicCharacterController.Examples
         {
             if (!_isControlEnabled) return;
 
-            // if (_controls.Player.LeftClick.WasPressedThisFrame())
-            // {
-            //     Cursor.lockState = CursorLockMode.Locked;
-            // }
+            if (_controls.Player.LeftClick.WasPressedThisFrame())
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             HandleCharacterInput();
         }
 

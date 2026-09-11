@@ -54,24 +54,30 @@ public class PlayerInteract : MonoBehaviour
     }
 
     void OnTriggerExit(Collider other)
-    {
-        var interactable = other.GetComponentInParent<IInteractable>();
-        if (interactable != null)
         {
-            int removedIndex = nearbyInteractables.IndexOf(interactable);
-            nearbyInteractables.Remove(interactable);
+            var interactable = other.GetComponentInParent<IInteractable>();
+            if (interactable != null)
+            {
+                // ★ Auto-close chest when leaving collider
+                if (interactable is StorageChest chest)
+                {
+                    chest.ForceClose();
+                }
 
-            // ��Ѻ currentIndex ��������ش�ͺ list
-            if (nearbyInteractables.Count == 0)
-            {
-                currentIndex = 0;
-            }
-            else if (removedIndex <= currentIndex)
-            {
-                currentIndex = Mathf.Clamp(currentIndex - 1, 0, nearbyInteractables.Count - 1);
+                int removedIndex = nearbyInteractables.IndexOf(interactable);
+                nearbyInteractables.Remove(interactable);
+
+                // ��Ѻ currentIndex ��������ش�ͺ list
+                if (nearbyInteractables.Count == 0)
+                {
+                    currentIndex = 0;
+                }
+                else if (removedIndex <= currentIndex)
+                {
+                    currentIndex = Mathf.Clamp(currentIndex - 1, 0, nearbyInteractables.Count - 1);
+                }
             }
         }
-    }
 
     void HandleScrollInput()
     {

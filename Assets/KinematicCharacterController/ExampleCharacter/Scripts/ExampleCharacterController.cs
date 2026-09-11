@@ -512,5 +512,17 @@ namespace KinematicCharacterController.Examples
         public void OnDiscreteCollisionDetected(Collider hitCollider)
         {
         }
+
+        /// <summary>
+        /// หยุดการรับ input ทั้งตำแหน่งการหมุนและการเคลื่อนที่ทันที (ใช้ตอนเปิด UI/Inventory)
+        /// </summary>
+        public void StopAllInputs()
+        {
+            _moveInputVector = Vector3.zero;
+            _lookInputVector = Vector3.zero;
+            _jumpRequested = false;
+            _jumpConsumed = false;
+            _internalVelocityAdd = Vector3.zero;
+        }
     }
 }

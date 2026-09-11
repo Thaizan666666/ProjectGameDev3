@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.ComponentModel;
+using KinematicCharacterController.Examples;
 
 public class Inventory : MonoBehaviour
 {
@@ -25,9 +26,13 @@ public class Inventory : MonoBehaviour
     private bool isDragging = false;
 
     private PlayerInputActions inputActions;
+    private ExamplePlayer _examplePlayer;
+    private StorageChest _openChest = null;
 
     private void Awake()
     {
+        instance = this;
+
         inventorySlots.AddRange(inventorySlotParent.GetComponentsInChildren<Slot>());
         hotbarSlots.AddRange(hotbatObj.GetComponentsInChildren<Slot>());
         chesUISlots.AddRange(chestUI.GetComponentsInChildren<Slot>());
@@ -38,11 +43,14 @@ public class Inventory : MonoBehaviour
         chestUI.gameObject.SetActive(false);
 
         inputActions = new PlayerInputActions();
+
+        // Cache ExamplePlayer reference for input control
+        _examplePlayer = FindFirstObjectByType<ExamplePlayer>();
     }
 
     void Start()
     {
-        AddItem(keyItem, 1);
+        
     }
 
     void OnEnable()
@@ -59,39 +67,93 @@ public class Inventory : MonoBehaviour
         if (inputActions.Interacting.OpenInventory.WasPressedThisFrame())
         {
             Debug.Log("B has pressed.");
-            ToggleInventory();
+            HandleToggleAll();
         }
 
-        StartDrag();
-        UpdateDragItemPosition();
-        EndDrag();
-    }
-
-    public void ToggleInventory()
-    {
-        container.SetActive(!container.activeInHierarchy);
-        Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = !Cursor.visible;
-
-        StorageChest[] storageChests = FindObjectsByType<StorageChest>(FindObjectsSortMode.None);
-        for(int i = 0; i < storageChests.Length; i++)
+        // Only allow drag when inventory is open
+        if (container.activeInHierarchy)
         {
-            storageChests[i].CloseChest();
+            StartDrag();
+            UpdateDragItemPosition();
+            EndDrag();
         }
     }
+
+    // ===== B Key: ปิดทุกอย่างถ้าเปิดอยู่ / เปิดแค่ inventory =====
+    private void HandleToggleAll()
+    {
+        if (_openChest != null)
+        {
+            // Chest กำลังเปิด → ปิดทั้งคู่
+            StorageChest chest = _openChest;
+            chest.ForceClose();       // chest บันทึก item + reset isOpen
+            CloseInventory();         // ปิด main inventory
+        }
+        else if (container.activeInHierarchy)
+        {
+            // Main inventory เปิดอยู่ (ไม่มี chest) → ปิด
+            CloseInventory();
+        }
+        else
+        {
+            // ทุกอย่างปิดอยู่ → เปิดแค่ main inventory
+            OpenInventory();
+        }
+    }
+
+    // ===== Open/Close Main Inventory (container + cursor + player input) =====
+    public void OpenInventory()
+    {
+        container.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        if (_examplePlayer != null)
+        {
+            _examplePlayer.SetControlEnabled(false);
+            _examplePlayer.Character.StopAllInputs();
+        }
+    }
+
+    public void CloseInventory()
+    {
+        container.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        if (_examplePlayer != null)
+            _examplePlayer.SetControlEnabled(true);
+    }
+
+    public bool IsInventoryOpen() => container.activeInHierarchy;
+
+    // ===== Chest UI Management =====
+    public void ShowChestUI(StorageChest chest)
+    {
+        _openChest = chest;
+        chestUI.gameObject.SetActive(true);
+    }
+
+    public void HideChestUI()
+    {
+        _openChest = null;
+        chestUI.gameObject.SetActive(false);
+    }
+
+    public StorageChest GetOpenChest() => _openChest;
+
+    public Slot[] GetChestSlots() => chesUISlots.ToArray();
 
     public void AddItem(ItemSO itemToAdd, int amount)
     {
         int remaining = amount;
 
-        foreach(Slot slot in allSlots)
+        foreach (Slot slot in allSlots)
         {
-            if(slot.HasItem() && slot.GetItem() == itemToAdd)
+            if (slot.HasItem() && slot.GetItem() == itemToAdd)
             {
                 int currentAmount = slot.GetAmount();
                 int maxStack = itemToAdd.maxStackSize;
 
-                if(currentAmount < maxStack)
+                if (currentAmount < maxStack)
                 {
                     int spaceLeft = maxStack - currentAmount;
                     int amountToAdd = Mathf.Min(spaceLeft, remaining);
@@ -99,24 +161,24 @@ public class Inventory : MonoBehaviour
                     slot.SetItem(itemToAdd, currentAmount + amountToAdd);
                     remaining -= amountToAdd;
 
-                    if(remaining <= 0) return;
+                    if (remaining <= 0) return;
                 }
             }
         }
 
-        foreach(Slot slot in allSlots)
+        foreach (Slot slot in allSlots)
         {
             if (!slot.HasItem())
             {
                 int amountToPlace = Mathf.Min(itemToAdd.maxStackSize, remaining);
                 slot.SetItem(itemToAdd, amountToPlace);
-                remaining -= amountToPlace; 
+                remaining -= amountToPlace;
 
-                if(remaining <= 0) return;
+                if (remaining <= 0) return;
             }
         }
 
-        if(remaining > 0)
+        if (remaining > 0)
         {
             Debug.Log("Inventory is full, could not add " + remaining + " of " + itemToAdd.itemName);
         }
@@ -128,15 +190,12 @@ public class Inventory : MonoBehaviour
         {
             Slot hovered = GetHoveredSlot();
 
-            Debug.Log("Mouse left button has pressed.");
-
-            if(hovered != null && hovered.HasItem())
+            if (hovered != null && hovered.HasItem())
             {
-                Debug.Log("Is hovering.");
                 draggedSlot = hovered;
                 isDragging = true;
 
-                //show drag item
+                // show drag item
                 dragIcon.sprite = hovered.GetItem().icon;
                 dragIcon.color = new Color(1, 1, 1, 0.5f);
                 dragIcon.enabled = true;
@@ -148,32 +207,30 @@ public class Inventory : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
-            Debug.Log("Mouse left button has relesed.");
-
             Slot hovered = GetHoveredSlot();
 
-            if(hovered != null)
+            if (hovered != null && draggedSlot != null)
             {
                 HandleDrop(draggedSlot, hovered);
-
-                dragIcon.enabled = false;
-
-                draggedSlot = null;
-                isDragging = false;
             }
+            // else: ปล่อยนอก slot — ไม่ต้องทำอะไร Item ยังอยู่ใน slot เดิม
+
+            dragIcon.enabled = false;
+            draggedSlot = null;
+            isDragging = false;
         }
     }
 
     private Slot GetHoveredSlot()
     {
-        foreach(Slot s in allSlots)
+        foreach (Slot s in allSlots)
         {
-            if(s.hovering) return s;
+            if (s.hovering) return s;
         }
 
-        foreach(Slot s in chesUISlots)
+        foreach (Slot s in chesUISlots)
         {
-            if(s.hovering) return s;
+            if (s.hovering) return s;
         }
 
         return null;
@@ -181,28 +238,28 @@ public class Inventory : MonoBehaviour
 
     private void HandleDrop(Slot from, Slot to)
     {
-        if(from == to) return;
+        if (from == to) return;
 
-        //Stacking
-        if(to.HasItem() && to.GetItem() == from.GetItem())
+        // Stacking
+        if (to.HasItem() && to.GetItem() == from.GetItem())
         {
             int max = to.GetItem().maxStackSize;
             int space = max - to.GetAmount();
 
-            if(space > 0)
+            if (space > 0)
             {
                 int move = Mathf.Min(space, from.GetAmount());
 
                 to.SetItem(to.GetItem(), to.GetAmount() + move);
                 from.SetItem(from.GetItem(), from.GetAmount() - move);
 
-                if(from.GetAmount() <= 0) from.ClearSlot();
+                if (from.GetAmount() <= 0) from.ClearSlot();
 
                 return;
             }
         }
 
-        //Different Item
+        // Different Item - swap
         if (to.HasItem())
         {
             ItemSO tempItem = to.GetItem();
@@ -213,16 +270,18 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        //Empty Slot
-        to.SetItem(from.GetItem(), from.GetAmount());
-        from.ClearSlot();
+        // Empty Slot
+        if (from != null)
+        {
+            to.SetItem(from.GetItem(), from.GetAmount());
+            from.ClearSlot();
+        }
     }
 
     private void UpdateDragItemPosition()
     {
         if (isDragging)
         {
-            Debug.Log("updating position.");
             dragIcon.transform.position = Mouse.current.position.ReadValue();
         }
     }
