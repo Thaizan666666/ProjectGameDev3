@@ -13,10 +13,12 @@ public class FishData
     public float percentRate;
 
     public int Price;
-
     public Sprite Icon;
     public GameObject Prefab;
+
+    public ItemSO linkedItem; // คัดลอกมาจาก FishStats ตอนสร้าง FishData
 
     [HideInInspector]
     public int fishID => (int)fishName;
 }
+

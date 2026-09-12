@@ -1444,7 +1444,7 @@ PrefabInstance:
     - target: {fileID: 7149838972240525462, guid: 3b640ec810d35f94badaebb628e55d75, type: 3}
       propertyPath: activeFishSlot
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3214256584037922099}
     - target: {fileID: 8491896392094408100, guid: 3b640ec810d35f94badaebb628e55d75, type: 3}
       propertyPath: m_Name
       value: FishZone_Com
@@ -3861,7 +3861,7 @@ PrefabInstance:
     - target: {fileID: 4634762506506814390, guid: 95d82d00ebdab2446bd73e0596cfb910, type: 3}
       propertyPath: activeFishSlot
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3214256584037922099}
     - target: {fileID: 6577264609807446248, guid: 95d82d00ebdab2446bd73e0596cfb910, type: 3}
       propertyPath: fishDatabase
       value: 
@@ -4832,7 +4832,7 @@ PrefabInstance:
     - target: {fileID: 1433181270542412590, guid: 33c3f75305826ce4fb20b90d121adab5, type: 3}
       propertyPath: activeFishSlot
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3214256584037922099}
     - target: {fileID: 1919100281041581196, guid: 33c3f75305826ce4fb20b90d121adab5, type: 3}
       propertyPath: fishDatabase
       value: 
@@ -5508,6 +5508,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130367902200c284482bf30dbd7a70e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishController
+--- !u!114 &1630426585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8079774127055414006, guid: ed4a20a275b758f46ba0be8148cb50dd, type: 3}
+  m_PrefabInstance: {fileID: 1630426579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010298063bd22b840ae520811ce80666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingGameManager
 --- !u!1001 &1645208582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8388,6 +8399,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5897213201131271646, guid: e5266e6d9b032774ba475a42c2a39863, type: 3}
+      propertyPath: fishingGameManager
+      value: 
+      objectReference: {fileID: 1630426585}
     - target: {fileID: 6675760958856258131, guid: e5266e6d9b032774ba475a42c2a39863, type: 3}
       propertyPath: slotManager
       value: 
@@ -8441,6 +8456,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5266e6d9b032774ba475a42c2a39863, type: 3}
+--- !u!114 &3214256584037922099 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6675760958856258131, guid: e5266e6d9b032774ba475a42c2a39863, type: 3}
+  m_PrefabInstance: {fileID: 3214256584037922098}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bafe7082f56e884aaa6a1725cfc6dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ActiveFishSlot
 --- !u!4 &3495263291839367746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3944366051772954342, guid: e5266e6d9b032774ba475a42c2a39863, type: 3}

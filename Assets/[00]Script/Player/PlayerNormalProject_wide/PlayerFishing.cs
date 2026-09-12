@@ -1,7 +1,7 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TableForge.Fish;
 
 namespace PlayerNormal.Project_wide
 {
@@ -190,6 +190,18 @@ namespace PlayerNormal.Project_wide
                     $"Icon: {(caughtData.Icon != null ? caughtData.Icon.name : "null")}, " +
                     $"Prefab: {(caughtData.Prefab != null ? caughtData.Prefab.name : "null")}"
                 );
+
+                // ★ เพิ่มปลาลง Inventory ผ่าน ItemSO ที่ผูกไว้ใน FishStats
+                if (caughtData.linkedItem != null)
+                {
+                    Inventory.instance.AddItem(caughtData.linkedItem, 1);
+                    Debug.Log($"[PlayerFishing] เพิ่ม {caughtData.fishName} ลง Inventory แล้ว (ItemSO: {caughtData.linkedItem.itemName})");
+                }
+                else
+                {
+                    Debug.LogWarning($"[PlayerFishing] {caughtData.fishName} ไม่มี linkedItem — ยังไม่ได้ผูก ItemSO ใน FishStats asset");
+                }
+
                 OnFishObtained?.Invoke(caughtData);
             }
             else

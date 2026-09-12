@@ -70,7 +70,8 @@ public class FishDatabase : MonoBehaviour, IFishRepository
         percentRate = stats.percentRate,
         Price       = stats.Price,
         Icon        = stats.Icon,
-        Prefab      = stats.Prefab
+        Prefab      = stats.Prefab,
+        linkedItem  = stats.linkedItem
     };
 
     public IReadOnlyList<FishData> GetAll()
