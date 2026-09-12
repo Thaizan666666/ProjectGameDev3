@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32063a527489679468ad94c61aa727d6
+guid: e71963bd8501fae4eb48d9555a19b18b
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bird
-    second: {fileID: 2100000, guid: 0b4afdf458c08ea49b5ea732da4bd782, type: 2}
+      name: cat
+    second: {fileID: 2100000, guid: 93c9292d97921b04ebe1d24b532b1a37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cat_shirt
+    second: {fileID: 2100000, guid: ec3da7d9bb216f14d8945f83135c06eb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

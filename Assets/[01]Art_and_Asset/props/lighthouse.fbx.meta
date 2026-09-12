@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32063a527489679468ad94c61aa727d6
+guid: 60398bb302b092b4f8299ac925eeb231
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bird
-    second: {fileID: 2100000, guid: 0b4afdf458c08ea49b5ea732da4bd782, type: 2}
+      name: lighthouse
+    second: {fileID: 2100000, guid: 6e538c62eebbf7744bf42682b5d26276, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

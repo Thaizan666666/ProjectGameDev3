@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32063a527489679468ad94c61aa727d6
+guid: f2e1af0d35088ce4cbf076d6eecae4d1
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bird
-    second: {fileID: 2100000, guid: 0b4afdf458c08ea49b5ea732da4bd782, type: 2}
+      name: dog
+    second: {fileID: 2100000, guid: e1fd749523d1eff419e788c6cc66219a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

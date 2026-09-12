@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32063a527489679468ad94c61aa727d6
+guid: 3ba8f7485959cbb4588648b693e1dbc2
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bird
-    second: {fileID: 2100000, guid: 0b4afdf458c08ea49b5ea732da4bd782, type: 2}
+      name: glass
+    second: {fileID: 2100000, guid: 6f09e75317483dd48b6f3ae762d2cd53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: in_aquarium_lv1
+    second: {fileID: 2100000, guid: 9552385a199d64e4fbfc99cf6a043928, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water_glass
+    second: {fileID: 2100000, guid: dd97121e70c89d84f807baa7323d01b2, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: in_aquarium_lv1_BaseColor
+    second: {fileID: 2800000, guid: a93ad3511e1ad7f43902ad257d768a62, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: in_aquarium_lv1_Normal
+    second: {fileID: 2800000, guid: 48ecebda85ac63145bcdb69fb955232f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

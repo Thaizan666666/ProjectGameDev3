@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32063a527489679468ad94c61aa727d6
+guid: 0eb58c23e2776b64994018897ff4954a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bird
-    second: {fileID: 2100000, guid: 0b4afdf458c08ea49b5ea732da4bd782, type: 2}
+      name: rock
+    second: {fileID: 2100000, guid: a587e96c9b413ba41b00add8ec84fe6c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rock_BaseColor
+    second: {fileID: 2800000, guid: a87afef3f181c3c42927852f4777938c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rock_normal
+    second: {fileID: 2800000, guid: 1f6268a8b7e013f4da5c4c129365e229, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,7 +48,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -96,7 +106,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.099999994
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

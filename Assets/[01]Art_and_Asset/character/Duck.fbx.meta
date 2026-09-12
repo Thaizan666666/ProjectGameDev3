@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32063a527489679468ad94c61aa727d6
+guid: 093fbd1210f9a044699bcc99f2b32285
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -9,6 +9,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: bird
     second: {fileID: 2100000, guid: 0b4afdf458c08ea49b5ea732da4bd782, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bird_shirt
+    second: {fileID: 2100000, guid: e154cc8feeb1b14438c1f1510756ae13, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bird_BaseColor
+    second: {fileID: 2800000, guid: d11eef64a7786e444abece6633dd9bfb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bird_shirt_BaseColor
+    second: {fileID: 2800000, guid: 056f9fca9c8525d42a035c4feefcfefc, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

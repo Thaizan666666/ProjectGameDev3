@@ -9,6 +9,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: modular
     second: {fileID: 2100000, guid: 3121ff8f491f1af4597249ff5f873e06, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: modular_BaseColor
+    second: {fileID: 2800000, guid: 1c31e973727fddb4abeda69b02dcf8a2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: modular_Normal
+    second: {fileID: 2800000, guid: ab511862119d421469f85ce3af96dbfa, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
