@@ -106,10 +106,23 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         return !isBusy;
     }
 
+    private bool _lastHighlighted;
+
     public void SetHighlighted(bool isHighlighted)
     {
         if (highlightIndicator != null)
+        {
             highlightIndicator.SetActive(isHighlighted);
+            return;
+        }
+
+        // No highlightIndicator assigned in Inspector: fall back to a console log so
+        // range/detection is still visible while testing without extra scene setup.
+        if (isHighlighted != _lastHighlighted)
+        {
+            _lastHighlighted = isHighlighted;
+            Debug.Log(isHighlighted ? $"[DEBUG] {name}: in interact range" : $"[DEBUG] {name}: left interact range");
+        }
     }
 
     public Transform GetTransform() => transform;

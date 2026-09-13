@@ -5,7 +5,8 @@
     ],
     "excludeFiles": [
         "**/*~/*",
-        "./Samples/Yarn Spinner*/*"
+        "./Samples/Yarn Spinner*/*",
+        "Bruno_Dialogue/**/*"
     ],
     "localisation": {},
     "baseLanguage": "th",

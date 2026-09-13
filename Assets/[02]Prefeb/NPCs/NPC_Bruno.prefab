@@ -208,7 +208,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591138223230238330}
-  - component: {fileID: 6974336638897315012}
   m_Layer: 0
   m_Name: NPC_Bruno
   m_TagString: Untagged
@@ -234,24 +233,6 @@ Transform:
   - {fileID: 9182001881499221855}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6974336638897315012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6526375089960103176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bbaadbb3bc78ae4fb64631785f2891b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  yarnStartNode: Bruno_Upgrade
-  dialogueRunner: {fileID: 0}
-  talkPoint: {fileID: 9182001881499221855}
-  highlightIndicator: {fileID: 0}
-  animator: {fileID: 0}
-  faceTurnSpeed: 6
 --- !u!1 &8871771759618960158
 GameObject:
   m_ObjectHideFlags: 0
