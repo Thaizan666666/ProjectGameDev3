@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerWallet : MonoBehaviour, IWallet
 {
+    public static PlayerWallet Instance;
     [SerializeField] private int money;
     public int Money => money;
 

@@ -13,6 +13,7 @@ namespace KinematicCharacterController.Examples
         public ExampleCharacterController Character;
         private PlayerInputActions _controls;
         private bool _isControlEnabled = true;
+        public bool canJump = true;
         private void Awake()
         {
             _controls = new PlayerInputActions();
@@ -73,7 +74,7 @@ namespace KinematicCharacterController.Examples
             // ตอนนี้ให้ใช้ rotation ของกล้องจริงที่ CinemachineBrain ขับอยู่แทน
             characterInputs.CameraRotation = Camera.main.transform.rotation;
 
-            characterInputs.JumpDown = _controls.Player.Jump.WasPressedThisFrame();
+            characterInputs.JumpDown = canJump && _controls.Player.Jump.WasPressedThisFrame();
             characterInputs.CrouchDown = _controls.Player.Crouch.WasPressedThisFrame();
             characterInputs.CrouchUp = _controls.Player.Crouch.WasReleasedThisFrame();
 
