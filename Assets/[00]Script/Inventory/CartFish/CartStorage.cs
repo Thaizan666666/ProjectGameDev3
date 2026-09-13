@@ -48,20 +48,47 @@ public class CartStorage : MonoBehaviour, IInteractable
     void OpenCart()
     {
         Inventory.instance.OpenInventory();
+        Inventory.instance.ShowCartUI(this);
+
         isOpen = true;
 
-        if (cartUI != null)
-            cartUI.SetActive(true);
+        Slot[] slots = Inventory.instance.GetCartSlots();
+        int limit = Mathf.Min(slots.Length, storedItems.Length);
+
+        for (int i = 0; i < limit; i++)
+        {
+            var data = storedItems[i];
+            if (data.item != null)
+                slots[i].SetItem(data.item, data.amount);
+            else
+                slots[i].ClearSlot();
+        }
     }
 
     public void CloseCart()
     {
         if (!isOpen) return;
+
+        Slot[] slots = Inventory.instance.GetCartSlots();
+        int limit = Mathf.Min(slots.Length, storedItems.Length);
+
+        for (int i = 0; i < limit; i++)
+        {
+            if (slots[i].HasItem())
+            {
+                storedItems[i].item = slots[i].GetItem();
+                storedItems[i].amount = slots[i].GetAmount();
+            }
+            else
+            {
+                storedItems[i].item = null;
+                storedItems[i].amount = 0;
+            }
+        }
+
         isOpen = false;
 
-        if (cartUI != null)
-            cartUI.SetActive(false);
-
+        Inventory.instance.HideCartUI();
         Inventory.instance.CloseInventory();
     }
 

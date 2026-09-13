@@ -505,6 +505,11 @@ RectTransform:
   m_AnchoredPosition: {x: 120, y: -40}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &98391336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1310465256326604944, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
+  m_PrefabInstance: {fileID: 1190496946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &99370706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5273,19 +5278,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1310465256326604944, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1190496953}
   m_SourcePrefab: {fileID: 100100000, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
 --- !u!114 &1190496947 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7788041439948966231, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
   m_PrefabInstance: {fileID: 1190496946}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 98391336}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &1190496953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98391336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1ce12296da9f4489bd3ea565dbc945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  Cincamera: {fileID: 1190496947}
 --- !u!1001 &1192311456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8048,11 +8069,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cf9265871e76246890fd8e470e785f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  cameraController: {fileID: 1190496953}
   keyItem: {fileID: 11400000, guid: 6e93f375826801a4487112d68cb1d503, type: 2}
   hotbatObj: {fileID: 161352018}
   inventorySlotParent: {fileID: 272616712}
   container: {fileID: 2078187448}
   chestUI: {fileID: 817844969}
+  cartUI: {fileID: 1662171612}
   dragIcon: {fileID: 1386979626}
 --- !u!1 &1696962605
 GameObject:
@@ -12445,7 +12468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b688344dbaa3864fab00b918e339c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartStorage
-  cartSize: 10
+  cartSize: 18
   storedItems: []
   cartUI: {fileID: 1662171610}
 --- !u!1 &4647109228495914943

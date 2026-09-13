@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.ComponentModel;
 using KinematicCharacterController.Examples;
+using Unity.Cinemachine;
 
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
+    [SerializeField] private CameraController cameraController;
 
     public ItemSO keyItem;
     public GameObject hotbatObj;
     public GameObject inventorySlotParent;
     public GameObject container;
     public Transform chestUI;
+    public Transform cartUI;
 
     public Image dragIcon;
 
@@ -21,6 +24,7 @@ public class Inventory : MonoBehaviour
     private List<Slot> hotbarSlots = new List<Slot>();
     private List<Slot> allSlots = new List<Slot>();
     private List<Slot> chesUISlots = new List<Slot>();
+    private List<Slot> CartUISlots = new List<Slot>();
 
     private Slot draggedSlot = null;
     private bool isDragging = false;
@@ -28,6 +32,7 @@ public class Inventory : MonoBehaviour
     private PlayerInputActions inputActions;
     private ExamplePlayer _examplePlayer;
     private StorageChest _openChest = null;
+    private CartStorage _openCart = null;
 
     private void Awake()
     {
@@ -36,11 +41,13 @@ public class Inventory : MonoBehaviour
         inventorySlots.AddRange(inventorySlotParent.GetComponentsInChildren<Slot>());
         hotbarSlots.AddRange(hotbatObj.GetComponentsInChildren<Slot>());
         chesUISlots.AddRange(chestUI.GetComponentsInChildren<Slot>());
+        CartUISlots.AddRange(cartUI.GetComponentsInChildren<Slot>());
 
         allSlots.AddRange(inventorySlots);
         allSlots.AddRange(hotbarSlots);
 
         chestUI.gameObject.SetActive(false);
+        cartUI.gameObject.SetActive(false);
 
         inputActions = new PlayerInputActions();
 
@@ -112,6 +119,8 @@ public class Inventory : MonoBehaviour
             _examplePlayer.SetControlEnabled(false);
             _examplePlayer.Character.StopAllInputs();
         }
+
+        cameraController.SetCameraInput(false);
     }
 
     public void CloseInventory()
@@ -121,6 +130,8 @@ public class Inventory : MonoBehaviour
         Cursor.visible = false;
         if (_examplePlayer != null)
             _examplePlayer.SetControlEnabled(true);
+
+        cameraController.SetCameraInput(true);
     }
 
     public bool IsInventoryOpen() => container.activeInHierarchy;
@@ -141,6 +152,25 @@ public class Inventory : MonoBehaviour
     public StorageChest GetOpenChest() => _openChest;
 
     public Slot[] GetChestSlots() => chesUISlots.ToArray();
+
+    // ===== Cart UI Management =====
+    public void ShowCartUI(CartStorage cart)
+    {
+        _openCart = cart;
+        cartUI.gameObject.SetActive(true);
+    }
+
+    public void HideCartUI()
+    {
+        _openCart = null;
+        cartUI.gameObject.SetActive(false);
+    }
+
+    public CartStorage GetOpenCart() => _openCart;
+
+    public Slot[] GetCartSlots() => CartUISlots.ToArray();
+
+
 
     public void AddItem(ItemSO itemToAdd, int amount)
     {
@@ -229,6 +259,11 @@ public class Inventory : MonoBehaviour
         }
 
         foreach (Slot s in chesUISlots)
+        {
+            if (s.hovering) return s;
+        }
+
+        foreach (Slot s in CartUISlots)
         {
             if (s.hovering) return s;
         }
