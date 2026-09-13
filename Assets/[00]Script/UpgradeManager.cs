@@ -95,10 +95,12 @@ public class UpgradeManager : MonoBehaviour
 
     private bool _lastCheckResult;
 
-    /// <summary>
-    /// เรียกจาก Yarn: <<canTryUpgrade "TheSeagullInn">>
-    /// static method → ไม่ต้องใส่ชื่อ GameObject
-    /// </summary>
+    [YarnFunction("canUpgradeSuccess")]
+    public static bool GetCanUpgradeSuccess()
+    {
+        return Instance != null && Instance.LastCheckResult;
+    }
+
     [YarnCommand("canTryUpgrade")]
     public static void CanTryUpgrade(string buildingName)
     {

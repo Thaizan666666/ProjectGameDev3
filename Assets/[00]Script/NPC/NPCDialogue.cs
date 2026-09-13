@@ -33,18 +33,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     private Transform _playerTransform;
     private bool _isFacingPlayer;
 
-    private void Awake()
-    {
-        // Register Yarn functions that need access to game state
-        if (dialogueRunner != null)
-        {
-            dialogueRunner.AddFunction("canUpgradeSuccess", () =>
-            {
-                return UpgradeManager.Instance != null && UpgradeManager.Instance.LastCheckResult;
-            });
-        }
-    }
-
     private void OnEnable()
     {
         if (dialogueRunner != null)
