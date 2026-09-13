@@ -17,6 +17,7 @@ public class FishData
     public GameObject Prefab;
 
     public ItemSO linkedItem; // คัดลอกมาจาก FishStats ตอนสร้าง FishData
+    public FishSize fishSize;
 
     [HideInInspector]
     public int fishID => (int)fishName;

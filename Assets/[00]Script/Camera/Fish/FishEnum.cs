@@ -16,3 +16,9 @@ public enum FishTier
     Rare,
     Boss
 }
+
+public enum FishSize
+{
+    SmallFish,
+    BigFish
+}

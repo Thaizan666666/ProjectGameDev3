@@ -26,6 +26,8 @@ namespace KinematicCharacterController.Examples
         private static readonly int IsFishBiteHash = Animator.StringToHash("isFishBite");
         private static readonly int IsFishingFinishHash = Animator.StringToHash("isFishingFinish");
         private static readonly int DirFishingHash = Animator.StringToHash("DirFishing");
+        private static readonly int SmallFishHash = Animator.StringToHash("SmallFish");
+        private static readonly int BigFishHash = Animator.StringToHash("BigFish");
 
         // track previous frame to detect state transitions (trigger on enter/exit)
         private bool _wasFishing;
@@ -37,6 +39,23 @@ namespace KinematicCharacterController.Examples
             if (_character == null) _character = GetComponentInParent<ExampleCharacterController>();
             if (_animator == null) _animator = GetComponent<Animator>();
             if (_fishing == null) _fishing = GetComponentInParent<PlayerFishing>();
+        }
+
+        private void OnEnable()
+        {
+            if (_fishing != null) _fishing.OnFishObtained += HandleFishCaught;
+        }
+
+        private void OnDisable()
+        {
+            if (_fishing != null) _fishing.OnFishObtained -= HandleFishCaught;
+        }
+
+        /// <summary>เมื่อตกปลาได้ ให้ trigger animation ตาม FishSize</summary>
+        private void HandleFishCaught(FishData fish)
+        {
+            if (_animator == null || fish == null) return;
+            _animator.SetTrigger(fish.fishSize == FishSize.BigFish ? BigFishHash : SmallFishHash);
         }
 
         public void UpdateAnimation(Animator animator, ExampleCharacterController character)

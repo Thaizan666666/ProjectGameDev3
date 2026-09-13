@@ -71,7 +71,8 @@ public class FishDatabase : MonoBehaviour, IFishRepository
         Price       = stats.Price,
         Icon        = stats.Icon,
         Prefab      = stats.Prefab,
-        linkedItem  = stats.linkedItem
+        linkedItem  = stats.linkedItem,
+        fishSize    = stats.fishSize
     };
 
     public IReadOnlyList<FishData> GetAll()

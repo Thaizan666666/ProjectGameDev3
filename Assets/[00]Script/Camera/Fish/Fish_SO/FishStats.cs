@@ -17,6 +17,7 @@ namespace TableForge.Fish
         public int Price;
         public Sprite Icon;
         public GameObject Prefab;
+        public FishSize fishSize;
 
         [Header("Inventory Integration")]
         public ItemSO linkedItem; // ItemSO ที่ตรงกับปลาตัวนี้ใน Inventory
