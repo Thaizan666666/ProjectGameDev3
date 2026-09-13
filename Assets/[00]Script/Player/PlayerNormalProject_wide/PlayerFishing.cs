@@ -21,6 +21,10 @@ namespace PlayerNormal.Project_wide
         [SerializeField] private float biteDelayMin = 2f;
         [SerializeField] private float biteDelayMax = 6f;
 
+        [Header("Hook Visual (optional)")]
+        [Tooltip("ถ้าผูกไว้ จะรอ animation สะบัดคันจบแล้วโยน Hook ออกไปเป็นส่วนโค้งก่อนเริ่มนับเวลารอกินเบ็ด (ดู FishingHookThrow.cs) — ปล่อยว่างได้ถ้ายังไม่อยากใช้")]
+        [SerializeField] private FishingHookThrow hookThrow;
+
         private FishZone currentZone;
         private GameObject spawnedFish;
         private Coroutine waitForBiteRoutine;
@@ -65,6 +69,8 @@ namespace PlayerNormal.Project_wide
                 StopCoroutine(waitForBiteRoutine);
                 waitForBiteRoutine = null;
             }
+
+            hookThrow?.CleanupHook();
         }
 
         // ── ห้ามสะบัดเบ็ดซ้ำระหว่างที่ยังมี encounter ทำงานอยู่ (รอปลากินเบ็ด หรือกำลังสู้กับปลา) ──
@@ -136,11 +142,20 @@ namespace PlayerNormal.Project_wide
 
         private System.Collections.IEnumerator WaitForBiteThenSpawn()
         {
+            // ถ้าผูก FishingHookThrow ไว้ ให้รอ animation จบ + โยน Hook + เปิดกล้องจ้อง Hook ก่อน
+            // ค่อยเริ่มนับเวลารอกินเบ็ด (ไม่ผูกก็ข้ามไปนับเวลาทันทีเหมือนเดิม)
+            if (hookThrow != null)
+            {
+                Vector3 targetPos = transform.position + transform.forward * spawnDistance;
+                yield return StartCoroutine(hookThrow.PlayThrowSequence(targetPos));
+            }
+
             float delay = UnityEngine.Random.Range(biteDelayMin, biteDelayMax);
             Debug.Log($"[PlayerFishing] เริ่มรอปลากินเบ็ด {delay:0.0} วินาที (timeScale ตอนนี้ = {Time.timeScale})");
             yield return new WaitForSeconds(delay);
 
             Debug.Log("[PlayerFishing] รอครบแล้ว กำลังเริ่ม encounter...");
+            hookThrow?.CleanupHook();
             waitForBiteRoutine = null;
             TryStartFishingEncounter();
         }

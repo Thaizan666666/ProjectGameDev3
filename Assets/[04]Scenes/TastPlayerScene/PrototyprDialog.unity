@@ -1036,7 +1036,7 @@ PrefabInstance:
       objectReference: {fileID: 1587190372}
     - target: {fileID: 8321150294399152652, guid: 52e1c06f2b3b7ed4d9287d75c93031ee, type: 3}
       propertyPath: buoyancyForce
-      value: 15
+      value: 20.2
       objectReference: {fileID: 0}
     - target: {fileID: 8321150294399152652, guid: 52e1c06f2b3b7ed4d9287d75c93031ee, type: 3}
       propertyPath: waterAngularDrag
@@ -5048,6 +5048,7 @@ MonoBehaviour:
   MeshRoot: {fileID: 2131714182}
   CameraFollowPoint: {fileID: 1913685091}
   CrouchedCapsuleHeight: 1
+  _moveInputVector: {x: 0, y: 0, z: 0}
 --- !u!54 &1913685095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5115,6 +5116,7 @@ MonoBehaviour:
   spawnDistance: 6
   biteDelayMin: 2
   biteDelayMax: 6
+  hookThrow: {fileID: 0}
 --- !u!114 &1913685098
 MonoBehaviour:
   m_ObjectHideFlags: 0
