@@ -1,30 +1,48 @@
 using UnityEngine;
 using KinematicCharacterController.Examples;
+using PlayerNormal.Project_wide;
 
 namespace KinematicCharacterController.Examples
 {
     /// <summary>
-    /// Animation layer for player locomotion — implements IPlayerAnimationLayer
+    /// Animation layer for player — implements IPlayerAnimationLayer
+    /// ผูก Animator parameters เข้ากับ PlayerFishing state ตามที่ Player.controller มีอยู่แล้ว
     /// </summary>
     public class PlayerAnimatorUpdate : MonoBehaviour, IPlayerAnimationLayer
     {
         [SerializeField] private ExampleCharacterController _character;
         [SerializeField] private Animator _animator;
 
+        [Header("Fishing")]
+        [Tooltip("PlayerFishing component บน Player GameObject เดียวกัน (auto-find ถ้าว่าง)")]
+        [SerializeField] private PlayerFishing _fishing;
+
+        // ── Locomotion hashes ──
         private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
         private static readonly int IsGroundedHash = Animator.StringToHash("isGrounded");
+
+        // ── Fishing hashes (ตรงกับ Player.controller parameters) ──
+        private static readonly int IsFishingHash = Animator.StringToHash("isFishing");
+        private static readonly int IsFishBiteHash = Animator.StringToHash("isFishBite");
+        private static readonly int IsFishingFinishHash = Animator.StringToHash("isFishingFinish");
+        private static readonly int DirFishingHash = Animator.StringToHash("DirFishing");
+
+        // track previous frame to detect state transitions (trigger on enter/exit)
+        private bool _wasFishing;
+        private bool _wasBite;
+        private float _dirFishingVelocity; // for SmoothDamp
 
         private void Awake()
         {
             if (_character == null) _character = GetComponentInParent<ExampleCharacterController>();
             if (_animator == null) _animator = GetComponent<Animator>();
+            if (_fishing == null) _fishing = GetComponentInParent<PlayerFishing>();
         }
 
         public void UpdateAnimation(Animator animator, ExampleCharacterController character)
         {
             UpdateLocomotion(animator, character);
-
-            // Debug.Log($"sqrMagnitude is {character.Motor.Velocity.sqrMagnitude}");
+            UpdateFishing(animator, character);
         }
 
         private void UpdateLocomotion(Animator animator, ExampleCharacterController character)
@@ -36,9 +54,47 @@ namespace KinematicCharacterController.Examples
             animator.SetBool(IsGroundedHash, character.Motor.GroundingStatus.IsStableOnGround);
         }
 
-        // ── Future extension methods (not implemented) ──
+        private void UpdateFishing(Animator animator, ExampleCharacterController character)
+        {
+            if (_fishing == null) return;
 
-        // public void UpdateFishing(Animator animator, ExampleCharacterController character) { }
-        // public void UpdateSwimming(Animator animator, ExampleCharacterController character) { }
+            bool isWaitingForBite = _fishing.IsWaitingForBite;
+            bool isActive = _fishing.IsEncounterActive;
+
+            // ── isFishing: true ตอนโยนเบ็ดแล้ว (รอปลากินเบ็ด หรือกำลังสู้) ──
+            bool isFishing = isWaitingForBite || isActive;
+            animator.SetBool(IsFishingHash, isFishing);
+
+            // ── isFishBite: true ตอน encounter กำลังสู้กับปลา ──
+            animator.SetBool(IsFishBiteHash, isActive);
+
+            // ── isFishingFinish: trigger เมื่อออกจากโหมดตกปลา ──
+            if (_wasFishing && !isFishing)
+            {
+                animator.SetTrigger(IsFishingFinishHash);
+            }
+
+            // ── DirFishing: มุมแนวนอนเทียบกับปลา → 0=fishing_left, 0.5=fishing_up, 1=fishing_right ──
+            // คำนวณจาก signed angle ระหว่าง player.forward กับทิศไปหาปลา แล้ว map [-90°,+90°] → [0,1]
+            // ปลาอยู่ซ้าย → หันขวาสู้ → angle > 0 → DirFishing > 0.5 ( fishing_right)
+            // ปลาอยู่ขวา → หันซ้ายสู้ → angle < 0 → DirFishing < 0.5 ( fishing_left)
+            Transform fishTransform = _fishing.CurrentFishTransform;
+            float targetDir = 0.5f;
+            if (fishTransform != null && _character != null)
+            {
+                Vector3 toFish = fishTransform.position - _character.transform.position;
+                toFish.y = 0f;
+                if (toFish.sqrMagnitude > 0.001f)
+                {
+                    float angle = Vector3.SignedAngle(_character.transform.forward, toFish, Vector3.up);
+                    targetDir = Mathf.Clamp01(0.5f + angle / 180f);
+                }
+            }
+            float smoothed = Mathf.SmoothDamp(animator.GetFloat(DirFishingHash), targetDir, ref _dirFishingVelocity, 0.15f);
+            animator.SetFloat(DirFishingHash, smoothed);
+
+            _wasFishing = isFishing;
+            _wasBite = isActive;
+        }
     }
 }

@@ -101,6 +101,19 @@ namespace PlayerNormal.Project_wide
             if (currentZone == zone) currentZone = null;
         }
 
+        // ── Public read-only state for PlayerAnimatorUpdate ──
+        /// <summary>กำลังรอปลากินเบ็ด (โยนเบ็ดแล้ว ยังไม่เริ่ม encounter)</summary>
+        public bool IsWaitingForBite => waitForBiteRoutine != null;
+        /// <summary>กำลังสู้กับปลา (encounter กำลังทำงาน)</summary>
+        public bool IsEncounterActive =>
+            fishingGameManager != null && fishingGameManager.State == FishingEncounterState.Fighting;
+
+        /// <summary>Transform ของปลาที่กำลังสู้อยู่ (ใช้คำนวณ DirFishing ใน PlayerAnimatorUpdate) — null ถ้ายังไม่เริ่ม encounter</summary>
+        public Transform CurrentFishTransform =>
+            fishingGameManager != null && fishingGameManager.CurrentFish != null
+                ? fishingGameManager.CurrentFish.transform
+                : null;
+
         // ── รอ 'ปลากินเบ็ด' ก่อนค่อย spawn ปลาให้เห็น — ปลาจะไม่โผล่มาจนกว่าจะถึงตอนนี้
         // เพื่อให้ผู้เล่นรู้ตัวว่าต้องเริ่มดูตำแหน่งเมาส์ (ซ้าย/ขวา) ตอนไหน ไม่ใช่ตั้งแต่โยนเบ็ด
         private void StartWaitingForBite()
