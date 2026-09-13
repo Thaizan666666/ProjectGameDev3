@@ -27,6 +27,7 @@ namespace PlayerNormal.Project_wide
 
         private FishZone currentZone;
         private GameObject spawnedFish;
+        private FishController currentFishController;
         private Coroutine waitForBiteRoutine;
 
         /// <summary>ส่งข้อมูลปลาที่จับได้ออกไปให้ระบบอื่น (เช่น Inventory) subscribe ไปเก็บเอง — ไม่ได้เก็บ/จัดการอะไรในนี้</summary>
@@ -155,13 +156,16 @@ namespace PlayerNormal.Project_wide
             yield return new WaitForSeconds(delay);
 
             Debug.Log("[PlayerFishing] รอครบแล้ว กำลังเริ่ม encounter...");
+            // ต้องอ่านตำแหน่ง Hook ไว้ก่อน CleanupHook (มันลบ Hook ทิ้งเลย) — ให้ปลา spawn ตรงจุดที่ Hook อยู่จริง
+            Vector3? hookSpawnPos = hookThrow?.HookPosition;
             hookThrow?.CleanupHook();
             waitForBiteRoutine = null;
-            TryStartFishingEncounter();
+            TryStartFishingEncounter(hookSpawnPos);
         }
 
-        // ── เริ่ม encounter ตกปลา: สุ่มปลาจากโซนที่ยืนอยู่แล้ว spawn (เรียกตอนปลากินเบ็ดแล้วเท่านั้น) ──
-        private void TryStartFishingEncounter()
+        // ── เริ่ม encounter ตกปลา: สุ่มปลาจากโซนที่ยืนอยู่แล้ว spawn ตรงตำแหน่ง Hook (เรียกตอนปลากินเบ็ดแล้วเท่านั้น) ──
+        // overrideSpawnPos = null ถ้าไม่ได้ผูก FishingHookThrow ไว้ -> fallback ไปใช้ spawnDistance หน้าผู้เล่นเหมือนเดิม
+        private void TryStartFishingEncounter(Vector3? overrideSpawnPos = null)
         {
             if (currentZone == null)
             {
@@ -191,7 +195,7 @@ namespace PlayerNormal.Project_wide
 
             if (spawnedFish != null) Destroy(spawnedFish);
 
-            Vector3 spawnPos = transform.position + transform.forward * spawnDistance;
+            Vector3 spawnPos = overrideSpawnPos ?? (transform.position + transform.forward * spawnDistance);
             spawnedFish = Instantiate(data.Prefab, spawnPos, Quaternion.identity);
 
             FishController controller = spawnedFish.GetComponent<FishController>();
@@ -199,7 +203,19 @@ namespace PlayerNormal.Project_wide
 
             controller.SetFishData(data);
             fishingGameManager.StartEncounter(controller);
+            hookThrow?.SetLineEndTarget(controller.transform); // Hook หายไปแล้ว แต่สายยังลากต่อไปหาปลาระหว่างสู้กัน
+
+            currentFishController = controller;
+            controller.OnStateChanged += HandleFishStateChanged;
+            HandleFishStateChanged(controller.State); // ตั้งความตึงเริ่มต้นทันทีตาม state ปัจจุบัน ไม่ต้องรอ state เปลี่ยนก่อน
+
             Debug.Log($"[PlayerFishing] Encounter started -> {data.fishName} (Tier {data.fishTier}), State now: {fishingGameManager.State}");
+        }
+
+        // ── ปลาว่าย/พุ่ง -> สายตึง (สู้เต็มที่), ปลาเหนื่อย (Tired) -> สายหย่อน (ใกล้ดึงขึ้นฝั่งแล้ว) ──
+        private void HandleFishStateChanged(FishState newState)
+        {
+            hookThrow?.SetLineTension(newState == FishState.Tired ? 0f : 1f);
         }
 
         // ── ตกได้แล้ว: caughtData คือปลาตัวที่จับได้จริง (ดึงจาก FishStats SO ผ่าน FishZone/FishDatabase) ──
@@ -243,6 +259,13 @@ namespace PlayerNormal.Project_wide
         {
             if (spawnedFish != null) Destroy(spawnedFish);
             spawnedFish = null;
+            hookThrow?.ClearLineEndTarget(); // encounter จบแล้ว (จับได้/เบ็ดขาด) ให้สายหายไปจริง ๆ
+
+            if (currentFishController != null)
+            {
+                currentFishController.OnStateChanged -= HandleFishStateChanged;
+                currentFishController = null;
+            }
         }
     }
 
