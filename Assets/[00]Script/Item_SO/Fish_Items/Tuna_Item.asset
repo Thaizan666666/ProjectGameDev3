@@ -15,5 +15,7 @@ MonoBehaviour:
   itemName: Tuna
   icon: {fileID: 21300000, guid: bd42c53d47e2e5e4196d665f75e57e48, type: 3}
   maxStackSize: 99
+  sellPrice: 0
   itemPrefab: {fileID: 5131394721203828810, guid: 331bed5f15896f641b43a7b447345e08, type: 3}
   handItemPrefab: {fileID: 5131394721203828810, guid: 331bed5f15896f641b43a7b447345e08, type: 3}
+  itemSize: 2

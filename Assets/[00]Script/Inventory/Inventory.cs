@@ -21,6 +21,10 @@ public class Inventory : MonoBehaviour
 
     public Image dragIcon;
 
+    private int equippedHotBarIndex = 0;
+    public float equippedOpacity = 0.9f;
+    public float normalOpacity = 0.58f;
+
     private List<Slot> inventorySlots = new List<Slot>();
     private List<Slot> hotbarSlots = new List<Slot>();
     private List<Slot> allSlots = new List<Slot>();
@@ -30,6 +34,9 @@ public class Inventory : MonoBehaviour
     private Slot draggedSlot = null;
     private bool isDragging = false;
     public bool HasBag = false;
+
+    [Header("Starting Items")]
+    [SerializeField] private ItemSO startingRod;
 
     private PlayerInputActions inputActions;
     private ExamplePlayer _examplePlayer;
@@ -59,7 +66,13 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        
+        if (startingRod != null)
+        {
+            AddItemToHotbar(startingRod, 1);
+
+            // เลือกช่องที่มี Rod อัตโนมัติ
+            UpdateHotBarOpacity();
+        }
     }
 
     void OnEnable()
@@ -86,7 +99,20 @@ public class Inventory : MonoBehaviour
             UpdateDragItemPosition();
             EndDrag();
         }
+
+        HandleHotBarSelection();
+        UpdateHotBarOpacity();
     }
+
+    private Key[] numberKeys =
+    {
+        Key.Digit1,
+        Key.Digit2,
+        Key.Digit3,
+        Key.Digit4,
+        Key.Digit5,
+        Key.Digit6
+    };
 
     // ===== B Key: ปิดทุกอย่างถ้าเปิดอยู่ / เปิดแค่ inventory =====
     private void HandleToggleAll()
@@ -404,5 +430,42 @@ public class Inventory : MonoBehaviour
         chesUISlots.AddRange(chestUI.GetComponentsInChildren<Slot>());
         CartUISlots.Clear();
         CartUISlots.AddRange(cartUI.GetComponentsInChildren<Slot>());
+    }
+
+    public ItemSO EquippedItem
+    {
+        get
+        {
+            if (equippedHotBarIndex >= 0 && equippedHotBarIndex < hotbarSlots.Count)
+            {
+                var slot = hotbarSlots[equippedHotBarIndex];
+                if (slot.HasItem()) return slot.GetItem();
+            }
+            return null;
+        }
+    }
+
+    private void UpdateHotBarOpacity()
+    {
+        for(int i = 0; i < hotbarSlots.Count; i++)
+        {
+            Image icon = hotbarSlots[i].GetComponent<Image>();
+            if(icon != null)
+            {
+                icon.color = (i == equippedHotBarIndex) ? new Color(1, 1, 1, equippedOpacity) : new Color(1, 1, 1, normalOpacity);
+            }
+        }
+    }
+
+    private void HandleHotBarSelection()
+    {
+        for (int i = 0; i < numberKeys.Length; i++)
+        {
+            if (Keyboard.current[numberKeys[i]].wasPressedThisFrame)
+            {
+                equippedHotBarIndex = i;
+                UpdateHotBarOpacity();
+            }
+        }
     }
 }

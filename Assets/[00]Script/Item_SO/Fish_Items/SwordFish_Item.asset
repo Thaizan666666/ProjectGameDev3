@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18b681c30be791f4087d535643b6886e, type: 3}
-  m_Name: Dunkleosteus_Item
+  m_Name: SwordFish_Item
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: Dunkleosteus
-  icon: {fileID: 21300000, guid: 4ea702bfd294d0c4d83950cd81a2bd14, type: 3}
-  maxStackSize: 1
-  itemPrefab: {fileID: 4847272728496316168, guid: d7599a2e2f7aece4ab2cbf5d8cec51fe, type: 3}
-  handItemPrefab: {fileID: 4847272728496316168, guid: d7599a2e2f7aece4ab2cbf5d8cec51fe, type: 3}
+  itemName: SwordFish
+  icon: {fileID: 21300000, guid: 92589bf53b215bb4e8786d34e68fc56c, type: 3}
+  maxStackSize: 99
+  sellPrice: 0
+  itemPrefab: {fileID: 5131394721203828810, guid: b556ed759003e3b45905a693e72a01d2, type: 3}
+  handItemPrefab: {fileID: 5131394721203828810, guid: b556ed759003e3b45905a693e72a01d2, type: 3}
+  itemSize: 2

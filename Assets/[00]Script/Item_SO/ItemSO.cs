@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum ItemSize
+{
+    ExecpSize,
+    SmallItem,
+    BigItem
+}
+
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/ItemSO")]
 public class ItemSO : ScriptableObject
 {
@@ -9,4 +16,5 @@ public class ItemSO : ScriptableObject
     public int sellPrice;        // ราคาขาย default = 0 (ปลาจะถูก overwrite ด้วย FishData.Price)
     public GameObject itemPrefab;
     public GameObject handItemPrefab;
+    public ItemSize itemSize = ItemSize.SmallItem;
 }

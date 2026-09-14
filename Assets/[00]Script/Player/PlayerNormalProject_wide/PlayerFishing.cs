@@ -10,6 +10,10 @@ namespace PlayerNormal.Project_wide
         public Animator rodAnim;
         InputAction swingRodAction;
 
+        [Header("Rod Item")]
+        [Tooltip("ItemSO ของคันเบ็ด (ลากจาก Project)")]
+        [SerializeField] private ItemSO rodItem;
+
         [Header("Fishing Encounter")]
         [Tooltip("ตัวจัดการ encounter ตกปลา (GameObject FishingSystem ในซีน)")]
         [SerializeField] private FishingGameManager fishingGameManager;
@@ -76,9 +80,12 @@ namespace PlayerNormal.Project_wide
 
         // ── ห้ามสะบัดเบ็ดซ้ำระหว่างที่ยังมี encounter ทำงานอยู่ (รอปลากินเบ็ด หรือกำลังสู้กับปลา) ──
         // ไม่มี cooldown เวลาแล้ว พอ encounter ก่อนหน้าจบ (จับได้/เบ็ดขาด) สะบัดเบ็ดใหม่ได้ทันที
+        private bool IsHoldingRod =>
+        Inventory.instance != null && Inventory.instance.EquippedItem == rodItem;
+
         private bool CanSwingRod =>
             waitForBiteRoutine == null &&
-            (fishingGameManager == null || fishingGameManager.State != FishingEncounterState.Fighting);
+            (fishingGameManager == null || fishingGameManager.State != FishingEncounterState.Fighting) && IsHoldingRod;
 
         void Update()
         {
