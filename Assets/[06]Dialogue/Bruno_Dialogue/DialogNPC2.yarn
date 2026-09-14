@@ -1,0 +1,52 @@
+﻿title: Pu_Entry2
+---
+    <<if $PuSceneFishing>>
+        <<jump Scene6>>
+    <<elseif $PuSceneMeting>>
+        <<jump Scene4>>
+    <<else>>
+        <<PuScene3>>
+
+<<endif>>
+===
+
+title: PuScene3
+---
+<<camera_shoulder_in "Dialogue System" "Pu">>
+GRANDPA: Give it a try. See if you still know how
+<<camera_reset "Dialogue System">>
+<<wait_for_catch>>
+<<camera_shoulder_in "Dialogue System" "Pu">>
+GRANDPA: That rod's seen better days — no wonder you're pulling up junk.
+GRANDPA: Don't throw it out, though. Go have a word with the shop over there. They'll take it off your hands.
+<<camera_reset "Dialogue System">>
+<<set $PuSceneMeting = true>>
+===
+
+title: SHOPKEEPER
+---
+<<camera_shoulder_in "Dialogue System" "SHOPKEEPER">>
+SHOPKEEPER: Well now… you're old man's grandkid, aren't you?
+SHOPKEEPER: Oh, I remember. You were about this tall last I saw you.
+SHOPKEEPER: Just got back?
+PLAYER: Yeah. I've been missing this place, I guess.
+SHOPKEEPER: Mm… that's nice.
+SHOPKEEPER: My boy moved to the city, you know. Hasn't been back in a long while.
+SHOPKEEPER: Anyway — let's see what you've got there.
+//AfterSell
+SHOPKEEPER: There's a rod out back. Been collecting dust three years now. Nobody's ever wanted it.
+SHOPKEEPER: Take it. I'll knock the price down for you.
+<<camera_reset "Dialogue System">>
+===
+
+title: Scene4
+---
+===
+
+title: Scene5
+---
+===
+
+title: Scene6
+---
+===
