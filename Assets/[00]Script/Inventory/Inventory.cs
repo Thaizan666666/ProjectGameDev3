@@ -28,6 +28,7 @@ public class Inventory : MonoBehaviour
 
     private Slot draggedSlot = null;
     private bool isDragging = false;
+    public bool HasBag = false;
 
     private PlayerInputActions inputActions;
     private ExamplePlayer _examplePlayer;
@@ -89,6 +90,8 @@ public class Inventory : MonoBehaviour
     // ===== B Key: ปิดทุกอย่างถ้าเปิดอยู่ / เปิดแค่ inventory =====
     private void HandleToggleAll()
     {
+        if (!HasBag) return;
+
         if (_openChest != null)
         {
             // Chest กำลังเปิด → ปิดทั้งคู่
@@ -116,9 +119,10 @@ public class Inventory : MonoBehaviour
     }
 
     // ===== Open/Close Main Inventory (container + cursor + player input) =====
-    public void OpenInventory()
+    public void OpenInventory(bool showInventorySlots = true)
     {
         container.SetActive(true);
+        inventorySlotParent.SetActive(showInventorySlots);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         if (_examplePlayer != null)
@@ -181,6 +185,12 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemSO itemToAdd, int amount)
     {
+        if (!HasBag)
+        {
+            AddItemToHotbar(itemToAdd, amount);
+            return;
+        }
+
         int remaining = amount;
 
         foreach (Slot slot in allSlots)
@@ -220,6 +230,42 @@ public class Inventory : MonoBehaviour
             Debug.Log("Inventory is full, could not add " + remaining + " of " + itemToAdd.itemName);
         }
     }
+
+    private void AddItemToHotbar(ItemSO itemToAdd, int amount)
+    {
+        int remaining = amount;
+
+        foreach (Slot slot in hotbarSlots)
+        {
+            if (slot.HasItem() && slot.GetItem() == itemToAdd)
+            {
+                int max = itemToAdd.maxStackSize;
+                int space = max - slot.GetAmount();
+                if (space > 0)
+                {
+                    int move = Mathf.Min(space, remaining);
+                    slot.SetItem(itemToAdd, slot.GetAmount() + move);
+                    remaining -= move;
+                    if (remaining <= 0) return;
+                }
+            }
+        }
+
+        foreach (Slot slot in hotbarSlots)
+        {
+            if (!slot.HasItem())
+            {
+                int place = Mathf.Min(itemToAdd.maxStackSize, remaining);
+                slot.SetItem(itemToAdd, place);
+                remaining -= place;
+                if (remaining <= 0) return;
+            }
+        }
+
+        if (remaining > 0)
+            Debug.LogWarning($"[Inventory] HotBar เต็ม — ไม่สามารถเก็บ {remaining}x {itemToAdd.itemName}");
+    }
+
 
     private void StartDrag()
     {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Properties;
 
 [System.Serializable]
 public class CartSlot 
@@ -47,7 +48,7 @@ public class CartStorage : MonoBehaviour, IInteractable
 
     void OpenCart()
     {
-        Inventory.instance.OpenInventory();
+        Inventory.instance.OpenInventory(showInventorySlots: Inventory.instance.HasBag);
         Inventory.instance.ShowCartUI(this);
 
         isOpen = true;

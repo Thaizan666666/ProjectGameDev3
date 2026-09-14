@@ -36,7 +36,7 @@ public class StorageChest : MonoBehaviour, IInteractable
     void OpenChest()
     {
         // ขอให้ Inventory เปิด main inventory + chest UI
-        Inventory.instance.OpenInventory();
+        Inventory.instance.OpenInventory(showInventorySlots: Inventory.instance.HasBag);
         Inventory.instance.ShowChestUI(this);
 
         isOpen = true;
