@@ -21,6 +21,8 @@ public class RideArea : MonoBehaviour, IInteractable
 
     public Transform GetTransform() => transform;
 
+    public bool IsRiding => isRiding;
+
 
     public void Interact()
     {

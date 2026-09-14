@@ -83,6 +83,7 @@ public class CartStorage : MonoBehaviour, IInteractable
             {
                 storedItems[i].item = null;
                 storedItems[i].amount = 0;
+                storedItems[i].sellPrice = 0;
             }
         }
 

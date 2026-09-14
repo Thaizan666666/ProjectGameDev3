@@ -329,7 +329,7 @@ ModelImporter:
       name: Armature|Push_cart_walk
       takeName: Armature|Push_cart_walk
       internalID: -4138390392813875275
-      firstFrame: 0
+      firstFrame: 1.4
       lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0

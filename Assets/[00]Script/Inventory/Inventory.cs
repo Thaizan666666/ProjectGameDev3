@@ -96,9 +96,16 @@ public class Inventory : MonoBehaviour
             chest.ForceClose();       // chest บันทึก item + reset isOpen
             CloseInventory();         // ปิด main inventory
         }
+        else if (_openCart != null)
+        {
+            // Cart กำลังเปิด → sync ข้อมูล + ปิดทั้งคู่
+            CartStorage cart = _openCart;
+            _openCart.ForceClose();   // cart บันทึก item + reset isOpen
+            CloseInventory();         // ปิด main inventory
+        }
         else if (container.activeInHierarchy)
         {
-            // Main inventory เปิดอยู่ (ไม่มี chest) → ปิด
+            // Main inventory เปิดอยู่ (ไม่มี chest/cart) → ปิด
             CloseInventory();
         }
         else

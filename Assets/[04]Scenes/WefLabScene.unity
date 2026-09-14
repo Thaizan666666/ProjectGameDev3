@@ -2540,7 +2540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2794330155699460597, guid: 0689476036f2fab448ab834462ad6741, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.80547
+      value: -26.53
       objectReference: {fileID: 0}
     - target: {fileID: 2794330155699460597, guid: 0689476036f2fab448ab834462ad6741, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3287,7 +3287,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4380313478986564226, guid: 4a9a242d173f4d9458a1a803ce888038, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.80547
+      value: -27.53
       objectReference: {fileID: 0}
     - target: {fileID: 4380313478986564226, guid: 4a9a242d173f4d9458a1a803ce888038, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4062,7 +4062,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.19134948, y: 0.04579464, z: -0.010259233, w: 0.9803994}
-  m_LocalPosition: {x: -22.80547, y: 2.7613301, z: 2.6430502}
+  m_LocalPosition: {x: -28.53, y: 2.7613301, z: 2.6430502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5220,6 +5220,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 703233340848488968, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
+      propertyPath: VerticalAxis.Value
+      value: 17.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 703233340848488968, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
       propertyPath: TrackerSettings.PositionDamping.z
       value: 1
       objectReference: {fileID: 0}
@@ -5237,7 +5241,7 @@ PrefabInstance:
       objectReference: {fileID: 6858809153452914702}
     - target: {fileID: 8680330869677565242, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.80547
+      value: -27.53
       objectReference: {fileID: 0}
     - target: {fileID: 8680330869677565242, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9491,7 +9495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8872242312197663164, guid: 33eae3109e48dca4798b42df6995dc94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.80547
+      value: -28.53
       objectReference: {fileID: 0}
     - target: {fileID: 8872242312197663164, guid: 33eae3109e48dca4798b42df6995dc94, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11805,7 +11809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6909456325806025451}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FishObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12544,7 +12548,7 @@ GameObject:
   - component: {fileID: 8692505272924725237}
   - component: {fileID: 5418369849986900565}
   - component: {fileID: 4862895980055849583}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -12766,7 +12770,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677700123206360141}
   - component: {fileID: 4819896618926494325}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: "CurrentFish\U0001F41F"
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -12962,6 +12966,7 @@ MonoBehaviour:
   _character: {fileID: 694292351255803420}
   _animator: {fileID: 6662528921468413920}
   _fishing: {fileID: 9028672150812623084}
+  _rideArea: {fileID: 7359239635737632229}
 --- !u!4 &6017199965032362765
 Transform:
   m_ObjectHideFlags: 0
@@ -12986,7 +12991,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311197147151291894}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RefEquipment_Rod
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -13277,7 +13282,7 @@ Transform:
   m_GameObject: {fileID: 6081181356878095028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.80547, y: 0.26133, z: 4.64305}
+  m_LocalPosition: {x: -27.53, y: 0.26133, z: 4.64305}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13467,7 +13472,7 @@ GameObject:
   - component: {fileID: 2636624723639395902}
   - component: {fileID: 8647406974839020768}
   - component: {fileID: 8087977218875463521}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rod
   m_TagString: Player
   m_Icon: {fileID: 0}

@@ -16,18 +16,27 @@ namespace KinematicCharacterController.Examples
         [Header("Fishing")]
         [Tooltip("PlayerFishing component บน Player GameObject เดียวกัน (auto-find ถ้าว่าง)")]
         [SerializeField] private PlayerFishing _fishing;
+        [SerializeField] private RideArea _rideArea;
 
-        // ── Locomotion hashes ──
+        #region Locomotion hashes
+        // Locomotion hashes 
         private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
         private static readonly int IsGroundedHash = Animator.StringToHash("isGrounded");
+        #endregion
 
-        // ── Fishing hashes (ตรงกับ Player.controller parameters) ──
+        #region Fishing hashes
+        // Fishing hashes 
         private static readonly int IsFishingHash = Animator.StringToHash("isFishing");
         private static readonly int IsFishBiteHash = Animator.StringToHash("isFishBite");
         private static readonly int IsFishingFinishHash = Animator.StringToHash("isFishingFinish");
         private static readonly int DirFishingHash = Animator.StringToHash("DirFishing");
         private static readonly int SmallFishHash = Animator.StringToHash("SmallFish");
         private static readonly int BigFishHash = Animator.StringToHash("BigFish");
+        #endregion
+
+        #region  RidingCart hashes
+        private static readonly int IsRidingHash = Animator.StringToHash("isRiding");
+        #endregion
 
         // track previous frame to detect state transitions (trigger on enter/exit)
         private bool _wasFishing;
@@ -62,6 +71,7 @@ namespace KinematicCharacterController.Examples
         {
             UpdateLocomotion(animator, character);
             UpdateFishing(animator, character);
+            UpdateRidingCart(animator);
         }
 
         private void UpdateLocomotion(Animator animator, ExampleCharacterController character)
@@ -90,7 +100,8 @@ namespace KinematicCharacterController.Examples
             // ── isFishingFinish: trigger เมื่อออกจากโหมดตกปลา ──
             if (_wasFishing && !isFishing)
             {
-                animator.SetTrigger(IsFishingFinishHash);
+                // animator.SetTrigger(IsFishingFinishHash);
+                animator.SetBool(IsFishingFinishHash, true);
             }
 
             // ── DirFishing: มุมแนวนอนเทียบกับปลา → 0=fishing_left, 0.5=fishing_up, 1=fishing_right ──
@@ -114,6 +125,13 @@ namespace KinematicCharacterController.Examples
 
             _wasFishing = isFishing;
             _wasBite = isActive;
+            animator.SetBool(IsFishingFinishHash, false);
+        }
+
+        private void UpdateRidingCart(Animator animator)
+        {
+            if(_rideArea == null) return;
+            animator.SetBool(IsRidingHash, _rideArea.IsRiding);
         }
     }
 }
