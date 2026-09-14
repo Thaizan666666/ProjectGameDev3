@@ -1,5 +1,7 @@
 ﻿title: variables
 ---
+<<declare $PuSceneMeting = false>>
+<<declare $PuSceneFishing = false>>
 <<declare $met_grandfather = false>>
 ===
 
