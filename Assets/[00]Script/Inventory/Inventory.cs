@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using System.ComponentModel;
 using KinematicCharacterController.Examples;
 using Unity.Cinemachine;
+using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
@@ -148,10 +149,12 @@ public class Inventory : MonoBehaviour
     public bool IsInventoryOpen() => container.activeInHierarchy;
 
     // ===== Chest UI Management =====
+    #region Chest UI
     public void ShowChestUI(StorageChest chest)
     {
         _openChest = chest;
         chestUI.gameObject.SetActive(true);
+        RefreshSlotLists();
     }
 
     public void HideChestUI()
@@ -163,12 +166,15 @@ public class Inventory : MonoBehaviour
     public StorageChest GetOpenChest() => _openChest;
 
     public Slot[] GetChestSlots() => chesUISlots.ToArray();
+    #endregion
 
     // ===== Cart UI Management =====
+    #region Cart UI
     public void ShowCartUI(CartStorage cart)
     {
         _openCart = cart;
         cartUI.gameObject.SetActive(true);
+        RefreshSlotLists();
     }
 
     public void HideCartUI()
@@ -180,7 +186,7 @@ public class Inventory : MonoBehaviour
     public CartStorage GetOpenCart() => _openCart;
 
     public Slot[] GetCartSlots() => CartUISlots.ToArray();
-
+    #endregion
 
 
     public void AddItem(ItemSO itemToAdd, int amount)
@@ -271,7 +277,8 @@ public class Inventory : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Slot hovered = GetHoveredSlot();
+            // Slot hovered = GetHoveredSlot();
+            Slot hovered = GetSlotUnderMouse();
 
             if (hovered != null && hovered.HasItem())
             {
@@ -290,39 +297,41 @@ public class Inventory : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
-            Slot hovered = GetHoveredSlot();
-
+            Slot hovered = GetSlotUnderMouse(); // ใช้ raycast
             if (hovered != null && draggedSlot != null)
             {
                 HandleDrop(draggedSlot, hovered);
             }
-            // else: ปล่อยนอก slot — ไม่ต้องทำอะไร Item ยังอยู่ใน slot เดิม
-
+            else if (draggedSlot != null)
+            {
+                // ★ Snap back visual: item อยู่ใน draggedSlot เดิมอยู่แล้ว
+                // แค่เล่น animation dragIcon กลับตำแหน่ง slot เดิม (ถ้าอยากดูสวย)
+            }
             dragIcon.enabled = false;
             draggedSlot = null;
             isDragging = false;
         }
     }
 
-    private Slot GetHoveredSlot()
-    {
-        foreach (Slot s in allSlots)
-        {
-            if (s.hovering) return s;
-        }
+    // private Slot GetHoveredSlot()
+    // {
+    //     foreach (Slot s in allSlots)
+    //     {
+    //         if (s.hovering) return s;
+    //     }
 
-        foreach (Slot s in chesUISlots)
-        {
-            if (s.hovering) return s;
-        }
+    //     foreach (Slot s in chesUISlots)
+    //     {
+    //         if (s.hovering) return s;
+    //     }
 
-        foreach (Slot s in CartUISlots)
-        {
-            if (s.hovering) return s;
-        }
+    //     foreach (Slot s in CartUISlots)
+    //     {
+    //         if (s.hovering) return s;
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
     private void HandleDrop(Slot from, Slot to)
     {
@@ -372,5 +381,28 @@ public class Inventory : MonoBehaviour
         {
             dragIcon.transform.position = Mouse.current.position.ReadValue();
         }
+    }
+
+    private Slot GetSlotUnderMouse()
+    {
+        var pointer = new PointerEventData(EventSystem.current);
+        pointer.position = Mouse.current.position.ReadValue();
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, results);
+
+        foreach (var r in results)
+        {
+            var slot = r.gameObject.GetComponent<Slot>();
+            if (slot != null) return slot;
+        }
+        return null;
+    }
+
+    void RefreshSlotLists()
+    {
+        chesUISlots.Clear();
+        chesUISlots.AddRange(chestUI.GetComponentsInChildren<Slot>());
+        CartUISlots.Clear();
+        CartUISlots.AddRange(cartUI.GetComponentsInChildren<Slot>());
     }
 }

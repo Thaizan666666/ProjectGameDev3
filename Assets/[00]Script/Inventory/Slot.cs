@@ -3,7 +3,8 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+// public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Slot : MonoBehaviour
 {
     public bool hovering;
 
@@ -106,6 +107,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public bool HasItem() => heldItem != null;
 
-    public void OnPointerEnter(PointerEventData eventData) => hovering = true;
-    public void OnPointerExit(PointerEventData eventData) => hovering = false;
+    // public void OnPointerEnter(PointerEventData eventData) => hovering = true;
+    // public void OnPointerExit(PointerEventData eventData) => hovering = false;
 }
