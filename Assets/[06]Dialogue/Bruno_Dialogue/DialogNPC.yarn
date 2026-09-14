@@ -1,9 +1,19 @@
 ﻿title: variables
 ---
-<<declare $has_old_rod = false>>
-<<declare $has_new_rod = false>>
-<<declare $junk_sold = false>>
-<<declare $fish_caught_count = 0>>
+<<declare $met_grandfather = false>>
+===
+
+// ============================================================
+// Entry gate — ตั้งใน NPCDialogue.yarnStartNode ของ "Pu" แทน
+// "Scene1_MeetGrandfather" ตรงๆ เพื่อให้ interact ครั้งถัดไปไปต่อ Scene2
+// ============================================================
+title: Pu_Entry
+---
+<<if $met_grandfather>>
+    <<jump Scene2_Quest1_OldRod>>
+<<else>>
+    <<jump Scene1_MeetGrandfather>>
+<<endif>>
 ===
 
 // ============================================================
@@ -11,11 +21,11 @@
 // ============================================================
 title: Start
 ---
-<<camera_shoulder_in "Dialogue System" "Player">>
-[Player] มาถึงแล้ว…
-[Player] เอ๊ะ เรือมาจอดผิดท่าเปล่าเนี่ย
-[Player] ไม่สิ ป้ายเขียนชื่อถูกแล้ว
-<<camera_reset "Dialogue System">>
+<<LockControlls "player(V2)">>
+Player: So this is it… #line:09933ad 
+Player: Wait — did the boat drop me at the wrong dock? #line:025eda6 
+Player: No. No, the sign says the right name. #line:002fb2b 
+<<UnlockControlls "player(V2)">>
 ===
 
 // ============================================================
@@ -24,137 +34,71 @@ title: Start
 title: Scene1_MeetGrandfather
 ---
 <<camera_shoulder_in "Dialogue System" "Pu">>
-ปู่: เรือรอบนี้มาตรงเวลานะเนี่ย
-ปู่: นาน ๆ ทีจะตรง
+GRANDPA: Afternoon boat's on time today. #line:0a66ae3 
+GRANDPA: Doesn't happen often #line:0c281c4 
 // หันมา เงียบไปครู่หนึ่ง
-ปู่: …โอ๊ะ
-ปู่: โตขึ้นเยอะเลยนะ
-[Player] ปู่จำผมได้ด้วยเหรอ
-ปู่: จำได้สิ ป่แก่ ไม่ได้ตาบอด
-ปู่: เอ้า แล้วนี่มาคนเดียวเหรอ
-[Player] ปิดภาคเรียนพอดีน่ะ ก็เลยอยากมาเยี่ยม
-ปู่: อือ… ก็ดี มาพักสักหน่อยก็ดี
-[Player] ปู่ ทำไมเมืองถึงเงียบแบบนี้ล่ะ
-ปู่: อ๋อ… ก็นะ
-ปู่: เมื่อก่อนตรงนี้เรือจอดกันจนแทบไม่มีที่ ทุกลำที่ข้ามทะเลต้องแวะที่นี่ จะเติมเสบียง จะซ่อมเรือ จะพักคน ต้องมาที่นี่ ไม่มีทางเลือกอื่น
-ปู่: ตอนนี้เรือมันก็ดีขึ้นแล้ว แล่นได้ไกลขึ้น บรรทุกได้เยอะขึ้น ไม่จำเป็นต้องแวะเกาะนี้แล้ว
-ปู่: คนก็ทยอยย้ายออกนั่นแหละ โลกมันเปลี่ยนไปแล้ว
-ปู่: เอ้า มาถึงแล้วก็อย่ายืนเฉย ๆ สิ
+GRANDPA: …Oh. #line:06da195 
+GRANDPA: Look how big you've gotten. #line:0db1da3 
+Player: You still recognize me? #line:0829a6a 
+GRANDPA: Of course I do. I'm old, not blind. #line:04f38ee 
+GRANDPA: So — you came all this way on your own? #line:0d21fc2 
+Player: School's out for the break. I thought I'd come visit. #line:0feaf76 
+GRANDPA: Mm… that's good. Good to rest a while. #line:017d06b 
+Player: Grandpa… why's the town so quiet? #line:0ef5b11 
+GRANDPA: Ah. Well. #line:0792202 
+GRANDPA: Used to be, you couldn't find a free spot along this whole pier. Every ship crossing the water had to stop here. Supplies, repairs, somewhere for the crew to sleep. Wasn't a choice — there was nowhere else. #line:0388022 
+GRANDPA: Then the ships got better. Faster, bigger holds. They didn't need to stop anymore. #line:0f1a33b 
+GRANDPA: So folks packed up, little by little. That's just how it went. The world moved along without us. #line:0299627 
+GRANDPA: Well. Now that you're here. #line:0209e99 
+GRANDPA: There's something I want to show you.  #line:06ace64 
 <<camera_reset "Dialogue System">>
+<<UnlockControlls "player(V2)">>
+<<npc_walk_to_point "Talk Area" "Point">>
+<<npc_walk_to_point "Talk Area" "Point 2">>
+<<npc_turn_to_point "Talk Area" "LookAt">>
+<<set $met_grandfather = true>>
 ===
 
 // // ============================================================
 // // ฉาก 2 — เควส 1: เบ็ดเก่า
 // // ============================================================
-// title: Scene2_Quest1_OldRod
-// ---
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// ปู่: โกดังตรงนั้นมีของของหลานอยู่ ไปหยิบมาสิ
-// <<camera_reset "Dialogue System">>
-// // ระบบ: ชี้ทางไปโกดัง สอนการเดินและปุ่มปฏิสัมพันธ์
-// // <<wait_for_item "OldFishingRod">>
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// [ผู้เล่น] อันนี้… เบ็ดของผมนี่
-// ปู่: จำได้ด้วยเหรอ ตอนเด็ก ๆ เราชอบยืนตกอยู่ตรงนี้ทั้งวัน
-// ปู่: ปู่เก็บไว้ เผื่อมีคนกลับมาใช้
-// <<set $has_old_rod = true>>
-// <<camera_reset "Dialogue System">>
-// <<jump Scene3_FirstCatch>>
-// ===
+title: Scene2_Quest1_OldRod
+---
+<<camera_shoulder_in "Dialogue System" "Pu">>
+Player: What is this, a warehouse?
+GRANDPA: This is the last thing I ever built. The one I never finished.
+Player: It's an aquarium?
+GRANDPA: It was going to be.
+GRANDPA: When the ships stopped coming, folks needed a reason to stop here again. I thought — give them something to see. Something worth the crossing.
+GRANDPA: That was the idea, anyway. Last one I had.
+Player: So what happened?
+GRANDPA: I got old. That's what happened.
+GRANDPA: Glass is heavy. Pipes are heavier. Got to where I'd work an hour and need to sit for three.
+GRANDPA: One day I sat down and just… didn't get back up.
+GRANDPA: Been sitting ever since.
+Player: …
+Player: Then let me finish it.
+GRANDPA: What?
+Player: I want to help you finish it.
+GRANDPA: …
+GRANDPA: You came here to rest.
+Player: I came here to see you.
+GRANDPA: Hmmm.
+GRANDPA: Then take this.
+Player: Wait — this is my old rod.
+GRANDPA: You remember it, huh.
+Player: Of course I remember it. I thought it was gone.
+GRANDPA: I kept it. In case somebody came back to use it.
+<<AddItem>>
+<<set $has_old_rod = true>>
+<<camera_reset "Dialogue System">>
+===
 
-// // ============================================================
-// // ฉาก 3 — เควส 2–3: ตกปลาครั้งแรก (ได้แต่ขยะ)
-// // ============================================================
-// title: Scene3_FirstCatch
-// ---
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// ปู่: ลองดูสิ ยังใช้เป็นอยู่รึเปล่า
-// <<camera_reset "Dialogue System">>
-// // ระบบ: สอนกลไกตกปลา — ผลลัพธ์คือได้ขยะ
-// // <<wait_for_catch "Junk">>
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// ปู่: สงสัยเบ็ดมันจะเก่าแล้วน่ะ เลยตกได้แต่ขยะ แต่อย่าพึ่งทิ้งล่ะ ลองไปคุยกับร้านของฉำตรงนั้นดูสิ เขาน่าจะรับซื้อขยะนะ
-// <<camera_reset "Dialogue System">>
-// <<jump Scene3b_SellJunk>>
-// ===
-
-// title: Scene3b_SellJunk
-// ---
-// // <<camera_shoulder_in "Dialogue System" "ShopkeeperJunk">>
-// ShopkeeperJunk: อ้าว… หลานปู่ใช่มั้ยเนี่ย
-// ShopkeeperJunk: โอ๊ย จำได้ ๆ แต่ก่อนตัวเล็กนิดเดียวเอง
-// ShopkeeperJunk: พึ่งกลับมาหรอ
-// [ผู้เล่น] ใช่ครับ พอดีคิดถึงที่นี่น่ะครับ
-// ShopkeeperJunk: อือ… ก็ดีแล้ว
-// ShopkeeperJunk: ลูกฉันก็ไปอยู่เมืองใหญ่ ไม่ได้กลับมานานแล้ว
-// ShopkeeperJunk: เอ้า ของอะไรมาให้ดูซิ
-// // <<open_sell_shop "Junk">>
-// // <<set $junk_sold = true>>
-// ShopkeeperJunk: ตรงหลังร้านมีเบ็ดอยู่อันนึง วางฝุ่น จับมาสามปีแล้ว ไม่มีใครซื้อ
-// ShopkeeperJunk: เอาไปเถอะ ลดให้
-// // <<set $has_new_rod = true>>
-// <<camera_reset "Dialogue System">>
-// <<jump Scene4_RealFish>>
-// ===
-
-// // ============================================================
-// // ฉาก 4 — ตกได้ปลาจริง
-// // ============================================================
-// title: Scene4_RealFish
-// ---
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// ปู่: เอาล่ะ ได้เบ็ดมาแล้วใช่ไหม เอานี่ไป มันคือเหยื่อ
-// ปู่: ทีนี้ลองตกใหม่ดูสิ
-// <<camera_reset "Dialogue System">>
-// <<wait_for_catch "RealFish">>
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// [Player] ได้แล้ว ๆ
-// ปู่: ฝีมือยังเก่งเหมือนเดิมเลยนะ
-// ปู่: ดูสิว่าจะตกได้สักกี่ตัว
-// <<camera_reset "Dialogue System">>
-// //<<wait_until $fish_caught_count >= 5>>
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// ปู่: น่าจะเยอะพอแล้วล่ะ ร้านตรงนั้นเขารับซื้อปลานะ ลองเอาไปขายที่นั่นดูสิ
-// <<camera_reset "Dialogue System">>
-// <<jump Scene5_SellFish>>
-// ===
-
-// // ============================================================
-// // ฉาก 5 — ขายปลา
-// // ============================================================
-// title: Scene5_SellFish
-// ---
-// <<camera_shoulder_in "Dialogue System" "FishSeller">>
-// FishSeller: อ้าว สวัสดี… เธอคือหลานของปู่ใช่หรือเปล่า ฉันเคยฟังปู่เธอเล่าน่ะ
-// [Player] ใช่แล้ว ผมพึ่งกลับมาเยี่ยมที่นี่น่ะครับ
-// FishSeller: ก็ดีนะ นาน ๆ ทีจะมีคนหน้าใหม่เดินผ่านหน้าร้าน
-// // มองเบ็ดที่ผู้เล่นถืออยู่
-// FishSeller: เอ๊ะ นั่นเบ็ดนี่ ตกปลาเป็นด้วยเหรอ
-// [Player] ปู่สอนให้น่ะครับ ตกได้บ้างนิดหน่อย
-// FishSeller: ฮ่า ๆ นิดหน่อยก็ยังดีกว่าไม่มีใครตกเลย
-// FishSeller: ฉันรับซื้อปลานะ ตกได้อะไรก็เอามาให้ฉันดูได้เลย
-// <<open_sell_shop "Fish">>
-// <<open_buy_shop "Bait">>
-// <<camera_reset "Dialogue System">>
-// <<jump Scene6_BigFish>>
-// ===
-
-// // ============================================================
-// // ฉาก 6 — ปลาใหญ่
-// // ============================================================
-// title: Scene6_BigFish
-// ---
-// <<camera_shoulder_in "Dialogue System" "Pu">>
-// ปู่: รู้ไหมว่าในทะเลน่ะ เขาว่ากันว่ามีปลาตัวโตครองถิ่นอยู่นะ
-// ปู่: ไม่แน่ว่าถ้าเป็นหลาน อาจจะจับมันได้ก็ได้
-// ปู่: ลองไปคุยกับคนตรงนั้นดู เขาดูแลเรือของปู่อยู่ ใช้มันลองในทะเลสิ
-// <<camera_reset "Dialogue System">>
-// <<jump Scene6b_Captain>>
-// ===
-
-// title: Scene6b_Captain
-// ---
-// <<camera_shoulder_in "Dialogue System" "Captain">>
-// Captain: มาเอาเรือใช่ไหม? นี่คือเรือของปู่นาย เดี๋ยวฉันเตรียมเครื่องยนต์ให้นะ
-// <<camera_reset "Dialogue System">>
-// ===
+title: ResetAllProgress
+---
+<<set $has_old_rod = false>>
+<<set $has_new_rod = false>>
+<<set $junk_sold = false>>
+<<set $fish_caught_count = 0>>
+<<set $The_Seagull_CurrentLv = 1>>
+===

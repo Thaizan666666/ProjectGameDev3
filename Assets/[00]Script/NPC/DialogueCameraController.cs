@@ -88,48 +88,4 @@ public class DialogueCameraController : MonoBehaviour
         if (dialogueVCam == null) return;
         dialogueVCam.Priority = idlePriority;
     }
-
-    /// <summary>
-    /// ตัวอย่าง command เสริมสำหรับรอ action ของระบบเกม เช่น รอผู้เล่นหยิบไอเทม/ตกปลาได้
-    /// ต้องมีระบบ event ฝั่งเกมเรียก TriggerItemReceived / TriggerCatch ให้ IEnumerator นี้ทำงานต่อ
-    /// (ตัวอย่างโครงไว้ให้ปรับใช้ตามระบบเควสจริงของโปรเจกต์)
-    /// </summary>
-    [YarnCommand("wait_for_item")]
-    public IEnumerator WaitForItem(string itemId)
-    {
-        bool received = false;
-        void OnReceived(string id)
-        {
-            if (id == itemId) received = true;
-        }
-
-        // ตัวอย่าง: สมัคร event จากระบบ Inventory ของคุณเอง
-        //InventoryEvents.OnItemReceived += OnReceived;
-
-        while (!received)
-        {
-            yield return null;
-        }
-
-        //InventoryEvents.OnItemReceived -= OnReceived;
-    }
-
-    [YarnCommand("wait_for_catch")]
-    public IEnumerator WaitForCatch(string catchType)
-    {
-        bool caught = false;
-        void OnCaught(string type)
-        {
-            if (type == catchType) caught = true;
-        }
-
-        //FishingEvents.OnCaught += OnCaught;
-
-        while (!caught)
-        {
-            yield return null;
-        }
-
-        //FishingEvents.OnCaught -= OnCaught;
-    }
 }

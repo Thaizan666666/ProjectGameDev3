@@ -15,6 +15,7 @@
 using System;
 using UnityEngine;
 using KinematicCharacterController.Examples;
+using Yarn.Unity;
 
 [RequireComponent(typeof(ExamplePlayer))]
 public class PlayerController : MonoBehaviour
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         examplePlayer.enabled = false;
     }
 
+    [YarnCommand("UnlockControlls")]
     public void UnlockControls()
     {
         _isAutoMoving = false;
@@ -52,6 +54,11 @@ public class PlayerController : MonoBehaviour
         _onArrive = null;
 
         examplePlayer.enabled = true;
+    }
+    [YarnCommand("LockControlls")]
+    public void lockControls()
+    {
+        examplePlayer.enabled = false;
     }
 
     private void FixedUpdate()

@@ -121,7 +121,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         if (isHighlighted != _lastHighlighted)
         {
             _lastHighlighted = isHighlighted;
-            Debug.Log(isHighlighted ? $"[DEBUG] {name}: in interact range" : $"[DEBUG] {name}: left interact range");
         }
     }
 

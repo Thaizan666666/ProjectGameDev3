@@ -11,21 +11,21 @@ position: -163,-451
 title: Bruno_Upgrade
 position: 100,-312
 ---
-Bruno : Hi! How can I help you?
--> I want to upgrade building.
+Bruno : Hi! How can I help you? #line:0a5c869 
+-> I want to upgrade building. #line:05efc34 
     <<jump Select_Building_to_Upgrade>>
--> Nothing.
+-> Nothing. #line:0905470 
 ===
 
 title: Select_Building_to_Upgrade
 position: -32,-65
 ---
-Bruno : Sure! Which one?
--> The Seagull Inn.
+Bruno : Sure! Which one? #line:06c9a1c 
+-> The Seagull Inn. #line:0e2ae24 
     <<set $selectedBuilding = "TheSeagullInn">>
     <<set $selectedBuildingLabel = "The Seagull Inn">>
     <<jump Upgrade_The_Seagull_Inn>>
--> On second thought, I'd rather not do it.
+-> On second thought, I'd rather not do it. #line:0ca62fe 
     <<jump Cancel_Upgrade>>
 ===
 
@@ -34,8 +34,8 @@ position: -354,-66
 ---
 <<if $The_Seagull_CurrentLv > 0 && $The_Seagull_CurrentLv < 3>>
     <<if $The_Seagull_CurrentLv == 1>>
-        Bruno : 2,000 coins.
-        -> Here you are.
+        Bruno : 2,000 coins. #line:04746b0 
+        -> Here you are. #line:05858c7 
             <<set $upgradeOk = false>>
             <<canTryUpgrade "TheSeagullInn">>
             <<set $upgradeOk = canUpgradeSuccess()>>
@@ -43,18 +43,18 @@ position: -354,-66
                 <<set $The_Seagull_CurrentLv += 1>>
                 <<jump Admited_Upgrade>>
             <<else>>
-                Bruno : Sorry, I can't upgrade this building right now. Maybe it's already being worked on.
-                -> Back to select building.
+                Bruno : Sorry, I can't upgrade this building right now. Maybe it's already being worked on. #line:064eddf 
+                -> Back to select building. #line:02aa50c 
                     <<jump Select_Building_to_Upgrade>>
-                -> Ok then.
+                -> Ok then. #line:08b9f39 
                     <<jump Cancel_Upgrade>>
             <<endif>>
-        -> I'll cancel it.
+        -> I'll cancel it. #line:0350715 
             <<jump Cancel_Upgrade>>
     <<endif>>
     <<if $The_Seagull_CurrentLv == 2>>
-        Bruno : 3,000 coins.
-        -> Here you are.
+        Bruno : 3,000 coins. #line:015e781 
+        -> Here you are. #line:09f4ed2 
             <<set $upgradeOk = false>>
             <<canTryUpgrade "TheSeagullInn">>
             <<set $upgradeOk = canUpgradeSuccess()>>
@@ -62,32 +62,32 @@ position: -354,-66
                 <<set $The_Seagull_CurrentLv += 1>>
                 <<jump Admited_Upgrade>>
             <<else>>
-                Bruno : Sorry, I can't upgrade this building right now. Maybe it's already being worked on.
-                -> Back to select building.
+                Bruno : Sorry, I can't upgrade this building right now. Maybe it's already being worked on. #line:05aacf1 
+                -> Back to select building. #line:08ddd12 
                     <<jump Select_Building_to_Upgrade>>
-                -> Ok then.
+                -> Ok then. #line:02ded93 
                     <<jump Cancel_Upgrade>>
             <<endif>>
-        -> I'll cancel it.
+        -> I'll cancel it. #line:013c24c 
             <<jump Cancel_Upgrade>>
     <<endif>>
 <<else>>
     <<set $The_Seagull_CurrentLv = -1>>
-    Bruno : Now you can't upgrade this building anymore.
-    -> Back to select building.
+    Bruno : Now you can't upgrade this building anymore. #line:03c09ce 
+    -> Back to select building. #line:066703b 
         <<jump Select_Building_to_Upgrade>>
-    -> Ok then.
+    -> Ok then. #line:05fde3d 
 <<endif>>
 ===
 
 title: Admited_Upgrade
 position: -509,303
 ---
-Bruno : Thank you! Upgrade is confirmed. It'll be ready tomorrow morning.
+Bruno : Thank you! Upgrade is confirmed. It'll be ready tomorrow morning. #line:04a89b7 
 ===
 
 title: Cancel_Upgrade
 position: -57,302
 ---
-Bruno : It's Ok. Come back another time.
+Bruno : It's Ok. Come back another time. #line:099f80c 
 ===
