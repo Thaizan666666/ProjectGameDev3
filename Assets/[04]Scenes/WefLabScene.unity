@@ -8211,6 +8211,7 @@ MonoBehaviour:
   equippedOpacity: 0.9
   normalOpacity: 0.58
   HasBag: 0
+  refItemCarry: {fileID: 311197147151291894}
   startingRod: {fileID: 11400000, guid: 48c4d211fff83c943b4e17e752bee7ef, type: 2}
 --- !u!1 &1696962605
 GameObject:
@@ -13752,11 +13753,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &8647406974839020768 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2146366463666226442, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
-  m_PrefabInstance: {fileID: 9215539405150412907}
-  m_PrefabAsset: {fileID: 0}
 --- !u!33 &8656058798085805874
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -13845,7 +13841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b129970c062270e48b1e0141cbbf2cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.PlayerFishing
-  rodAnim: {fileID: 8647406974839020768}
+  rodAnim: {fileID: 0}
   rodItem: {fileID: 11400000, guid: 48c4d211fff83c943b4e17e752bee7ef, type: 2}
   fishingGameManager: {fileID: 1630426585}
   spawnDistance: 6

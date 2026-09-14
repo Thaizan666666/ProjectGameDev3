@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum ItemSize
 {
-    ExecpSize,
+    ExceptSize,
     SmallItem,
     BigItem
 }

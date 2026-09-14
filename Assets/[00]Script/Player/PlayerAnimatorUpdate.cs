@@ -34,10 +34,15 @@ namespace KinematicCharacterController.Examples
         private static readonly int BigFishHash = Animator.StringToHash("BigFish");
         #endregion
 
-        #region  RidingCart hashes
+        #region RidingCart hashes
         private static readonly int IsRidingHash = Animator.StringToHash("isRiding");
         #endregion
 
+        #region CarryItem hashes
+        private static readonly int IsCarryHash = Animator.StringToHash("isCarry");
+        private static readonly int SmallItemHash = Animator.StringToHash("SmallItem?");
+        private static readonly int BigItemHash = Animator.StringToHash("BigItem?");
+        #endregion
         // track previous frame to detect state transitions (trigger on enter/exit)
         private bool _wasFishing;
         private bool _wasBite;
@@ -64,7 +69,10 @@ namespace KinematicCharacterController.Examples
         private void HandleFishCaught(FishData fish)
         {
             if (_animator == null || fish == null) return;
+            
+            ItemSize size = fish.linkedItem != null ? fish.linkedItem.itemSize : ItemSize.SmallItem;
             _animator.SetTrigger(fish.fishSize == FishSize.BigFish ? BigFishHash : SmallFishHash);
+
         }
 
         public void UpdateAnimation(Animator animator, ExampleCharacterController character)

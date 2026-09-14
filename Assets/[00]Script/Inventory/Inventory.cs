@@ -35,6 +35,9 @@ public class Inventory : MonoBehaviour
     private bool isDragging = false;
     public bool HasBag = false;
 
+    [Header("Carry System")]
+    [SerializeField] private Transform refItemCarry;     // ลาก RefItemCarry จาก Hierarchy
+
     [Header("Starting Items")]
     [SerializeField] private ItemSO startingRod;
 
@@ -42,6 +45,7 @@ public class Inventory : MonoBehaviour
     private ExamplePlayer _examplePlayer;
     private StorageChest _openChest = null;
     private CartStorage _openCart = null;
+    private GameObject _currentCarriedModel;
 
     private void Awake()
     {
@@ -72,6 +76,7 @@ public class Inventory : MonoBehaviour
 
             // เลือกช่องที่มี Rod อัตโนมัติ
             UpdateHotBarOpacity();
+            UpdateCarriedItem();
         }
     }
 
@@ -457,6 +462,46 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    #region UpdateCarriedItem
+    private void UpdateCarriedItem()
+    {
+        // 1. Destroy model เก่า
+        if (_currentCarriedModel != null)
+        {
+            Destroy(_currentCarriedModel);
+            _currentCarriedModel = null;
+        }
+
+        // 2. ดึง item ที่ถืออยู่
+        ItemSO equipped = EquippedItem;
+        bool holdingItem = (equipped != null);
+
+        bool isCarrying = holdingItem && equipped.itemSize != ItemSize.ExceptSize;
+
+        // 4. Set Animator
+        if (PlayerAnimator.Instance != null)  // หรือหา Animator component
+        {
+            var anim = PlayerAnimator.Instance.GetComponent<Animator>();
+            anim.SetBool("isCarry", isCarrying);
+
+            if (isCarrying)
+            {
+                anim.SetBool("SmallItem?", equipped.itemSize == ItemSize.SmallItem);
+                anim.SetBool("BigItem?",  equipped.itemSize == ItemSize.BigItem);
+
+            }
+        }
+
+        // 5. Instantiate model ใหม่
+        if (holdingItem && equipped.handItemPrefab != null && refItemCarry != null)
+        {
+            _currentCarriedModel = Instantiate(equipped.handItemPrefab, refItemCarry);
+            _currentCarriedModel.transform.localPosition = Vector3.zero;
+            _currentCarriedModel.transform.localRotation = Quaternion.identity;
+        }
+    }
+    #endregion
+
     private void HandleHotBarSelection()
     {
         for (int i = 0; i < numberKeys.Length; i++)
@@ -465,6 +510,7 @@ public class Inventory : MonoBehaviour
             {
                 equippedHotBarIndex = i;
                 UpdateHotBarOpacity();
+                UpdateCarriedItem();
             }
         }
     }
