@@ -37,7 +37,6 @@ public static class ObjectCommand
     public static IEnumerator WaitForItem()
     {
         yield return null;
-
     }
 
     [YarnCommand("wait_for_catch")]
@@ -57,5 +56,11 @@ public static class ObjectCommand
         }
 
         //FishingEvents.OnCaught -= OnCaught;
+    }
+
+    public static IEnumerable WaitForSells()
+    {
+        Debug.Log("------Selling---------");
+        yield return null;
     }
 }

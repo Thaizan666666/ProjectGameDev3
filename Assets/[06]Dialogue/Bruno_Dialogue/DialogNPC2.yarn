@@ -5,8 +5,7 @@
     <<elseif $PuSceneMeting>>
         <<jump Scene4>>
     <<else>>
-        <<PuScene3>>
-
+        <<jump PuScene3>>
 <<endif>>
 ===
 
@@ -15,6 +14,7 @@ title: PuScene3
 <<camera_shoulder_in "Dialogue System" "Pu">>
 GRANDPA: Give it a try. See if you still know how
 <<camera_reset "Dialogue System">>
+<<<npc_turn_to_point "Player" "LookSea">>
 <<wait_for_catch>>
 <<camera_shoulder_in "Dialogue System" "Pu">>
 GRANDPA: That rod's seen better days — no wonder you're pulling up junk.
@@ -41,12 +41,19 @@ SHOPKEEPER: Take it. I'll knock the price down for you.
 
 title: Scene4
 ---
+<<camera_shoulder_in "Dialogue System" "SHOPKEEPER">>
+GRANDPA: Got yourself a new rod, then. Here — take this. It's bait.
+GRANDPA: Go on, try again.
+<<camera_reset "Dialogue System">>
+
 ===
 
 title: Scene5
 ---
+
 ===
 
 title: Scene6
 ---
+
 ===
