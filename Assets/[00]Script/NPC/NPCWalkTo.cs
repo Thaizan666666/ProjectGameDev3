@@ -21,6 +21,8 @@ public class NPCWalkTo : MonoBehaviour
     [SerializeField] private float arriveDistance = 0.1f;
     [SerializeField] private float turnStopAngle = 1f;
 
+    [SerializeField] private Animator animatorNPC;
+
     /// <summary>
     /// Yarn: <<npc_walk_to_point "NpcGameObjectName" "WalkPointObjectName">>
     /// Looks up an empty GameObject by name and walks this NPC toward its
@@ -57,6 +59,7 @@ public class NPCWalkTo : MonoBehaviour
             }
 
             Vector3 direction = toPoint.normalized;
+            animatorNPC.SetBool("isGWalk", true);
             // Only drive X/Z; leave Y velocity alone so gravity keeps handling the fall/ground contact.
             rb.linearVelocity = new Vector3(direction.x * moveSpeed, rb.linearVelocity.y, direction.z * moveSpeed);
 
@@ -65,6 +68,8 @@ public class NPCWalkTo : MonoBehaviour
             transform.root.rotation = Quaternion.Slerp(transform.root.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
             yield return null;
+
+            animatorNPC.SetBool("isGWalk", false);
         }
     }
 
