@@ -18,7 +18,7 @@ MonoBehaviour:
   maxWeight: 14
   percentRate: 30
   Price: 400
-  Icon: {fileID: 21300000, guid: eaa0e37ca60fa1b46a06baeb6a42cfd7, type: 3}
+  Icon: {fileID: 21300000, guid: a819f85797f3d174f943706a0b7cb193, type: 3}
   Prefab: {fileID: 1037251650805260153, guid: de09e185c69655148be6d97f910b37ae, type: 3}
   fishSize: 0
   linkedItem: {fileID: 11400000, guid: 9ba2940631678ef4c8a433abf4c06e71, type: 2}

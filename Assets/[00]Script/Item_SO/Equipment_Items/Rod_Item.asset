@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rod_Item
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: CommonRod
-  icon: {fileID: 21300000, guid: 98e68c3603d49d94da677038838c6647, type: 3}
+  icon: {fileID: 21300000, guid: 7880c9708983d644596bbf11bdfff175, type: 3}
   maxStackSize: 1
   sellPrice: 0
   itemPrefab: {fileID: 4915167281176685968, guid: 625c2a08ed0a3e74185ab9d49ba31b71, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CommonFish_Item
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: CommonFish
-  icon: {fileID: 21300000, guid: a915a58045b4650479caedfd0fe19835, type: 3}
+  icon: {fileID: 21300000, guid: daa780f1f0efe8f4089ab9705034de42, type: 3}
   maxStackSize: 99
   sellPrice: 1000
   itemPrefab: {fileID: 6971651124162908057, guid: 0c60cecaa401f69419e409ce13474203, type: 3}

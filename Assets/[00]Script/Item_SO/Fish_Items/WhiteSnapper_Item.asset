@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: WhiteSnapper_Item
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: WhiteSnapper
-  icon: {fileID: 21300000, guid: 2fe803e4391a6f0468d34625e1fee70a, type: 3}
+  icon: {fileID: 21300000, guid: 2f63fdd374772314d9fefaef52581365, type: 3}
   maxStackSize: 99
   sellPrice: 1000
-  itemPrefab: {fileID: 6971651124162908057, guid: ccbb9663b1a11f54381adda3998da428, type: 3}
-  handItemPrefab: {fileID: 6971651124162908057, guid: ccbb9663b1a11f54381adda3998da428, type: 3}
+  itemPrefab: {fileID: 1723968895174519268, guid: 38eed31a959bc86489a6c20d3d17bdb4, type: 3}
+  handItemPrefab: {fileID: 919132149155446097, guid: 83de67b604eb9c945a42bdb6b3b24f47, type: 3}
   itemSize: 1
   itemType: 2
