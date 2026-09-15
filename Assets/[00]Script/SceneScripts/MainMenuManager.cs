@@ -5,7 +5,15 @@ public class MainMenuManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("StartScene");
+        if (FadeBlackScreen.Instance != null)
+        {
+            FadeBlackScreen.Instance.FadeInThenLoadScene("StartScene");
+        }
+        else
+        {
+            Debug.LogWarning("MainMenuManager: FadeBlackScreen.Instance not found, loading scene without fade.");
+            SceneManager.LoadScene("StartScene");
+        }
     }
 
     public void OpenSettings()
