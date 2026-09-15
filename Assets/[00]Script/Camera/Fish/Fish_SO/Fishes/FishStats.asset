@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6d4684f404ee8346a7b6fecd3f983a4, type: 3}
-  m_Name: Tuna
+  m_Name: FishStats
   m_EditorClassIdentifier: Assembly-CSharp::TableForge.Fish.FishStats
-  fishName: 804
-  fishTier: 1
-  minWeight: 40
-  maxWeight: 60
-  percentRate: 18
-  Price: 3000
-  Icon: {fileID: 21300000, guid: bd42c53d47e2e5e4196d665f75e57e48, type: 3}
-  Prefab: {fileID: 5329651924340414265, guid: f33df0d2cb40d6f4ebfebdb3c5402081, type: 3}
-  fishSize: 1
-  linkedItem: {fileID: 11400000, guid: dc0cdd603acc7a445a6c4fc0d03c0d12, type: 2}
+  fishName: 0
+  fishTier: 0
+  minWeight: 0
+  maxWeight: 0
+  percentRate: 0
+  Price: 0
+  Icon: {fileID: 0}
+  Prefab: {fileID: 0}
+  fishSize: 0
+  linkedItem: {fileID: 0}
