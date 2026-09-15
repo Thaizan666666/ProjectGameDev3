@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: WhiteSnapper
   icon: {fileID: 21300000, guid: 2fe803e4391a6f0468d34625e1fee70a, type: 3}
   maxStackSize: 99
-  sellPrice: 0
+  sellPrice: 1000
   itemPrefab: {fileID: 6971651124162908057, guid: ccbb9663b1a11f54381adda3998da428, type: 3}
   handItemPrefab: {fileID: 6971651124162908057, guid: ccbb9663b1a11f54381adda3998da428, type: 3}
   itemSize: 1

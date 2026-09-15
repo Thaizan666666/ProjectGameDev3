@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Sadine
   icon: {fileID: 21300000, guid: 4634f210e2f91584ca33e1d0b6eadfb3, type: 3}
   maxStackSize: 99
-  sellPrice: 0
+  sellPrice: 1000
   itemPrefab: {fileID: 6971651124162908057, guid: cc0274ffb3bc81a46be32cd8456b19a9, type: 3}
   handItemPrefab: {fileID: 6971651124162908057, guid: cc0274ffb3bc81a46be32cd8456b19a9, type: 3}
   itemSize: 1

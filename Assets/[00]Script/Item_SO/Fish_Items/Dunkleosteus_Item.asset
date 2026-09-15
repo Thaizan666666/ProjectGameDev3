@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Dunkleosteus
   icon: {fileID: 21300000, guid: 4ea702bfd294d0c4d83950cd81a2bd14, type: 3}
   maxStackSize: 1
-  sellPrice: 0
+  sellPrice: 1000
   itemPrefab: {fileID: 4847272728496316168, guid: d7599a2e2f7aece4ab2cbf5d8cec51fe, type: 3}
   handItemPrefab: {fileID: 4847272728496316168, guid: d7599a2e2f7aece4ab2cbf5d8cec51fe, type: 3}
   itemSize: 2

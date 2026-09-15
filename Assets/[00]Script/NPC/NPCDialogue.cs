@@ -8,6 +8,7 @@
 // PlayerController component (see Assets/[00]Script/Player/PlayerController.cs).
 // ─────────────────────────────────────────────────────────────
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -32,7 +33,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     private Transform _playerTransform;
     private bool _isFacingPlayer;
-
+    
     private void OnEnable()
     {
         if (dialogueRunner != null)
@@ -69,7 +70,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
             return;
         }
 
-        PlayerController playerController = playerObj.GetComponentInParent<PlayerController>();
+        PlayerController playerController = playerObj.GetComponent<PlayerController>();
         if (playerController == null)
         {
             Debug.LogWarning($"{name}: Player is missing a PlayerController component.", this);
@@ -88,17 +89,19 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     }
 
     private void HandleDialogueComplete()
-    {
-        _isFacingPlayer = false;
-        isBusy = false;
-
-        if (_playerTransform != null && _playerTransform.TryGetComponent(out PlayerController playerController))
         {
-            playerController.UnlockControls();
-        }
+            _isFacingPlayer = false;
+            isBusy = false;
 
-        _playerTransform = null;
-    }
+            if (_playerTransform != null)
+            {
+                var playerController = _playerTransform.GetComponent<PlayerController>();
+                if (playerController != null)
+                    playerController.UnlockControls();
+            }
+
+            _playerTransform = null;
+        }
 
     public bool CanInteract()
     {

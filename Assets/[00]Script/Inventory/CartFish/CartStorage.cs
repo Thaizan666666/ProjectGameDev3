@@ -77,8 +77,14 @@ public class CartStorage : MonoBehaviour, IInteractable
         {
             if (slots[i].HasItem())
             {
-                storedItems[i].item = slots[i].GetItem();
+                ItemSO item = slots[i].GetItem();
+                storedItems[i].item = item;
                 storedItems[i].amount = slots[i].GetAmount();
+                
+                int resolvedPrice = item.sellPrice;
+                FishData fish = FishData.FindByLinkedItem(item);
+                if (fish != null) resolvedPrice = fish.Price;
+                storedItems[i].sellPrice = resolvedPrice;
             }
             else
             {
@@ -232,6 +238,44 @@ public class CartStorage : MonoBehaviour, IInteractable
                 items.Add(slot);
         }
         return items;
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Fish Sale Helpers (filter เฉพาะ ItemType.FishItem)
+    // ─────────────────────────────────────────────────────────────
+
+    /// <summary>มีปลาในรถไหม (filter ItemType.FishItem)</summary>
+    public bool HasFishItems()
+    {
+        foreach (var slot in storedItems)
+            if (slot.HasItem && slot.item.itemType == ItemType.FishItem)
+                return true;
+        return false;
+    }
+
+    /// <summary>รวมมูลค่าปลาในรถ (filter ItemType.FishItem)</summary>
+    public int GetFishTotalValue()
+    {
+        int total = 0;
+        foreach (var slot in storedItems)
+            if (slot.HasItem && slot.item.itemType == ItemType.FishItem)
+                total += slot.TotalValue;
+        return total;
+    }
+
+    /// <summary>ล้างเฉพาะปลาออกจากรถ (หลังขายสำเร็จ)</summary>
+    public void ClearFishItems()
+    {
+        for (int i = 0; i < storedItems.Length; i++)
+        {
+            var slot = storedItems[i];
+            if (slot.HasItem && slot.item.itemType == ItemType.FishItem)
+            {
+                slot.item = null;
+                slot.amount = 0;
+                slot.sellPrice = 0;
+            }
+        }
     }
 
     // ─────────────────────────────────────────────────────────────

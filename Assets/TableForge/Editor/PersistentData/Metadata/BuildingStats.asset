@@ -31,9 +31,9 @@ MonoBehaviour:
     - position: 1
       size: {x: 0, y: 100}
     - position: 0
-      size: {x: 263, y: 0}
+      size: {x: 285, y: 0}
     - position: 2
-      size: {x: 0, y: 0}
+      size: {x: 0, y: 25}
     - position: 3
       size: {x: 0, y: 0}
     - position: 4

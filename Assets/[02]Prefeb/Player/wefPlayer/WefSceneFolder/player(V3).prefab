@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8164646057546818232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RefItemCarry
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b129970c062270e48b1e0141cbbf2cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.PlayerFishing
-  rodAnim: {fileID: 0}
+  rodAnim: {fileID: 4339687789892388981}
   rodItem: {fileID: 11400000, guid: 48c4d211fff83c943b4e17e752bee7ef, type: 2}
   fishingGameManager: {fileID: 0}
   spawnDistance: 6
@@ -1762,8 +1762,28 @@ PrefabInstance:
       value: Rod(V2)
       objectReference: {fileID: 0}
     - target: {fileID: 5645833802971599271, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645833802971599271, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645833802971599271, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977412354508954860, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725529023929543920, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8224690550246226017, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1773,5 +1793,10 @@ PrefabInstance:
 --- !u!4 &3471059049767077031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1286738875481606616, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
+  m_PrefabInstance: {fileID: 2445674363085770111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4339687789892388981 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2146366463666226442, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
   m_PrefabInstance: {fileID: 2445674363085770111}
   m_PrefabAsset: {fileID: 0}

@@ -1,0 +1,42 @@
+﻿title: Finn_Variables
+---
+<<declare $saleTotal = 0>>
+===
+
+title: Finn_SellFish
+---
+Finn: Hi there! What brings you to the dock today? #line:f1a2c3
+-> I'd like to sell some fish. #line:f2b4d5
+    <<jump Finn_TrySell>>
+-> Not right now, maybe later. #line:f3c6e7
+    Finn: No problem! I'll be here if you change your mind. #line:f4d8f9
+===
+
+title: Finn_TrySell
+---
+<<tryCalculateFishSale>>
+<<set $saleTotal = calculateFishSale()>>
+
+<<if $saleTotal > 0>>
+    Finn: Great! Your fish are worth {$saleTotal} coins. #line:f5
+    -> Yes, sell them now. #line:f6
+        <<confirmFishSale>>
+        <<jump Finn_SellSuccess>>
+    -> Maybe later then. #line:f7
+        <<jump Finn_SellCancel>>
+<<else>>
+    Finn: I see you don't have any fish to sell right now. #line:f8
+    -> That's alright. #line:f9
+        <<jump Finn_SellCancel>>
+<<endif>>
+===
+
+title: Finn_SellSuccess
+---
+Finn: Perfect! Here's your {$saleTotal} coins. Thanks for selling with me! #line:f10
+===
+
+title: Finn_SellCancel
+---
+Finn: No worries! Come back when you have fish to sell. #line:f11
+===
