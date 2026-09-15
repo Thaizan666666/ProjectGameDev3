@@ -92,15 +92,12 @@ GRANDPA: You remember it, huh.
 Player: Of course I remember it. I thought it was gone.
 GRANDPA: I kept it. In case somebody came back to use it.
 <<AddItem>>
-<<set $has_old_rod = true>>
 <<camera_reset "Dialogue System">>
 ===
 
 title: ResetAllProgress
 ---
-<<set $has_old_rod = false>>
-<<set $has_new_rod = false>>
-<<set $junk_sold = false>>
-<<set $fish_caught_count = 0>>
-<<set $The_Seagull_CurrentLv = 1>>
+<<set $PuSceneMeting = false>>
+<<set $PuSceneFishing = false>>
+<<set $met_grandfather = false>>
 ===

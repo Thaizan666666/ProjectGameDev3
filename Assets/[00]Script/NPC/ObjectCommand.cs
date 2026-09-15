@@ -7,6 +7,7 @@ using UnityEngine;
 using Yarn.Unity;
 using System.Collections;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public static class ObjectCommand
 {
@@ -92,6 +93,13 @@ public static class ObjectCommand
     public static IEnumerable WaitForSells()
     {
         Debug.Log("------Selling---------");
+        yield return null;
+    }
+
+    [YarnCommand("LoadScene")]
+    public static IEnumerator RoadScenewithname(string SceneName)
+    {
+
         yield return null;
     }
 }
