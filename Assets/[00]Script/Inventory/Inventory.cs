@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform refItemCarry;     // ลาก RefItemCarry จาก Hierarchy
 
     [Header("Starting Items")]
-    [SerializeField] private ItemSO startingRod;
+    [SerializeField] public ItemSO startingRod;
 
     private PlayerInputActions inputActions;
     private ExamplePlayer _examplePlayer;
@@ -69,6 +69,18 @@ public class Inventory : MonoBehaviour
     }
 
     void Start()
+    {
+        // if (startingRod != null)
+        // {
+        //     AddItemToHotbar(startingRod, 1);
+
+        //     // เลือกช่องที่มี Rod อัตโนมัติ
+        //     UpdateHotBarOpacity();
+        //     UpdateCarriedItem();
+        // }
+    }
+
+    public void AddItemToObjectCommand()
     {
         if (startingRod != null)
         {
@@ -268,7 +280,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void AddItemToHotbar(ItemSO itemToAdd, int amount)
+    public void AddItemToHotbar(ItemSO itemToAdd, int amount)
     {
         int remaining = amount;
 

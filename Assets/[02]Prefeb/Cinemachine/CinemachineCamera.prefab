@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3049763557639077728}
   - component: {fileID: 346060038556622166}
   - component: {fileID: 4085238413161623544}
+  - component: {fileID: 2393484020691107082}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
     FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 2000
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d7c088409d9a40b7b09aa707777f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineOrbitalFollow
-  TargetOffset: {x: 0, y: 0, z: 0}
+  TargetOffset: {x: 0, y: 0.2, z: 0}
   TrackerSettings:
     BindingMode: 4
     PositionDamping: {x: 1, y: 1, z: 1}
@@ -135,7 +136,7 @@ MonoBehaviour:
   RadialAxis:
     Value: 1
     Center: 1
-    Range: {x: 0.6, y: 2}
+    Range: {x: 0.3, y: 2}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -167,7 +168,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   TiltAxis:
-    Value: 0
+    Value: 10.23
     Center: 0
     Range: {x: -70, y: 70}
     Wrap: 0
@@ -190,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDeoccluder
   CollideAgainst:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 9
   IgnoreTag: 
   TransparentLayers:
     serializedVersion: 2
@@ -200,7 +201,7 @@ MonoBehaviour:
     Enabled: 1
     DistanceLimit: 0
     MinimumOcclusionTime: 0
-    CameraRadius: 0.2
+    CameraRadius: 0.3
     UseFollowTarget:
       Enabled: 1
       YOffset: 0
@@ -289,3 +290,16 @@ MonoBehaviour:
         DecelTime: 0.2
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &2393484020691107082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310465256326604944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1ce12296da9f4489bd3ea565dbc945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  Cincamera: {fileID: 7788041439948966231}

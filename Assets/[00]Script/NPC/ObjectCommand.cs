@@ -28,7 +28,8 @@ public static class ObjectCommand
     [YarnCommand("AddItem")]
     public static void AddItem()
     {
-        Debug.LogWarning("Add item");
+        // Debug.LogWarning("Add item");
+        Inventory.instance.AddItemToObjectCommand();
     }
     /// <summary>
     /// ตัวอย่าง command เสริมสำหรับรอ action ของระบบเกม เช่น รอผู้เล่นหยิบไอเทม/ตกปลาได้
