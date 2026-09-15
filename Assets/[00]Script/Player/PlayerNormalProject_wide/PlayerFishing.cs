@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using KinematicCharacterController.Examples;
 using TableForge.Fish;
 
 namespace PlayerNormal.Project_wide
@@ -17,6 +18,8 @@ namespace PlayerNormal.Project_wide
         [Header("Fishing Encounter")]
         [Tooltip("ตัวจัดการ encounter ตกปลา (GameObject FishingSystem ในซีน)")]
         [SerializeField] private FishingGameManager fishingGameManager;
+        [Tooltip("ExamplePlayer บน GameObject เดียวกัน — ปิดตอนกด F ตกปลา (ตั้งแต่สะบัดคัน ไม่ใช่รอถึงปลากินเบ็ด) กันเดินระหว่างรอ/สู้ปลา")]
+        [SerializeField] private ExamplePlayer examplePlayer;
         [Tooltip("ระยะห่างหน้าเบ็ดจากผู้เล่นที่จะ spawn ปลา")]
         [SerializeField] private float spawnDistance = 6f;
 
@@ -73,6 +76,7 @@ namespace PlayerNormal.Project_wide
                 Debug.LogWarning("[PlayerFishing] OnDisable ถูกเรียกระหว่างที่กำลังรอกินเบ็ดอยู่ — coroutine ถูกตัดจบกลางทาง (component/GameObject นี้โดน disable)");
                 StopCoroutine(waitForBiteRoutine);
                 waitForBiteRoutine = null;
+                if (examplePlayer != null) examplePlayer.enabled = true; // กันเดินไม่ได้ค้างตลอดไปถ้า disable กลางคัน
             }
 
             hookThrow?.CleanupHook();
@@ -144,6 +148,8 @@ namespace PlayerNormal.Project_wide
                 return;
             }
 
+            if (examplePlayer != null) examplePlayer.enabled = false; // กด F ตกปลาแล้ว ห้ามเดินตั้งแต่ตอนนี้เลย ไม่ใช่รอถึงปลากินเบ็ด
+
             if (waitForBiteRoutine != null) StopCoroutine(waitForBiteRoutine);
             waitForBiteRoutine = StartCoroutine(WaitForBiteThenSpawn());
         }
@@ -177,12 +183,14 @@ namespace PlayerNormal.Project_wide
             if (currentZone == null)
             {
                 Debug.LogWarning("[PlayerFishing] ยกเลิกเริ่ม encounter: currentZone เป็น null (เดินออกจากโซนไปแล้วระหว่างรอปลากินเบ็ด?)");
+                if (examplePlayer != null) examplePlayer.enabled = true; // ยกเลิก encounter แล้ว ไม่มี FishingGameManager มาปลดล็อกให้ ต้องปลดเอง
                 return;
             }
 
             if (fishingGameManager == null)
             {
                 Debug.LogWarning("[PlayerFishing] ยกเลิกเริ่ม encounter: fishingGameManager ไม่ได้ผูกไว้ใน Inspector");
+                if (examplePlayer != null) examplePlayer.enabled = true;
                 return;
             }
 
@@ -191,12 +199,14 @@ namespace PlayerNormal.Project_wide
             if (data == null)
             {
                 Debug.LogWarning($"[PlayerFishing] ยกเลิกเริ่ม encounter: {currentZone.ZoneName} สุ่มปลาไม่ได้ (ดู warning จาก FishZone ด้านบน — เช็ค Entries/FishDatabase)");
+                if (examplePlayer != null) examplePlayer.enabled = true;
                 return;
             }
 
             if (data.Prefab == null)
             {
                 Debug.LogWarning($"[PlayerFishing] ยกเลิกเริ่ม encounter: {data.fishName} ไม่มี Prefab ผูกไว้ใน FishStats asset");
+                if (examplePlayer != null) examplePlayer.enabled = true;
                 return;
             }
 
@@ -267,6 +277,7 @@ namespace PlayerNormal.Project_wide
             if (spawnedFish != null) Destroy(spawnedFish);
             spawnedFish = null;
             hookThrow?.ClearLineEndTarget(); // encounter จบแล้ว (จับได้/เบ็ดขาด) ให้สายหายไปจริง ๆ
+            if (examplePlayer != null) examplePlayer.enabled = true; // จบแล้ว (จับได้/เบ็ดขาด) ปลดล็อกให้เดินได้
 
             if (currentFishController != null)
             {
