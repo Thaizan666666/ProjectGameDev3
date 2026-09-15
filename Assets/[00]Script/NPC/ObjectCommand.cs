@@ -100,7 +100,7 @@ public static class ObjectCommand
     [YarnCommand("LoadScene")]
     public static IEnumerator RoadScenewithname(string SceneName)
     {
-
+        FadeBlackScreen.Instance.FadeInThenLoadScene(SceneName);
         yield return null;
     }
 }
