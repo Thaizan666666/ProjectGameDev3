@@ -29,7 +29,7 @@ public class FishingDebugHud : MonoBehaviour
     {
         if (gameManager == null) return;
 
-        GUILayout.BeginArea(new Rect(10, 10, 340, 250), GUI.skin.box);
+        GUILayout.BeginArea(new Rect(10, 250, 340, 250), GUI.skin.box);
         GUILayout.Label($"Encounter State: {gameManager.State}");
 
         var fish = gameManager.CurrentFish;
