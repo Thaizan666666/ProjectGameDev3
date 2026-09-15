@@ -69,7 +69,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
             return;
         }
 
-        PlayerController playerController = playerObj.GetComponent<PlayerController>();
+        PlayerController playerController = playerObj.GetComponentInParent<PlayerController>();
         if (playerController == null)
         {
             Debug.LogWarning($"{name}: Player is missing a PlayerController component.", this);

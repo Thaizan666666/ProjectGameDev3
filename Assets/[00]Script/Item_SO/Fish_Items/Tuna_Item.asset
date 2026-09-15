@@ -19,3 +19,4 @@ MonoBehaviour:
   itemPrefab: {fileID: 5131394721203828810, guid: 331bed5f15896f641b43a7b447345e08, type: 3}
   handItemPrefab: {fileID: 5131394721203828810, guid: 331bed5f15896f641b43a7b447345e08, type: 3}
   itemSize: 2
+  itemType: 2

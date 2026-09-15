@@ -7,6 +7,14 @@ public enum ItemSize
     BigItem
 }
 
+public enum ItemType
+{
+    Undefine,
+    EquipmentItem,
+    FishItem,
+    QuestItem
+}
+
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/ItemSO")]
 public class ItemSO : ScriptableObject
 {
@@ -17,4 +25,5 @@ public class ItemSO : ScriptableObject
     public GameObject itemPrefab;
     public GameObject handItemPrefab;
     public ItemSize itemSize = ItemSize.SmallItem;
+    public ItemType itemType = ItemType.Undefine;
 }
