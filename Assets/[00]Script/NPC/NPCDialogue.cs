@@ -8,7 +8,6 @@
 // PlayerController component (see Assets/[00]Script/Player/PlayerController.cs).
 // ─────────────────────────────────────────────────────────────
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -33,7 +32,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     private Transform _playerTransform;
     private bool _isFacingPlayer;
-    
+
     private void OnEnable()
     {
         if (dialogueRunner != null)
@@ -89,19 +88,17 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     }
 
     private void HandleDialogueComplete()
+    {
+        _isFacingPlayer = false;
+        isBusy = false;
+
+        if (_playerTransform != null && _playerTransform.TryGetComponent(out PlayerController playerController))
         {
-            _isFacingPlayer = false;
-            isBusy = false;
-
-            if (_playerTransform != null)
-            {
-                var playerController = _playerTransform.GetComponent<PlayerController>();
-                if (playerController != null)
-                    playerController.UnlockControls();
-            }
-
-            _playerTransform = null;
+            playerController.UnlockControls();
         }
+
+        _playerTransform = null;
+    }
 
     public bool CanInteract()
     {

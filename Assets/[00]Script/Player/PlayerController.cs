@@ -16,6 +16,7 @@ using System;
 using UnityEngine;
 using KinematicCharacterController.Examples;
 using Yarn.Unity;
+using UnityEditor;
 
 [RequireComponent(typeof(ExamplePlayer))]
 public class PlayerController : MonoBehaviour
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
         examplePlayer.enabled = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_moveTarget == null) return;
 

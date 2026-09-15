@@ -37,7 +37,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - InvisbleWall
   - 
   m_SortingLayers:
   - name: Default

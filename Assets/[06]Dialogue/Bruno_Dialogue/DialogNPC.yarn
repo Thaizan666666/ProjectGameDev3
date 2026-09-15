@@ -23,11 +23,11 @@ title: Pu_Entry
 // ============================================================
 title: Start
 ---
-<<LockControlls "player(V2)">>
+<<LockControlls "player(V3)">>
 Player: So this is it… #line:09933ad 
 Player: Wait — did the boat drop me at the wrong dock? #line:025eda6 
 Player: No. No, the sign says the right name. #line:002fb2b 
-<<UnlockControlls "player(V2)">>
+<<UnlockControlls "player(V3)">>
 ===
 
 // ============================================================
@@ -54,7 +54,7 @@ GRANDPA: So folks packed up, little by little. That's just how it went. The worl
 GRANDPA: Well. Now that you're here. #line:0209e99 
 GRANDPA: There's something I want to show you.  #line:06ace64 
 <<camera_reset "Dialogue System">>
-<<UnlockControlls "player(V2)">>
+<<UnlockControlls "player(V3)">>
 <<npc_walk_to_point "Talk Area" "Point">>
 <<npc_walk_to_point "Talk Area" "Point 2">>
 <<npc_turn_to_point "Talk Area" "LookAt">>

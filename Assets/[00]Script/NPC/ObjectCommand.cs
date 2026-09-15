@@ -6,6 +6,7 @@
 using UnityEngine;
 using Yarn.Unity;
 using System.Collections;
+using System.Linq;
 
 public static class ObjectCommand
 {
@@ -39,23 +40,53 @@ public static class ObjectCommand
         yield return null;
     }
 
+    /// <summary>
+    /// Yarn: <<wait_for_catch "Sardine">>
+    /// รอให้ผู้เล่นกด F ตกปลาจริง ๆ จนจับได้ตัวที่ชื่อ catchType เป๊ะ ๆ ถึงไป dialogue บรรทัดต่อไป
+    /// catchType ต้องตรงกับ FishName enum และต้องเป็นปลาที่ตั้งค่าไว้ใน FishZone ของฉากจริง
+    /// (หา FishZone ในซีนอัตโนมัติ — ตอนนี้มีแค่ตัวเดียว ถ้ามีหลายโซนในอนาคตต้องเปลี่ยนไปหาโซนที่ผู้เล่นยืนอยู่แทน)
+    /// </summary>
     [YarnCommand("wait_for_catch")]
     public static IEnumerator WaitForCatch(string catchType)
     {
-        bool caught = false;
-        void OnCaught(string type)
+        FishingGameManager manager = Object.FindFirstObjectByType<FishingGameManager>();
+        if (manager == null)
         {
-            if (type == catchType) caught = true;
+            Debug.LogWarning("wait_for_catch: no FishingGameManager found in scene.");
+            yield break;
         }
 
-        //FishingEvents.OnCaught += OnCaught;
+        FishZone zone = Object.FindFirstObjectByType<FishZone>();
+        if (zone == null)
+        {
+            Debug.LogWarning("wait_for_catch: no FishZone found in scene.");
+            yield break;
+        }
 
+        if (!System.Enum.TryParse(catchType, true, out FishName targetFish))
+        {
+            Debug.LogWarning($"wait_for_catch: '{catchType}' is not a valid FishName.");
+            yield break;
+        }
+
+        if (!zone.Entries.Any(e => e.fishName == targetFish))
+        {
+            Debug.LogWarning($"wait_for_catch: '{targetFish}' is not configured in FishZone '{zone.ZoneName}' — check its Entries list.");
+            yield break;
+        }
+
+        bool caught = false;
+        void OnCaught(FishData data)
+        {
+            if (data != null && data.fishName == targetFish) caught = true;
+        }
+
+        manager.OnFishCaught += OnCaught;
         while (!caught)
         {
             yield return null;
         }
-
-        //FishingEvents.OnCaught -= OnCaught;
+        manager.OnFishCaught -= OnCaught;
     }
 
     public static IEnumerable WaitForSells()

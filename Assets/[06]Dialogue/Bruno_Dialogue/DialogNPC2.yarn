@@ -14,8 +14,8 @@ title: PuScene3
 <<camera_shoulder_in "Dialogue System" "Pu">>
 GRANDPA: Give it a try. See if you still know how
 <<camera_reset "Dialogue System">>
-<<<npc_turn_to_point "Player" "LookSea">>
-<<wait_for_catch>>
+<<turn_object_to_face "player(V3)" "LookSea">>
+<<wait_for_catch "CommonFish">>
 <<camera_shoulder_in "Dialogue System" "Pu">>
 GRANDPA: That rod's seen better days — no wonder you're pulling up junk.
 GRANDPA: Don't throw it out, though. Go have a word with the shop over there. They'll take it off your hands.
@@ -45,12 +45,22 @@ title: Scene4
 GRANDPA: Got yourself a new rod, then. Here — take this. It's bait.
 GRANDPA: Go on, try again.
 <<camera_reset "Dialogue System">>
-
+GRANDPA: I got one! I got one!
+GRANDPA: Still got the hands for it, I see.
+GRANDPA: Let's see how many you can pull in.
+//ตกได้ 5 ตัว
+GRANDPA: That ought to be plenty. The shop down the way buys fish — go see what they'll give you.
 ===
 
 title: Scene5
 ---
-
+FISHMONGER: Oh, hello there… you'd be the old man's grandkid, wouldn't you? He's talked about you.
+PLAYER: That's me. Just came back to visit.
+FISHMONGER: That's nice. It's not every day a new face walks past my window.
+FISHMONGER: Hold on — is that a rod? You fish?
+PLAYER: My grandpa taught me. I can hold my own, a little.
+FISHMONGER: Ha! A little's still better than nobody fishing at all.
+FISHMONGER: I buy, you know. Whatever you pull up, bring it by and let me have a look.
 ===
 
 title: Scene6
