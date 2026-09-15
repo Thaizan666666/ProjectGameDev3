@@ -85,6 +85,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         isBusy = true;
         _isFacingPlayer = true;
+        Inventory.instance.hotbatObj.SetActive(false);
         _ = dialogueRunner.StartDialogue(yarnStartNode);
     }
 
@@ -92,6 +93,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         {
             _isFacingPlayer = false;
             isBusy = false;
+            Inventory.instance.hotbatObj.SetActive(true);
 
             if (_playerTransform != null)
             {

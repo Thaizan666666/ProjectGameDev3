@@ -1099,6 +1099,7 @@ MonoBehaviour:
   dialogueRunner: {fileID: 296567059}
   talkPoint: {fileID: 1364177603}
   highlightIndicator: {fileID: 0}
+  hotbarUI: {fileID: 7883501453251530804}
   animator: {fileID: 0}
   faceTurnSpeed: 6
 --- !u!1001 &1414802327
@@ -3259,6 +3260,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5946854661529938476, guid: ebe5e0e640b37894cbf7d5607646acd1, type: 3}
+      propertyPath: hotbarUI
+      value: 
+      objectReference: {fileID: 7883501453251530804}
+    - target: {fileID: 5946854661529938476, guid: ebe5e0e640b37894cbf7d5607646acd1, type: 3}
       propertyPath: dialogueRunner
       value: 
       objectReference: {fileID: 296567059}
@@ -3669,6 +3674,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 809b702afb2e4d44db29d4039f771248, type: 3}
+--- !u!1 &7883501453251530804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4340456703661939985, guid: 809b702afb2e4d44db29d4039f771248, type: 3}
+  m_PrefabInstance: {fileID: 7883501453251530803}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8020987162954850572
 PrefabInstance:
   m_ObjectHideFlags: 0
