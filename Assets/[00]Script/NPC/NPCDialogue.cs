@@ -29,6 +29,8 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     [Tooltip("Higher = snappier turn toward the player once they arrive.")]
     [SerializeField] private float faceTurnSpeed = 6f;
 
+    [SerializeField] private Animator animatorNPC;
+
     public bool isBusy { get; private set; }
 
     private Transform _playerTransform;
@@ -88,6 +90,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         if (Inventory.instance != null)
             Inventory.instance.hotbatObj.SetActive(false);
         _ = dialogueRunner.StartDialogue(yarnStartNode);
+        animatorNPC.SetBool("isGTalk", true);
     }
 
     private void HandleDialogueComplete()
@@ -105,6 +108,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
             }
 
             _playerTransform = null;
+            animatorNPC.SetBool("isGTalk", false);
         }
 
     public bool CanInteract()
