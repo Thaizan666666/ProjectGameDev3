@@ -93,6 +93,7 @@ Player: Of course I remember it. I thought it was gone.
 GRANDPA: I kept it. In case somebody came back to use it.
 <<AddItem>>
 <<camera_reset "Dialogue System">>
+<<LoadScene "MainScene">>
 ===
 
 title: ResetAllProgress

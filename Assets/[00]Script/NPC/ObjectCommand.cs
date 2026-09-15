@@ -29,7 +29,8 @@ public static class ObjectCommand
     public static void AddItem()
     {
         // Debug.LogWarning("Add item");
-        Inventory.instance.AddItemToObjectCommand();
+        if (Inventory.instance != null)
+            Inventory.instance.AddItemToObjectCommand();
     }
     /// <summary>
     /// ตัวอย่าง command เสริมสำหรับรอ action ของระบบเกม เช่น รอผู้เล่นหยิบไอเทม/ตกปลาได้
@@ -100,7 +101,7 @@ public static class ObjectCommand
     [YarnCommand("LoadScene")]
     public static IEnumerator RoadScenewithname(string SceneName)
     {
-
+        SceneManager.LoadScene(SceneName);
         yield return null;
     }
 }

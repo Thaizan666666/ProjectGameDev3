@@ -100,6 +100,7 @@ public class FishingGameManager : MonoBehaviour
     {
         CurrentFish = newFish;
         CurrentFish.Init(player);
+        Inventory.instance.hotbatObj.SetActive(false);
 
         if (reelController != null) reelController.SetFish(CurrentFish);
         if (cameraRig != null)
@@ -170,6 +171,7 @@ public class FishingGameManager : MonoBehaviour
         if (cameraRig != null) cameraRig.SetActive(false);
         if (_playerControl != null) _playerControl.SetControlEnabled(true);
         SetCursorForFishing(false);
+        Inventory.instance.hotbatObj.SetActive(true);
     }
 
     private void HandleQteResult(bool success)
