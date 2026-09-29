@@ -3647,6 +3647,10 @@ PrefabInstance:
       propertyPath: fish
       value: 
       objectReference: {fileID: 1253964666}
+    - target: {fileID: 1943401500348909772, guid: ed4a20a275b758f46ba0be8148cb50dd, type: 3}
+      propertyPath: reelProgressPerSecond
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4410944594667551167, guid: ed4a20a275b758f46ba0be8148cb50dd, type: 3}
       propertyPath: overHeadCamera
       value: 
@@ -3675,6 +3679,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1622705194}
+    - target: {fileID: 8590909615532576478, guid: ed4a20a275b758f46ba0be8148cb50dd, type: 3}
+      propertyPath: swimSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5148,6 +5156,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player(V3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7134777126896058856, guid: 0f0b5b8e3c452114dbcae9088f066137, type: 3}
+      propertyPath: examplePlayer
+      value: 
+      objectReference: {fileID: 1990473352}
     - target: {fileID: 7134777126896058856, guid: 0f0b5b8e3c452114dbcae9088f066137, type: 3}
       propertyPath: fishingGameManager
       value: 

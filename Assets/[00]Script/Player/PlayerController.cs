@@ -13,10 +13,10 @@
 // Attach: same GameObject as ExamplePlayer (the one tagged "Player").
 // ─────────────────────────────────────────────────────────────
 using System;
+using System.Collections;
 using UnityEngine;
 using KinematicCharacterController.Examples;
 using Yarn.Unity;
-using UnityEditor;
 
 [RequireComponent(typeof(ExamplePlayer))]
 public class PlayerController : MonoBehaviour
@@ -26,12 +26,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float arriveDistance = 0.3f;
     [Tooltip("Distance (XZ) within which movement input starts scaling down, so the character decelerates into the target instead of overshooting it at full speed.")]
     [SerializeField] private float slowDownRadius = 1.5f;
+    [Tooltip("Degrees per second for player_turn_to_point.")]
+    [SerializeField] private float turnSpeed = 180f;
+    [SerializeField] private float turnStopAngle = 1f;
 
     private ExampleCharacterController Character => examplePlayer.Character;
 
     private bool _isAutoMoving;
     private Transform _moveTarget;
     private Action _onArrive;
+    // Paused while player_turn_to_point's coroutine owns rotation, so the
+    // "stay put and face the NPC" branch below doesn't fight it every frame.
+    private bool _suppressFacing;
 
     private void Reset()
     {
@@ -53,6 +59,7 @@ public class PlayerController : MonoBehaviour
         _isAutoMoving = false;
         _moveTarget = null;
         _onArrive = null;
+        _suppressFacing = false;
 
         examplePlayer.enabled = true;
     }
@@ -60,6 +67,41 @@ public class PlayerController : MonoBehaviour
     public void lockControls()
     {
         examplePlayer.enabled = false;
+    }
+
+    /// <summary>
+    /// Yarn: <<player_turn_to_point "PlayerGameObjectName" "PointObjectName">>
+    /// Looks up an empty GameObject by name and rotates the player to face it,
+    /// via Character.Motor.SetRotation() — not transform.rotation directly,
+    /// since KCC re-syncs transform.rotation FROM Motor.TransientRotation every
+    /// physics tick, which would silently overwrite a direct transform edit.
+    /// Does not move the player. Dialogue waits until the turn finishes.
+    /// </summary>
+    [YarnCommand("player_turn_to_point")]
+    public IEnumerator TurnToPoint(string pointName)
+    {
+        GameObject pointObj = GameObject.Find(pointName);
+        if (pointObj == null)
+        {
+            Debug.LogWarning($"{name}: no GameObject named '{pointName}' found.", this);
+            yield break;
+        }
+
+        Vector3 toPoint = pointObj.transform.position - transform.position;
+        toPoint.y = 0f;
+        if (toPoint.sqrMagnitude < 0.0001f) yield break;
+
+        Quaternion targetRotation = Quaternion.LookRotation(toPoint.normalized);
+
+        _suppressFacing = true;
+        while (Quaternion.Angle(Character.Motor.TransientRotation, targetRotation) > turnStopAngle)
+        {
+            Quaternion nextRotation = Quaternion.RotateTowards(Character.Motor.TransientRotation, targetRotation, turnSpeed * Time.deltaTime);
+            Character.Motor.SetRotation(nextRotation);
+            yield return null;
+        }
+        Character.Motor.SetRotation(targetRotation);
+        _suppressFacing = false;
     }
 
     private void Update()
@@ -97,6 +139,9 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         }
+
+        // Paused while player_turn_to_point's coroutine is driving rotation instead.
+        if (_suppressFacing) return;
 
         // Arrived: stay put but keep smoothly turning to face the NPC (the talk
         // point's parent) for as long as _moveTarget is set, i.e. until
