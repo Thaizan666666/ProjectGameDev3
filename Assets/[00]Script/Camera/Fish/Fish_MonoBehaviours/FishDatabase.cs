@@ -72,6 +72,9 @@ public class FishDatabase : MonoBehaviour, IFishRepository
         Icon        = stats.Icon,
         Prefab      = stats.Prefab,
         linkedItem  = stats.linkedItem,
+        driftSpeedMin = stats.driftSpeedMin,
+        driftSpeedMax = stats.driftSpeedMax,
+        roundsRequired = stats.roundsRequired,
         fishSize    = stats.fishSize
     };
 

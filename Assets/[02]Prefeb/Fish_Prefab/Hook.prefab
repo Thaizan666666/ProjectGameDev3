@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2291694855710820177}
   - component: {fileID: 5751739352536468147}
   - component: {fileID: -4585712517042793475}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97377f96904416e43ad23370c7646e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingNewSystem.FishingHook
+  floatHeightOffset: -0.1
+  waterManager: {fileID: 0}
+  moveSpeed: 4
 --- !u!54 &-4585712517042793475
 Rigidbody:
   m_ObjectHideFlags: 0

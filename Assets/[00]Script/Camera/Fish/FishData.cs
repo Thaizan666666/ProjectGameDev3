@@ -19,6 +19,10 @@ public class FishData
 
     public ItemSO linkedItem; // คัดลอกมาจาก FishStats ตอนสร้าง FishData
 
+    public float driftSpeedMin;
+    public float driftSpeedMax;
+    public int roundsRequired;
+
     [HideInInspector]
     public int fishID => (int)fishName;
 
