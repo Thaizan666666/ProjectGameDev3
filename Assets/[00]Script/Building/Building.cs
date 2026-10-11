@@ -1,158 +1,233 @@
 using System;
 using System.Collections.Generic;
-using PlayerNormal.Project_wide;
 using UnityEngine;
 using Yarn.Unity;
 
-namespace PlayerNormal.Project_wide
+/// <summary>
+/// Building base class implementing interaction, teleportation, and upgrade systems.
+/// Registers itself by BuildingName for global access.
+/// </summary>
+public class Building : MonoBehaviour, IInteractable, IUpgradable
 {
-    public class Building : MonoBehaviour, IInteractable, IUpgradable
+    // ─────────────────────────────────────────────────────────────
+    // Static Registry
+    // ─────────────────────────────────────────────────────────────
+    private static readonly Dictionary<BuildingName, Building> _instances = new();
+
+    public static Building GetByName(BuildingName name)
+        => _instances.TryGetValue(name, out var b) ? b : null;
+
+    // ─────────────────────────────────────────────────────────────
+    // Inspector Configuration
+    // ─────────────────────────────────────────────────────────────
+    [Header("Building Identity")]
+    [SerializeField] private BuildingName buildingName;
+
+    [Header("Runtime State (Read-only)")]
+    public int currentLevel = 1;
+    public BuildingData data;
+
+    [Header("Interaction UI")]
+    public GameObject UI_Interaction;
+
+    [Header("Teleport")]
+    [SerializeField] private Teleport _teleport;
+
+    // ─────────────────────────────────────────────────────────────
+    // Private State
+    // ─────────────────────────────────────────────────────────────
+    private bool _isPlayerInRange;
+    private GameObject _player; // Cached player reference
+
+    // ─────────────────────────────────────────────────────────────
+    // Public Properties
+    // ─────────────────────────────────────────────────────────────
+    public BuildingName BuildingName => buildingName;
+
+    // ─────────────────────────────────────────────────────────────
+    // IInteractable Implementation
+    // ─────────────────────────────────────────────────────────────
+    public Transform GetTransform() => transform;
+
+    public bool CanInteract() => _isPlayerInRange;
+
+    public void SetHighlighted(bool isHighlighted)
     {
-        // ── Static Registry: หา Building instance จาก BuildingName ได้ O(1) ──
-        private static readonly Dictionary<BuildingName, Building> _instances = new();
+        if (UI_Interaction != null)
+            UI_Interaction.SetActive(isHighlighted);
+    }
 
-        public static Building GetByName(BuildingName name)
-            => _instances.TryGetValue(name, out var b) ? b : null;
+    public void Interact()
+    {
+        // Resolve player reference (fallback if cached ref was lost)
+        ResolvePlayer();
 
-        [Header("Select building in Inspector (data loads at runtime)")]
-        [SerializeField] private BuildingName buildingName;
-
-        /// <summary>Public accessor for BuildingName (needed by BrunoDialogue)</summary>
-        public BuildingName BuildingName => buildingName;
-
-        [Header("Runtime state (read-only in Inspector)")]
-        public int currentLevel = 1;
-        public bool canUpgrade;
-
-        public BuildingData data;
-        private PlayerInteract playerInteract;
-        private Player player;
-
-        private void Awake()
+        if (_player == null)
         {
-            canUpgrade = false;
+            LogError("Player not found — check 'Player' tag exists in scene");
+            return;
         }
 
-        private void OnEnable()
+        if (_teleport == null)
         {
-            if (_instances.ContainsKey(buildingName))
-            {
-                Debug.LogWarning($"[Building] Duplicate BuildingName {buildingName} on {name} — replacing previous instance.");
-            }
-            _instances[buildingName] = this;
+            LogError("Teleport component missing on building");
+            return;
         }
 
-        private void OnDisable()
+        if (!_teleport.CanTeleport)
         {
-            if (_instances.TryGetValue(buildingName, out var b) && b == this)
-                _instances.Remove(buildingName);
+            LogWarning($"Teleport disabled for {buildingName} (CanTeleport=false)");
+            return;
         }
 
-        private void Start()
+        if (_teleport.destination == null)
         {
-            // Load data from BuildingDatabase by buildingName (like Fish pattern)
-            BuildingDatabase db = FindFirstObjectByType<BuildingDatabase>();
-            if (db != null)
-            {
-                data = db.GetByName(buildingName);
-                if (data != null)
-                {
-                    Debug.Log($"[Building] {buildingName} loaded: {data.levels.Count} levels, MaxLevel={data.MaxLevel}");
-                }
-                else
-                {
-                    Debug.LogWarning($"[Building] No data found for {buildingName}");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("[Building] No BuildingDatabase found in scene");
-            }
+            LogError("Teleport destination not assigned");
+            return;
         }
 
-        /// <summary>Alternative: set data directly (for spawning new building at runtime)</summary>
-        public void SetData(BuildingData newData, int level = 1)
+        Log($"Interact triggered — teleporting to {_teleport.destination.name}");
+        _teleport.TryTeleport(_player);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Trigger-based UI Handling
+    // ─────────────────────────────────────────────────────────────
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        _player = other.gameObject;
+        _isPlayerInRange = true;
+        _teleport?.SetTeleportEnabled(true);
+
+        if (UI_Interaction != null)
+            UI_Interaction.SetActive(true);
+
+        Log($"Player entered — UI shown, teleport enabled");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject != _player) return;
+
+        _isPlayerInRange = false;
+        _player = null;
+        _teleport?.SetTeleportEnabled(false);
+
+        if (UI_Interaction != null)
+            UI_Interaction.SetActive(false);
+
+        Log($"Player exited — UI hidden, teleport disabled");
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Unity Lifecycle
+    // ─────────────────────────────────────────────────────────────
+    private void Awake()
+    {
+        if (_teleport == null)
+            _teleport = GetComponent<Teleport>();
+    }
+
+    private void OnEnable()
+    {
+        if (_instances.ContainsKey(buildingName))
+            LogWarning($"Duplicate BuildingName '{buildingName}' on {name} — replacing previous");
+
+        _instances[buildingName] = this;
+    }
+
+    private void OnDisable()
+    {
+        if (_instances.TryGetValue(buildingName, out var b) && b == this)
+            _instances.Remove(buildingName);
+    }
+
+    private void Start()
+    {
+        LoadBuildingData();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Data Loading & Setup
+    // ─────────────────────────────────────────────────────────────
+    private void LoadBuildingData()
+    {
+        var db = FindFirstObjectByType<BuildingDatabase>();
+        if (db == null)
         {
-            data = newData;
-            currentLevel = level;
-            if (data == null)
-                Debug.LogWarning($"{name}: null data");
+            LogWarning("No BuildingDatabase found in scene");
+            return;
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            playerInteract = other.GetComponent<PlayerInteract>();
-            if (playerInteract == null) return;
-            canUpgrade = true;
+        data = db.GetByName(buildingName);
+        if (data != null)
+            Log($"Loaded: {data.levels.Count} levels, MaxLevel={data.MaxLevel}");
+        else
+            LogWarning($"No data found for {buildingName}");
+    }
 
-            Debug.Log($"canUpgrade is {canUpgrade}");
+    /// <summary>Set data directly (for runtime spawning)</summary>
+    public void SetData(BuildingData newData, int level = 1)
+    {
+        data = newData;
+        currentLevel = level;
+        if (data == null) LogWarning("Assigned null BuildingData");
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Upgrade System
+    // ─────────────────────────────────────────────────────────────
+    public void Upgrade()
+    {
+        if (data == null) return;
+
+        if (currentLevel >= data.MaxLevel)
+        {
+            Log($"Already at max level ({data.MaxLevel})");
+            return;
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            if (playerInteract == null) return;
-            if (!playerInteract.isPlayerInteract) return;
+        currentLevel++;
+        ApplyUpgradeVisual();
+    }
 
-            Debug.Log($"canUpgrade is {canUpgrade}");
-            OnActive(other.gameObject);
-            playerInteract.isPlayerInteract = false;
+    private void ApplyUpgradeVisual()
+    {
+        var prefab = data.GetPrefab(currentLevel);
+        if (prefab == null)
+        {
+            LogWarning($"Missing prefab for level {currentLevel}");
+            return;
         }
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.GetComponent<PlayerInteract>() == null) return;
-            canUpgrade = false;
-            playerInteract = null;
+        // Spawn new building as sibling (preserves position/rotation/parent)
+        var newObject = Instantiate(prefab, transform.position, transform.rotation, transform.parent);
+        var newBuilding = newObject.GetComponent<Building>();
 
-            Debug.Log($"canUpgrade is {canUpgrade}");
-        }
+        if (newBuilding != null)
+            newBuilding.SetData(data, currentLevel);
 
-        public void OnActive(GameObject interactor)
-        {
-            player = interactor.GetComponent<Player>();
-            if (player == null || data == null) return;
-        }
+        Log($"Upgraded to Lv.{currentLevel}");
+        Destroy(gameObject);
+    }
 
-        public void Upgrade()
-        {
-            if (data == null) return;
+    // ─────────────────────────────────────────────────────────────
+    // IUpgradable
+    // ─────────────────────────────────────────────────────────────
+    public void OnDisactive() => Log("OnDisactive called");
 
-            if (currentLevel >= data.MaxLevel)
-            {
-                Debug.Log($"[Building] {buildingName} is already at max level ({data.MaxLevel}).");
-                return;
-            }
+    // ─────────────────────────────────────────────────────────────
+    // Helpers
+    // ─────────────────────────────────────────────────────────────
+    private void ResolvePlayer()
+    {
+        if (_player == null)
+            _player = GameObject.FindGameObjectWithTag("Player");
+    }
 
-            currentLevel++;
-            DecideModel();
-        }
-
-        private void DecideModel() => ChangeModel(data.GetPrefab(currentLevel));
-
-        private void ChangeModel(GameObject prefab)
-        {
-            if (prefab == null)
-            {
-                Debug.LogWarning($"[Building] {name}: missing prefab for level {currentLevel}");
-                return;
-            }
-
-            // Spawn as sibling at same position/parent — NOT a child of this object
-            GameObject newObject = Instantiate(prefab, transform.position, transform.rotation, transform.parent);
-
-            Building newBuilding = newObject.GetComponent<Building>();
-            if (newBuilding != null)
-            {
-                newBuilding.SetData(data, currentLevel);
-            }
-
-            Debug.Log($"[Building] {buildingName} upgraded to Lv.{currentLevel}");
-            Destroy(gameObject);
-        }
-
-        public void OnDisactive()
-        {
-            Debug.Log($"[Building] {buildingName} OnDisactive");
-        }
-    } 
+    private void Log(string msg) => Debug.Log($"[Building:{buildingName}] {msg}");
+    private void LogWarning(string msg) => Debug.LogWarning($"[Building:{buildingName}] {msg}");
+    private void LogError(string msg) => Debug.LogError($"[Building:{buildingName}] {msg}");
 }

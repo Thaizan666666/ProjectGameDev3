@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58c118421c3d4742abeb0461cce550a, type: 3}
+  m_Name: Rod
+  m_EditorClassIdentifier: Assembly-CSharp::TableForge.Equipment.Fishing.RodStats
+  levelRod:
+  - prefabRod: {fileID: 4915167281176685968, guid: 625c2a08ed0a3e74185ab9d49ba31b71, type: 3}
+    upgradeCostRod: 0
+    rodName: 0
+    rodTier: 0
+  - prefabRod: {fileID: 8050763953741355947, guid: ce999e713d57c874db7148ff2388e0e4, type: 3}
+    upgradeCostRod: 1000
+    rodName: 1
+    rodTier: 1
+  - prefabRod: {fileID: 2728438858873162733, guid: b818520947ed9b74d8abd76d3dddd63f, type: 3}
+    upgradeCostRod: 2000
+    rodName: 2
+    rodTier: 2
+  - prefabRod: {fileID: 4232009826568880970, guid: 65952775c31d7de40b2deb5927b5f788, type: 3}
+    upgradeCostRod: 3000
+    rodName: 3
+    rodTier: 3

@@ -5,6 +5,12 @@ position: -163,-451
 <<declare $selectedBuilding = "">>
 <<declare $selectedBuildingLabel = "">>
 <<declare $upgradeOk = false>>
+<<declare $rodUpgradeOk = false>>
+<<declare $rodCurrentLevel = 1>>
+<<declare $rodUpgradeCost = 0>>
+<<declare $rodMaxLevel = 4>>
+<<declare $newRodName = "">>
+<<declare $newRodTier = "">>
 
 ===
 
@@ -14,8 +20,59 @@ position: 100,-312
 Bruno : Hi! How can I help you? #line:0a5c869 
 -> I want to upgrade building. #line:05efc34 
     <<jump Select_Building_to_Upgrade>>
+-> I want to upgrade my rod.
+    <<jump Select_Rod_to_Upgrade>>
 -> Nothing. #line:0905470 
 ===
+
+title: Select_Rod_to_Upgrade
+---
+<<set $rodCurrentLevel = getRodCurrentLevel()>>
+<<set $rodMaxLevel = getRodMaxLevel()>>
+<<if $rodCurrentLevel <= 0>>
+    Bruno : You don't have a fishing rod to upgrade! Go catch one first. #line:rod_no_rod
+    -> Oh, okay. #line:rod_no_rod_back
+        <<jump Bruno_Upgrade>>
+<<elseif $rodCurrentLevel >= $rodMaxLevel>>
+    Bruno : Your rod is already at the maximum level (Level {$rodMaxLevel})! #line:rod_max_level
+    -> Thanks anyway. #line:rod_max_level_back
+        <<jump Bruno_Upgrade>>
+<<else>>
+    <<set $rodUpgradeCost = getRodUpgradeCost()>>
+    <<set $newRodName = getRodNameAtLevel($rodCurrentLevel + 1)>>
+    <<set $newRodTier = getRodTierAtLevel($rodCurrentLevel + 1)>>
+    Bruno : I can upgrade your rod from Level {$rodCurrentLevel} to Level {$rodCurrentLevel + 1} ({$newRodName}, Tier: {$newRodTier}). That'll be {$rodUpgradeCost} coins. #line:rod_upgrade_offer
+    -> Here you are. #line:rod_upgrade_yes
+        <<set $rodUpgradeOk = false>>
+        <<canTryUpgradeRod>>
+        <<set $rodUpgradeOk = canUpgradeRodSuccess()>>
+        <<if $rodUpgradeOk>>
+            <<set $newRodName = getRodNameAtLevel($rodCurrentLevel + 1)>>
+            <<set $newRodTier = getRodTierAtLevel($rodCurrentLevel + 1)>>
+            Bruno : Perfect! Your rod is now a {$newRodName} (Tier: {$newRodTier}) at Level {$rodCurrentLevel + 1}! #line:rod_upgrade_success
+            -> Nice! #line:rod_upgrade_success_back
+                <<jump Bruno_Upgrade>>
+        <<else>>
+            <<set $failReason = rodUpgradeFailReason()>>
+            <<if $failReason == "not_enough_money">>
+                Bruno : You don't have enough coins for that upgrade. #line:rod_not_enough_money
+            <<elseif $failReason == "no_rod">>
+                Bruno : Hmm, I don't see a rod on you anymore. #line:rod_no_rod_anymore
+            <<elseif $failReason == "max_level">>
+                Bruno : That rod is already at max level! #line:rod_already_max
+            <<else>>
+                Bruno : Something went wrong with the upgrade. #line:rod_generic_fail
+            <<endif>>
+            -> Let me try again. #line:rod_retry
+                <<jump Select_Rod_to_Upgrade>>
+            -> Never mind. #line:rod_cancel
+                <<jump Bruno_Upgrade>>
+        <<endif>>
+    -> I'll pass. #line:rod_upgrade_no
+        <<jump Bruno_Upgrade>>
+<<endif>>
+===
+
 
 title: Select_Building_to_Upgrade
 position: -32,-65
