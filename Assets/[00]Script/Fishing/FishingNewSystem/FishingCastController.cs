@@ -20,6 +20,14 @@ namespace FishingNewSystem
         [Header("Player Lock")]
         [Tooltip("ExamplePlayer บน GameObject เดียวกัน — ปิดตอนเริ่มตกปลา (กดปุ่มปุ๊บล็อกทันที)")]
         [SerializeField] private ExamplePlayer examplePlayer;
+        [Tooltip("PlayerController บน GameObject เดียวกัน (auto-find ถ้าว่าง) — เช็คก่อน re-enable examplePlayer กัน dialogue ที่ยังไม่จบ")]
+        [SerializeField] private PlayerController playerController;
+        [Tooltip("FishingReelMinigame บน GameObject เดียวกัน (auto-find ถ้าว่าง) — ใช้บังคับปิด minigame ตอนกด R ยกเลิกกลางเกม")]
+        [SerializeField] private FishingReelMinigame reelMinigame;
+        [Tooltip("ปกติตกปลาไม่ได้ตอน dialogue เปิดอยู่ (IsInteracting) — ตั้ง true ชั่วคราวผ่าน SetFishingAllowedDuringDialogue ตอน Yarn ต้องการให้ตกได้ระหว่างคุย (เช่น ฉากสอนตกปลา)")]
+        [SerializeField] private bool fishingAllowedDuringDialogue;
+
+        public void SetFishingAllowedDuringDialogue(bool allowed) => fishingAllowedDuringDialogue = allowed;
         [Tooltip("CameraController ของกล้องหลัก — ปิด look-input ตอนตกปลา กันเมาส์หมุนกล้อง/ทิศ Player เพี้ยนระหว่าง cast/float/reel")]
         [SerializeField] private CameraController cameraController;
 
@@ -70,11 +78,23 @@ namespace FishingNewSystem
         private bool isLineTaut; // false = หย่อน/โค้ง (บิน/ลอยรอปลากิน), true = ตึงเป็นเส้นตรง (ปลากินเบ็ดแล้ว)
         private ItemSO equippedHookItem; // เบ็ดที่ถืออยู่ตอนเริ่ม cast — ล็อกไว้ทั้ง cast แม้จะสลับ hotbar ทีหลัง
 
+        // ── State เปิดให้ PlayerAnimatorUpdate อ่าน (คู่กับ PlayerFishing.IsWaitingForBite/IsEncounterActive/CurrentFishTransform/OnFishObtained ของระบบเก่า) ──
+        private bool isWaitingForBiteState;
+        private bool isEncounterActiveState;
+        public bool IsWaitingForBite => isWaitingForBiteState;
+        public bool IsEncounterActive => isEncounterActiveState;
+        public Transform CurrentFishTransform => activeHook != null ? activeHook.transform : null;
+        public event System.Action<FishData> OnFishObtained;
+        public void RaiseFishObtained(FishData fish) => OnFishObtained?.Invoke(fish);
+
         private void Awake()
         {
             swingRodAction = InputSystem.actions.FindAction("Interacting/SwingRod");
 
             // กันปัญหา priority tie ตั้งแต่โหลดฉาก (เจอบั๊กนี้มาแล้วกับ FishingCameraRig ของระบบเก่า)
+            if (playerController == null) playerController = GetComponent<PlayerController>();
+            if (reelMinigame == null) reelMinigame = GetComponent<FishingReelMinigame>();
+
             if (hookCamera != null)
             {
                 hookCamera.Priority = hookCameraIdlePriority;
@@ -184,6 +204,13 @@ namespace FishingNewSystem
                 return;
             }
 
+            // dialogue เปิดอยู่ -> ห้ามตกปลา เว้นแต่ Yarn จะอนุญาตไว้ชัด ๆ (เช่น ฉากสอนตกปลา)
+            if (playerController != null && playerController.IsInteracting && !fishingAllowedDuringDialogue)
+            {
+                Debug.LogWarning("[FishingCastController] กำลังคุย dialogue อยู่ — ตกปลาไม่ได้ตอนนี้");
+                return;
+            }
+
             // ต้องถือเบ็ด (equip อยู่ใน hotbar) ก่อนถึงตกปลาได้
             ItemSO heldItem = Inventory.instance != null ? Inventory.instance.EquippedItem : null;
             if (heldItem == null || heldItem.itemType != ItemType.EquipmentItem)
@@ -279,15 +306,16 @@ namespace FishingNewSystem
                 // โดนน้ำ -> เข้า state รอปลากิน กล้องยังตาม Hook ต่อไปเรื่อย ๆ ไม่ปิด
                 // (จะปิดตอนมีปลากินเบ็ดจริง ซึ่ง state นั้นยังไม่ได้ทำ หรือกด R ยกเลิกเอง)
                 Debug.Log("[FishingCastController] Hook โดน Layer Water -> เข้า State: รอปลากิน (ยังไม่มี state จริง แค่ log ไปก่อน) — กล้องยังตาม Hook ต่อ");
-                // TODO: ต่อ state machine จริงตรงนี้
+                isWaitingForBiteState = true;
             }
             else
             {
                 Debug.Log("[FishingCastController] Hook ไม่โดน Layer Water -> กลับท่าเก็บเบ็ด, ปลดล็อกการเดิน, กล้องกลับปกติ");
-                // TODO: trigger animation ท่าเก็บเบ็ดจริงตรงนี้
 
+                isWaitingForBiteState = false;
+                isEncounterActiveState = false;
                 if (hookCamera != null) hookCamera.Priority = hookCameraIdlePriority;
-                if (examplePlayer != null) examplePlayer.enabled = true;
+                if (examplePlayer != null && (playerController == null || !playerController.IsInteracting)) examplePlayer.enabled = true;
                 if (cameraController != null) cameraController.SetCameraInput(true);
                 if (activeHook != null) Destroy(activeHook);
                 activeHook = null;
@@ -300,6 +328,8 @@ namespace FishingNewSystem
         {
             if (hookCamera != null) hookCamera.Priority = hookCameraIdlePriority;
             isLineTaut = true; // ปลากินเบ็ดแล้ว -> สายตึงเป็นเส้นตรง
+            isWaitingForBiteState = false;
+            isEncounterActiveState = true;
         }
 
         /// <summary>กด R เรียกตัวนี้ — ยกเลิกตกปลาทุกสถานะ (ชาร์จ/Hook บินอยู่/ลอยรอปลากิน) กลับเป็นผู้เล่นปกติทันที</summary>
@@ -312,9 +342,12 @@ namespace FishingNewSystem
             isCharging = false;
             chargeTimer = 0f;
 
+            isWaitingForBiteState = false;
+            isEncounterActiveState = false;
             if (hookCamera != null) hookCamera.Priority = hookCameraIdlePriority;
-            if (examplePlayer != null) examplePlayer.enabled = true;
+            if (examplePlayer != null && (playerController == null || !playerController.IsInteracting)) examplePlayer.enabled = true;
             if (cameraController != null) cameraController.SetCameraInput(true);
+            if (reelMinigame != null) reelMinigame.CancelMinigame();
             if (activeHook != null) Destroy(activeHook);
             activeHook = null;
         }

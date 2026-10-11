@@ -1,0 +1,75 @@
+title: Pu_Entry3
+---
+    <<if $Scene3Done>>
+        <<jump Pu_Scene3Idle>>
+    <<elseif $CaughtBossFish>>
+        <<jump Pu_Scene3Return>>
+    <<else>>
+        <<jump Pu_Scene3Intro>>
+<<endif>>
+===
+
+title: Pu_Scene3Intro
+---
+GRANDPA: You know, they say there's a big one out there. Been ruling those waters a long time.
+GRANDPA: Who knows. Maybe you're the one who finally lands it.
+GRANDPA: Go talk to the fellow over there. He's been looking after my boat — take her out and see for yourself.
+<<set $MetCaptainReady = true>>
+===
+
+title: CAPTAIN
+---
+<<if not $MetCaptainReady>>
+    …
+    PLAYER: (I should talk to Grandpa first)
+<<elseif $CaughtBossFish>>
+    …
+    PLAYER: (Already caught it — better go show Grandpa)
+<<else>>
+//เดินไปหาคนขายเรือ
+<<camera_shoulder_in "Dialogue System" "CAPTAIN">>
+CAPTAIN: Here for the boat? She's your grandad's, this one. Give me a minute and I'll get her running for you.
+<<camera_reset "Dialogue System">>
+//ล่องเรือ ตกได้ปลาใหญ่ — ขับเรือออกไปตกเองหลัง dialogue จบ ไม่ block รอในนี้
+<<set_boss_only true>>
+<<force_next_catch "Dunkleosteus" 1>>
+<<start_boss_catch_watch "Dunkleosteus">>
+<<endif>>
+===
+
+title: Pu_Scene3Return
+---
+<<if not $CaughtBossFish>>
+    …
+    PLAYER: (I should go catch that big fish first)
+<<else>>
+PLAYER: Whoa… this thing's got some serious strength.
+PLAYER: Could this be the fish Grandpa was talking about?
+//และกลับไปคุยกับปู่
+<<camera_shoulder_in "Dialogue System" "Pu">>
+PLAYER: Grandpa! You're not gonna believe what I just caught!
+GRANDPA: Hmm? …..Is that… the one?
+PLAYER: Wasn't easy, I'll tell you that.
+GRANDPA: You actually caught it?
+PLAYER: Yeah. So, what should I do with it?
+GRANDPA: Why don't we keep it in the aquarium? It'd make quite the first attraction.
+PLAYER: You mean, actually keep it there?
+GRANDPA: Why not? We've got the space. We just need to get the tank ready.
+PLAYER: You really think people would come to see it?
+GRANDPA: I don't see why not. Besides, there's something else.
+PLAYER: What's that?
+GRANDPA: The fish around here have been getting fewer and fewer over the years. I've a feeling this big fellow might be part of the reason.
+GRANDPA: It's been hunting these waters for a long time. With it out of the sea, the smaller fish might finally have a chance to recover.
+PLAYER: So keeping it here could help the fish out there, too?
+GRANDPA: That's the hope, anyway.
+GRANDPA: Come on, then. Let's give our new guest a proper home.
+GRANDPA: Who knows? This might be the start of something good for the aquarium after all.
+<<camera_reset "Dialogue System">>
+<<LoadScene "MainScene">>
+<<endif>>
+===
+
+title: Pu_Scene3Idle
+---
+GRANDPA: That big fellow's settling into the tank nicely. Thanks again for catching it.
+===

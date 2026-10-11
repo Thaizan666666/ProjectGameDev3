@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
 
     private ExampleCharacterController Character => examplePlayer.Character;
 
+    /// <summary>true ตั้งแต่เริ่มเดินไปคุย NPC จนกว่า UnlockControls() — ใช้กันระบบอื่น (เช่น FishingCastController)
+    /// เผลอ re-enable examplePlayer คืนก่อน dialogue จบ (เช่น ตกปลาสำเร็จระหว่าง dialogue แล้วเดินได้ก่อนคุยจบ)</summary>
+    public bool IsInteracting { get; private set; }
+
     private bool _isAutoMoving;
     private Transform _moveTarget;
     private Action _onArrive;
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
         _moveTarget = target;
         _onArrive = onArrive;
         _isAutoMoving = true;
+        IsInteracting = true;
 
         examplePlayer.enabled = false;
     }
@@ -60,6 +65,7 @@ public class PlayerController : MonoBehaviour
         _moveTarget = null;
         _onArrive = null;
         _suppressFacing = false;
+        IsInteracting = false;
 
         examplePlayer.enabled = true;
     }
@@ -112,44 +118,61 @@ public class PlayerController : MonoBehaviour
         toTarget.y = 0f;
         float distance = toTarget.magnitude;
 
-        if (_isAutoMoving)
+        if (!_isAutoMoving) return; // หันเข้า NPC ไปแล้วรอบเดียวตอนมาถึง ไม่ต้องทำอะไรต่อจนกว่าจะ UnlockControls
+
+        if (distance <= arriveDistance)
         {
-            if (distance <= arriveDistance)
-            {
-                _isAutoMoving = false;
+            _isAutoMoving = false;
 
-                Action callback = _onArrive;
-                _onArrive = null;
-                callback?.Invoke();
+            // ตัด MoveVector ค้างจากเฟรมก่อนออกก่อน ไม่งั้น Character ยังไถลต่อด้วย input เก่า
+            // (Motor ใช้ input ล่าสุดค้างไว้จนกว่าจะมีคนสั่ง zero ให้ชัด ๆ — บั๊กเดียวกับตอนกด F ขณะเดินอยู่)
+            SetAIInputs(Vector3.zero, Vector3.zero);
 
-                // The callback (e.g. NPCDialogue.OnArrived -> dialogue completes
-                // synchronously for a trivial/empty Yarn node) may have already
-                // called UnlockControls(), clearing _moveTarget. Bail out if so.
-                if (_moveTarget == null) return;
-                // Otherwise fall through to face-the-NPC below, so turning
-                // starts the same frame we arrive.
-            }
-            else
-            {
-                Vector3 direction = toTarget / distance;
-                // Scale move strength down inside slowDownRadius so the character decelerates
-                // into the target instead of blowing past the (small) arrive threshold at full speed.
-                float moveStrength = Mathf.Clamp01(distance / slowDownRadius);
-                SetAIInputs(direction * moveStrength, direction);
-                return;
-            }
+            // หันเข้าหา NPC ให้เสร็จก่อน ค่อยเริ่ม dialogue (callback) ทีหลัง — ไม่งั้น dialogue
+            // box โผล่พร้อมกับที่ตัวละครกำลังหันอยู่ ดูเหมือนหันไม่เสร็จก็คุยไปแล้ว
+            Transform faceTarget = _moveTarget.parent != null ? _moveTarget.parent : _moveTarget;
+            Action callback = _onArrive;
+            _onArrive = null;
+            StartCoroutine(FaceThenInvoke(faceTarget, callback));
         }
+        else
+        {
+            Vector3 direction = toTarget / distance;
+            // Scale move strength down inside slowDownRadius so the character decelerates
+            // into the target instead of blowing past the (small) arrive threshold at full speed.
+            float moveStrength = Mathf.Clamp01(distance / slowDownRadius);
+            SetAIInputs(direction * moveStrength, direction);
+        }
+    }
 
-        // Paused while player_turn_to_point's coroutine is driving rotation instead.
-        if (_suppressFacing) return;
+    /// <summary>
+    /// หันเข้าหา NPC ครั้งเดียวตอนมาถึง (เรียกจาก Update ตอน arrive) ใช้ turnSpeed/turnStopAngle
+    /// เดียวกับ player_turn_to_point แล้วปล่อย ไม่หันต่อเนื่องซ้ำทุกเฟรมเหมือนเดิมอีก
+    /// </summary>
+    /// <summary>หันเข้าหา NPC ให้เสร็จก่อน แล้วค่อยเรียก callback (เริ่ม dialogue) ทีหลัง</summary>
+    private IEnumerator FaceThenInvoke(Transform faceTarget, Action callback)
+    {
+        yield return FaceTargetOnce(faceTarget);
+        callback?.Invoke();
+    }
 
-        // Arrived: stay put but keep smoothly turning to face the NPC (the talk
-        // point's parent) for as long as _moveTarget is set, i.e. until
-        // UnlockControls() is called when the dialogue ends.
-        Transform faceTarget = _moveTarget.parent != null ? _moveTarget.parent : _moveTarget;
+    private IEnumerator FaceTargetOnce(Transform faceTarget)
+    {
         Vector3 toFace = faceTarget.position - transform.position;
         toFace.y = 0f;
-        SetAIInputs(Vector3.zero, toFace.sqrMagnitude > 0.0001f ? toFace.normalized : Vector3.zero);
+        if (toFace.sqrMagnitude < 0.0001f) yield break;
+
+        Quaternion targetRotation = Quaternion.LookRotation(toFace.normalized);
+
+        _suppressFacing = true;
+        while (Quaternion.Angle(Character.Motor.TransientRotation, targetRotation) > turnStopAngle)
+        {
+            Quaternion nextRotation = Quaternion.RotateTowards(Character.Motor.TransientRotation, targetRotation, turnSpeed * Time.deltaTime);
+            Character.Motor.SetRotation(nextRotation);
+            yield return null;
+        }
+        Character.Motor.SetRotation(targetRotation);
+        _suppressFacing = false;
     }
 
     private void SetAIInputs(Vector3 moveVector, Vector3 lookVector)

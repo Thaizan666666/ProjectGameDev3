@@ -14,8 +14,10 @@ namespace KinematicCharacterController.Examples
         [SerializeField] private Animator _animator;
 
         [Header("Fishing")]
-        [Tooltip("PlayerFishing component บน Player GameObject เดียวกัน (auto-find ถ้าว่าง)")]
+        [Tooltip("PlayerFishing component บน Player GameObject เดียวกัน (auto-find ถ้าว่าง) — ระบบเก่า")]
         [SerializeField] private PlayerFishing _fishing;
+        [Tooltip("FishingCastController ของระบบใหม่ (FishingNewSystem) — ใช้แทน _fishing ถ้า Player ตัวนี้ไม่มี PlayerFishing (auto-find ถ้าว่าง)")]
+        [SerializeField] private FishingNewSystem.FishingCastController _newFishing;
         [SerializeField] private RideArea _rideArea;
 
         #region Locomotion hashes
@@ -53,16 +55,19 @@ namespace KinematicCharacterController.Examples
             if (_character == null) _character = GetComponentInParent<ExampleCharacterController>();
             if (_animator == null) _animator = GetComponent<Animator>();
             if (_fishing == null) _fishing = GetComponentInParent<PlayerFishing>();
+            if (_fishing == null && _newFishing == null) _newFishing = GetComponentInParent<FishingNewSystem.FishingCastController>();
         }
 
         private void OnEnable()
         {
             if (_fishing != null) _fishing.OnFishObtained += HandleFishCaught;
+            if (_newFishing != null) _newFishing.OnFishObtained += HandleFishCaught;
         }
 
         private void OnDisable()
         {
             if (_fishing != null) _fishing.OnFishObtained -= HandleFishCaught;
+            if (_newFishing != null) _newFishing.OnFishObtained -= HandleFishCaught;
         }
 
         /// <summary>เมื่อตกปลาได้ ให้ trigger animation ตาม FishSize</summary>
@@ -93,10 +98,26 @@ namespace KinematicCharacterController.Examples
 
         private void UpdateFishing(Animator animator, ExampleCharacterController character)
         {
-            if (_fishing == null) return;
+            bool isWaitingForBite;
+            bool isActive;
+            Transform fishTransformSource;
 
-            bool isWaitingForBite = _fishing.IsWaitingForBite;
-            bool isActive = _fishing.IsEncounterActive;
+            if (_fishing != null)
+            {
+                isWaitingForBite = _fishing.IsWaitingForBite;
+                isActive = _fishing.IsEncounterActive;
+                fishTransformSource = _fishing.CurrentFishTransform;
+            }
+            else if (_newFishing != null)
+            {
+                isWaitingForBite = _newFishing.IsWaitingForBite;
+                isActive = _newFishing.IsEncounterActive;
+                fishTransformSource = _newFishing.CurrentFishTransform;
+            }
+            else
+            {
+                return;
+            }
 
             // ── isFishing: true ตอนโยนเบ็ดแล้ว (รอปลากินเบ็ด หรือกำลังสู้) ──
             bool isFishing = isWaitingForBite || isActive;
@@ -116,7 +137,7 @@ namespace KinematicCharacterController.Examples
             // คำนวณจาก signed angle ระหว่าง player.forward กับทิศไปหาปลา แล้ว map [-90°,+90°] → [0,1]
             // ปลาอยู่ซ้าย → หันขวาสู้ → angle > 0 → DirFishing > 0.5 ( fishing_right)
             // ปลาอยู่ขวา → หันซ้ายสู้ → angle < 0 → DirFishing < 0.5 ( fishing_left)
-            Transform fishTransform = _fishing.CurrentFishTransform;
+            Transform fishTransform = fishTransformSource;
             float targetDir = 0.5f;
             if (fishTransform != null && _character != null)
             {
