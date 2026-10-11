@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TableForge.Building.BuildingStats
   buildingName: 1
   buildingType: 0
-  levels: []
+  levels:
+  - prefab: {fileID: 5782192008218251726, guid: 48098007d903c88468b2d7106c67c540, type: 3}
+    upgradeCost: 1000
+  - prefab: {fileID: 4179753679321101978, guid: 50990040d6468324095db50c815beab3, type: 3}
+    upgradeCost: 2000
+  - prefab: {fileID: 6680535439590140914, guid: 35749a7259dff8b4e8f4b6567507a75d, type: 3}
+    upgradeCost: 3000
