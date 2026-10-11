@@ -71,7 +71,9 @@ namespace FishingNewSystem
             // ยกเว้น FishZone ด้วย — โซนตกปลาเป็น trigger คลุมพื้นที่กว้าง ไม่ใช่สิ่งกีดขวางจริง ห้ามบล็อก WASD
             int waterLayer = LayerMask.NameToLayer("Water");
             int fishZoneLayer = LayerMask.NameToLayer("FishZone");
-            int excludeMask = (waterLayer >= 0 ? (1 << waterLayer) : 0) | (fishZoneLayer >= 0 ? (1 << fishZoneLayer) : 0) | (1 << gameObject.layer);
+            int defaultLayer = LayerMask.NameToLayer("Default");
+            int invisibleWallLayer = LayerMask.NameToLayer("InvisbleWall");
+            int excludeMask = (waterLayer >= 0 ? (1 << waterLayer) : 0) | (fishZoneLayer >= 0 ? (1 << fishZoneLayer) : 0) | (defaultLayer >= 0 ? (1 << defaultLayer) : 0) | (invisibleWallLayer >= 0 ? (1 << invisibleWallLayer) : 0) | (1 << gameObject.layer);
             nonWaterLayerMask = ~excludeMask;
         }
 
@@ -87,6 +89,9 @@ namespace FishingNewSystem
             // ไม่เกี่ยวกับ "ตกน้ำจริงไหม" เลย — ต้อง ignore ทิ้งไปเฉย ๆ ไม่ resolve ไม่งั้นจะโดนนับเป็น
             // "ชนแล้ว" ก่อนถึงผิวน้ำจริง (ยกเลิกใกล้ผู้เล่นเกินไป ถ้าโซนยื่นเข้ามาใกล้ หรือกลายเป็น miss ถ้า Layer ไม่ใช่ Water)
             if (hitObject.layer == LayerMask.NameToLayer("FishZone")) return;
+
+            // InvisbleWall เป็นกำแพงกันผู้เล่นออกนอกแมพ ไม่เกี่ยวกับการตกน้ำ — ignore เหมือน FishZone
+            if (hitObject.layer == LayerMask.NameToLayer("InvisbleWall")) return;
 
             resolved = true;
 
@@ -158,6 +163,7 @@ namespace FishingNewSystem
                 {
                     Inventory.instance.AddItem(caughtFishData.linkedItem, 1);
                     Debug.Log($"[FishingHook] เพิ่ม {caughtFishData.linkedItem.itemName} เข้า Inventory");
+                    owner?.RaiseFishObtained(caughtFishData); // แจ้ง PlayerAnimatorUpdate ให้เล่น trigger SmallFish/BigFish
                 }
                 else
                 {

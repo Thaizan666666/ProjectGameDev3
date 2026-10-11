@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.Cinemachine;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class FadeBlackScreen : MonoBehaviour
@@ -49,8 +50,22 @@ public class FadeBlackScreen : MonoBehaviour
         FadeIn(() =>
         {
             var op = SceneManager.LoadSceneAsync(sceneName);
-            op.completed += _ => FadeOut();
+            op.completed += _ =>
+            {
+                SnapCinemachineCameras();
+                FadeOut();
+            };
         });
+    }
+
+    // กันกล้อง Cinemachine "วาป"/ไหลเข้าตำแหน่งจริงให้เห็นระหว่าง FadeOut — บอก Cinemachine ว่า
+    // state ก่อนหน้าใช้ไม่ได้แล้ว (ฉากใหม่โหลดมา) ให้ snap เข้าตำแหน่ง/มุมจริงทันทีเฟรมเดียว ไม่ damping ไหลให้เห็น
+    private static void SnapCinemachineCameras()
+    {
+        foreach (var cam in Object.FindObjectsByType<CinemachineVirtualCameraBase>(FindObjectsSortMode.None))
+        {
+            cam.PreviousStateIsValid = false;
+        }
     }
 
     public void FadeOut(System.Action onComplete = null)

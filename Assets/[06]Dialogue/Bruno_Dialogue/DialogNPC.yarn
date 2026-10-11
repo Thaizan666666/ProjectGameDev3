@@ -1,8 +1,14 @@
-﻿title: variables
+title: variables
 ---
 <<declare $PuSceneMeting = false>>
 <<declare $PuSceneFishing = false>>
 <<declare $met_grandfather = false>>
+<<declare $ShopkeeperMet = false>>
+<<declare $CaughtFiveFish = false>>
+<<declare $FishmongerMet = false>>
+<<declare $MetCaptainReady = false>>
+<<declare $CaughtBossFish = false>>
+<<declare $Scene3Done = false>>
 ===
 
 // ============================================================
@@ -48,7 +54,8 @@ Player: School's out for the break. I thought I'd come visit. #line:0feaf76
 GRANDPA: Mm… that's good. Good to rest a while. #line:017d06b 
 Player: Grandpa… why's the town so quiet? #line:0ef5b11 
 GRANDPA: Ah. Well. #line:0792202 
-GRANDPA: Used to be, you couldn't find a free spot along this whole pier. Every ship crossing the water had to stop here. Supplies, repairs, somewhere for the crew to sleep. Wasn't a choice — there was nowhere else. #line:0388022 
+GRANDPA: Used to be, you couldn't find a free spot along this whole pier.
+GRANDPA: Every ship crossing the water had to stop here. Supplies, repairs, somewhere for the crew to sleep. Wasn't a choice — there was nowhere else. #line:0388022 
 GRANDPA: Then the ships got better. Faster, bigger holds. They didn't need to stop anymore. #line:0f1a33b 
 GRANDPA: So folks packed up, little by little. That's just how it went. The world moved along without us. #line:0299627 
 GRANDPA: Well. Now that you're here. #line:0209e99 
@@ -71,7 +78,8 @@ Player: What is this, a warehouse?
 GRANDPA: This is the last thing I ever built. The one I never finished.
 Player: It's an aquarium?
 GRANDPA: It was going to be.
-GRANDPA: When the ships stopped coming, folks needed a reason to stop here again. I thought — give them something to see. Something worth the crossing.
+GRANDPA: When the ships stopped coming, folks needed a reason to stop here again.
+GRANDPA: I thought — give them something to see. Something worth the crossing.
 GRANDPA: That was the idea, anyway. Last one I had.
 Player: So what happened?
 GRANDPA: I got old. That's what happened.
@@ -93,7 +101,7 @@ Player: Of course I remember it. I thought it was gone.
 GRANDPA: I kept it. In case somebody came back to use it.
 <<AddItem>>
 <<camera_reset "Dialogue System">>
-<<LoadScene "MainScene">>
+<<LoadScene "Scene2">>
 ===
 
 title: ResetAllProgress

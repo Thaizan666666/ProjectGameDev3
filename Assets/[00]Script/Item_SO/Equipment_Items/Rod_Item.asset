@@ -20,3 +20,5 @@ MonoBehaviour:
   handItemPrefab: {fileID: 4915167281176685968, guid: 625c2a08ed0a3e74185ab9d49ba31b71, type: 3}
   itemSize: 0
   itemType: 1
+  hookPullStrengthMultiplier: 2
+  hookHoldTimeReductionPercent: 0

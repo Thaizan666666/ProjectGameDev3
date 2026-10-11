@@ -80,7 +80,7 @@ public class Inventory : MonoBehaviour
         // }
         for (int i = 0; i < startItem.Length; i++)
         {
-            if (startItem != null)
+            if (startItem[i] != null)
             {
                 AddItemToHotbar(startItem[i], 1);
 

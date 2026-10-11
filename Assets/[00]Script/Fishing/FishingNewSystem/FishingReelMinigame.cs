@@ -86,7 +86,7 @@ namespace FishingNewSystem
         private float holdTimer;
         private float qteTimer;
         private int roundsCompleted;
-        private float quarterPullStep; // 1/4 ของระยะ anchor<->Player ตอนเริ่ม — ดึงเข้าทีละขั้นนี้ทุกครั้งที่ QTE สำเร็จ (3 ครั้ง + ครั้งสุดท้ายตอนจับได้ = ครบ 4/4)
+        private float pullStep; // 1/roundsRequired ของระยะ anchor<->Player ตอนเริ่ม — ดึงเข้าทีละขั้นนี้ทุกครั้งที่ QTE สำเร็จ (ครบ roundsRequired ครั้ง = ถึงตัว Player เป๊ะ)
         private float centeringElapsed; // เวลาที่ผ่านไปตั้งแต่เริ่มรอบ Centering นี้ — ใช้คู่กับ minCenteringGrace
 
         private float basePullStrength;
@@ -152,10 +152,10 @@ namespace FishingNewSystem
             // อยู่ฝั่ง/ทิศเดียวกับผู้เล่นตอนมองลงมา ไม่ใช่แกนโลกตายตัว
             anchorTransform.rotation = Quaternion.LookRotation(direction);
 
-            // ระยะจาก anchor ถึง Player ตอนเริ่ม หาร 4 — ดึงเข้าทีละ 1/4 ทุกครั้งที่ QTE สำเร็จ
-            // (3 ครั้งระหว่างเล่น + อีก 1 ครั้งตอนจับได้สำเร็จ = ครบ 4/4 ถึงตัว Player เป๊ะ)
+            // ระยะจาก anchor ถึง Player ตอนเริ่ม หาร roundsRequired — ดึงเข้าทีละ 1/N ทุกครั้งที่ QTE สำเร็จ
+            // (ครบ N ครั้ง = ถึงตัว Player เป๊ะ พอดี ไม่ต้อง double รอบสุดท้ายแล้ว)
             float totalPullDistance = Vector3.Distance(anchorPoint, transform.position);
-            quarterPullStep = totalPullDistance * 0.25f;
+            pullStep = totalPullDistance / Mathf.Max(1, roundsRequired);
 
             // ย้าย Hook ไปจุดล็อกทันที — ล็อกความรู้สึกว่าปลาติดเบ็ดอยู่หน้าเราแล้วจริง ๆ
             hook.transform.position = anchorPoint;
@@ -172,6 +172,17 @@ namespace FishingNewSystem
         }
 
         private bool IsActive => phase != Phase.Idle;
+
+        /// <summary>บังคับปิด minigame ทันที (ไม่ผ่าน OnReelMinigameEnded) — ใช้ตอนกด R ยกเลิกกลางเกม
+        /// Hook ถูก Destroy ไปแล้วจากฝั่งที่เรียก ไม่ต้องแจ้งกลับไปที่ Hook อีก</summary>
+        public void CancelMinigame()
+        {
+            if (!IsActive) return;
+
+            phase = Phase.Idle;
+            hook = null;
+            if (reelCamera != null) reelCamera.Priority = reelCameraIdlePriority;
+        }
 
         private void Update()
         {
@@ -346,13 +357,10 @@ namespace FishingNewSystem
         private void OnQteSuccess()
         {
             roundsCompleted++;
-            Debug.Log($"[FishingReelMinigame] QTE สำเร็จ! ดึงเข้ามา 1/4 ({roundsCompleted}/{roundsRequired})");
+            Debug.Log($"[FishingReelMinigame] QTE สำเร็จ! ดึงเข้ามา 1/{roundsRequired} ({roundsCompleted}/{roundsRequired})");
 
             bool isFinalCatch = roundsCompleted >= roundsRequired;
-            // รอบสุดท้ายดึงรวดเดียว 2/4 ที่เหลือ (รอบจริงครั้งที่ 3 + รอบที่ 4 โดยนัย) ให้ Hook มาอยู่ติดตัว Player เป๊ะ
-            float pullDistance = isFinalCatch ? quarterPullStep * 2f : quarterPullStep;
-
-            StartPulling(pullDistance, isFinalCatch);
+            StartPulling(pullStep, isFinalCatch);
         }
 
         private void OnQteFail()

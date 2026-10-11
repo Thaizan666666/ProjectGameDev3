@@ -134,6 +134,7 @@ MonoBehaviour:
   seatPoint: {fileID: 1660513283434361792}
   walkSpeed: 3
   arriveDistance: 0.15
+  walkTimeout: 3
 --- !u!1 &6707377305258029089
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8306472425557320349, guid: 7b074a731cd7f124da6848a019350a7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 8306472425557320349, guid: 7b074a731cd7f124da6848a019350a7d, type: 3}
       propertyPath: m_LocalPosition.z
