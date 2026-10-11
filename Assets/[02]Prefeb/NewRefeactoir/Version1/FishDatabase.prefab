@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8875440855875763524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4959757742711930459}
+  - component: {fileID: 4533695324974018020}
+  - component: {fileID: 4905378336393293284}
+  m_Layer: 0
+  m_Name: FishDatabase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4959757742711930459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8875440855875763524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4533695324974018020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8875440855875763524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79d098881b30be41a8daa074b3bafeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishDatabase
+  fishStatsAssets:
+  - {fileID: 11400000, guid: f7b1c9eff8e59074292f67176d0253dd, type: 2}
+  - {fileID: 11400000, guid: 3480b2c6bac30f746be7a5f87c78d210, type: 2}
+  - {fileID: 11400000, guid: 8de489774a11288428140b4622fd72cb, type: 2}
+  - {fileID: 11400000, guid: cd645863afb28864eb3a213b8135f817, type: 2}
+  - {fileID: 11400000, guid: 51233478c82d7654b89892e34b3b3287, type: 2}
+  - {fileID: 11400000, guid: 1cc123b35fb8e964fa8e02025a94f2da, type: 2}
+  - {fileID: 11400000, guid: cf619ca5ef0a64941ad8538f30d29ef2, type: 2}
+  - {fileID: 11400000, guid: 0102181a69a661a40bfc6863b9162760, type: 2}
+--- !u!114 &4905378336393293284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8875440855875763524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754e1efdbf23cef47a2dc84453def07f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingNewSystem.FishSpawnController
+  fishDatabase: {fileID: 4533695324974018020}
+  bossOnly: 0
+  forceThisFish: {fileID: 11400000, guid: 51233478c82d7654b89892e34b3b3287, type: 2}
+  forceRounds: 5
+  applyForce: 0

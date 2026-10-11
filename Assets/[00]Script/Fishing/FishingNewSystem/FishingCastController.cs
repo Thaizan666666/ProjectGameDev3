@@ -20,6 +20,8 @@ namespace FishingNewSystem
         [Header("Player Lock")]
         [Tooltip("ExamplePlayer บน GameObject เดียวกัน — ปิดตอนเริ่มตกปลา (กดปุ่มปุ๊บล็อกทันที)")]
         [SerializeField] private ExamplePlayer examplePlayer;
+        [Tooltip("CameraController ของกล้องหลัก — ปิด look-input ตอนตกปลา กันเมาส์หมุนกล้อง/ทิศ Player เพี้ยนระหว่าง cast/float/reel")]
+        [SerializeField] private CameraController cameraController;
 
         [Header("Hook Throw")]
         [Tooltip("Prefab เบ็ด ต้องมี Rigidbody + Collider และติด component FishingHook")]
@@ -203,6 +205,7 @@ namespace FishingNewSystem
                 }
                 examplePlayer.enabled = false;
             }
+            if (cameraController != null) cameraController.SetCameraInput(false);
 
             isCharging = true;
             chargeTimer = 0f;
@@ -285,6 +288,7 @@ namespace FishingNewSystem
 
                 if (hookCamera != null) hookCamera.Priority = hookCameraIdlePriority;
                 if (examplePlayer != null) examplePlayer.enabled = true;
+                if (cameraController != null) cameraController.SetCameraInput(true);
                 if (activeHook != null) Destroy(activeHook);
                 activeHook = null;
             }
@@ -310,6 +314,7 @@ namespace FishingNewSystem
 
             if (hookCamera != null) hookCamera.Priority = hookCameraIdlePriority;
             if (examplePlayer != null) examplePlayer.enabled = true;
+            if (cameraController != null) cameraController.SetCameraInput(true);
             if (activeHook != null) Destroy(activeHook);
             activeHook = null;
         }

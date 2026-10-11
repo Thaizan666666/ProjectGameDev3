@@ -1194,6 +1194,8 @@ MonoBehaviour:
   examplePlayer: {fileID: 5288474590839511190}
   arriveDistance: 0.3
   slowDownRadius: 1.5
+  turnSpeed: 180
+  turnStopAngle: 1
 --- !u!114 &6557765822693507355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,6 +1224,7 @@ MonoBehaviour:
   rodAnim: {fileID: 0}
   rodItem: {fileID: 11400000, guid: 48c4d211fff83c943b4e17e752bee7ef, type: 2}
   fishingGameManager: {fileID: 0}
+  examplePlayer: {fileID: 5288474590839511190}
   spawnDistance: 6
   biteDelayMin: 2
   biteDelayMax: 6

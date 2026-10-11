@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4585712517042793475}
   m_Layer: 7
   m_Name: Hook
-  m_TagString: Untagged
+  m_TagString: Hook
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +129,11 @@ MonoBehaviour:
   floatHeightOffset: -0.1
   waterManager: {fileID: 0}
   moveSpeed: 4
+  blockCheckRadius: 0.15
+  minDistanceFromPlayer: 1.5
+  biteDelayMin: 2
+  biteDelayMax: 5
+  reelMinigame: {fileID: 0}
 --- !u!54 &-4585712517042793475
 Rigidbody:
   m_ObjectHideFlags: 0
