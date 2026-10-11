@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 4413711405309723742}
   - component: {fileID: 4992787691547944309}
   - component: {fileID: 7019344751868670427}
-  - component: {fileID: 7445361335807913533}
   m_Layer: 0
   m_Name: Aquarium_lv.1
   m_TagString: Untagged
@@ -188,18 +187,3 @@ MonoBehaviour:
     buildingName: 1
     buildingType: 1
     levels: []
-  UI_Interaction: {fileID: 0}
-  _teleport: {fileID: 7445361335807913533}
---- !u!114 &7445361335807913533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5782192008218251726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dd9bd69c7d79724ab7f399106bc2461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Teleport
-  destination: {fileID: 0}

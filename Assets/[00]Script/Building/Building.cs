@@ -4,7 +4,8 @@ using UnityEngine;
 using Yarn.Unity;
 
 /// <summary>
-/// Building base class implementing interaction, teleportation, and upgrade systems.
+/// Building base class implementing upgrade system and interaction UI.
+/// Teleportation is now handled by separate TeleportTrigger component.
 /// Registers itself by BuildingName for global access.
 /// </summary>
 public class Building : MonoBehaviour, IInteractable, IUpgradable
@@ -28,16 +29,12 @@ public class Building : MonoBehaviour, IInteractable, IUpgradable
     public BuildingData data;
 
     [Header("Interaction UI")]
-    public GameObject UI_Interaction;
-
-    [Header("Teleport")]
-    [SerializeField] private Teleport _teleport;
+    // public GameObject UI_Interaction;
 
     // ─────────────────────────────────────────────────────────────
     // Private State
     // ─────────────────────────────────────────────────────────────
     private bool _isPlayerInRange;
-    private GameObject _player; // Cached player reference
 
     // ─────────────────────────────────────────────────────────────
     // Public Properties
@@ -53,72 +50,44 @@ public class Building : MonoBehaviour, IInteractable, IUpgradable
 
     public void SetHighlighted(bool isHighlighted)
     {
-        if (UI_Interaction != null)
-            UI_Interaction.SetActive(isHighlighted);
+        // if (UI_Interaction != null)
+        //     UI_Interaction.SetActive(isHighlighted);
     }
 
-    public void Interact()
+    /// <summary>
+    /// Interaction hook — override in derived classes for building-specific behavior.
+    /// Teleport is now handled by TeleportTrigger, not here.
+    /// </summary>
+    public virtual void Interact()
     {
-        // Resolve player reference (fallback if cached ref was lost)
-        ResolvePlayer();
-
-        if (_player == null)
-        {
-            LogError("Player not found — check 'Player' tag exists in scene");
-            return;
-        }
-
-        if (_teleport == null)
-        {
-            LogError("Teleport component missing on building");
-            return;
-        }
-
-        if (!_teleport.CanTeleport)
-        {
-            LogWarning($"Teleport disabled for {buildingName} (CanTeleport=false)");
-            return;
-        }
-
-        if (_teleport.destination == null)
-        {
-            LogError("Teleport destination not assigned");
-            return;
-        }
-
-        Log($"Interact triggered — teleporting to {_teleport.destination.name}");
-        _teleport.TryTeleport(_player);
+        Log($"Interact called on {buildingName} — override for custom behavior");
     }
 
     // ─────────────────────────────────────────────────────────────
-    // Trigger-based UI Handling
+    // Trigger-based UI Handling (UI only — no teleport)
     // ─────────────────────────────────────────────────────────────
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        // if (!other.CompareTag("Player")) return;
 
-        _player = other.gameObject;
-        _isPlayerInRange = true;
-        _teleport?.SetTeleportEnabled(true);
+        // _isPlayerInRange = true;
 
-        if (UI_Interaction != null)
-            UI_Interaction.SetActive(true);
+        // if (UI_Interaction != null)
+        //     UI_Interaction.SetActive(true);
 
-        Log($"Player entered — UI shown, teleport enabled");
+        // Log($"Player entered — UI shown");
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject != _player) return;
+        // if (other.gameObject != _player) return;
 
-        _isPlayerInRange = false;
-        _player = null;
-        _teleport?.SetTeleportEnabled(false);
+        // _isPlayerInRange = false;
 
-        if (UI_Interaction != null)
-            UI_Interaction.SetActive(false);
+        // if (UI_Interaction != null)
+        //     UI_Interaction.SetActive(false);
 
-        Log($"Player exited — UI hidden, teleport disabled");
+        // Log($"Player exited — UI hidden");
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -126,8 +95,7 @@ public class Building : MonoBehaviour, IInteractable, IUpgradable
     // ─────────────────────────────────────────────────────────────
     private void Awake()
     {
-        if (_teleport == null)
-            _teleport = GetComponent<Teleport>();
+        // No teleport component lookup needed
     }
 
     private void OnEnable()
@@ -221,12 +189,6 @@ public class Building : MonoBehaviour, IInteractable, IUpgradable
     // ─────────────────────────────────────────────────────────────
     // Helpers
     // ─────────────────────────────────────────────────────────────
-    private void ResolvePlayer()
-    {
-        if (_player == null)
-            _player = GameObject.FindGameObjectWithTag("Player");
-    }
-
     private void Log(string msg) => Debug.Log($"[Building:{buildingName}] {msg}");
     private void LogWarning(string msg) => Debug.LogWarning($"[Building:{buildingName}] {msg}");
     private void LogError(string msg) => Debug.LogError($"[Building:{buildingName}] {msg}");
