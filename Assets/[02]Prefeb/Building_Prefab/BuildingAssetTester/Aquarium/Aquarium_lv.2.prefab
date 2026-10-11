@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3451309787697932962}
   - component: {fileID: 6926026794915413523}
   - component: {fileID: 2034760785223958648}
+  - component: {fileID: 6287921307543047120}
   m_Layer: 0
   m_Name: Aquarium_lv.2
   m_TagString: Untagged
@@ -26,14 +27,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4179753679321101978}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70710695, z: -0, w: -0.7071067}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 3.42, y: 6.853904, z: 21.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1334348443790353535}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &6926026794915413523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -69,11 +70,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormal.Project_wide.Building
   buildingName: 1
   currentLevel: 2
-  canUpgrade: 0
   data:
     buildingName: 1
     buildingType: 1
     levels: []
+  UI_Interaction: {fileID: 0}
+  _teleport: {fileID: 6287921307543047120}
+--- !u!114 &6287921307543047120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4179753679321101978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9bd69c7d79724ab7f399106bc2461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Teleport
+  destination: {fileID: 0}
 --- !u!1 &6854903325291317776
 GameObject:
   m_ObjectHideFlags: 0

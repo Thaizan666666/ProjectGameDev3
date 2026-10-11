@@ -40,12 +40,12 @@ public class PlayerInteract : MonoBehaviour
         }
 
         // In PlayerInteract.cs:Update(), แปลงเป็น
-        if (currentTarget != null && currentTarget.CanInteract() && _controls.Interacting.Interact.WasPressedThisFrame())
-        {
-            Debug.Log($"[PlayerInteract] About to call Interact() on: {currentTarget.GetType().Name} (CanInteract={currentTarget.CanInteract()})");
-            currentTarget.Interact();
-            _controls.Player.Disable();
-        }
+        // if (currentTarget != null && currentTarget.CanInteract() && _controls.Interacting.Interact.WasPressedThisFrame())
+        // {
+        //     Debug.Log($"[PlayerInteract] About to call Interact() on: {currentTarget.GetType().Name} (CanInteract={currentTarget.CanInteract()})");
+        //     currentTarget.Interact();
+        //     _controls.Player.Disable();
+        // }
     }
 
     void OnTriggerEnter(Collider other)

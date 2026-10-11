@@ -833,8 +833,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.089155056, y: 0, z: 0, w: 0.99601775}
-  m_LocalPosition: {x: -27.53, y: 4.5223346, z: 0.2931471}
+  m_LocalRotation: {x: 0.052577313, y: 0, z: 0, w: 0.9986169}
+  m_LocalPosition: {x: -27.53, y: 1.7648591, z: -0.12553453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -945,11 +945,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8680330869677565242, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99601775
+      value: 0.9986169
       objectReference: {fileID: 0}
     - target: {fileID: 8680330869677565242, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.089155056
+      value: 0.05257731
       objectReference: {fileID: 0}
     - target: {fileID: 8680330869677565242, guid: 856aaebce16441e47aaa0b6b709b9808, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3843,6 +3843,14 @@ PrefabInstance:
     - target: {fileID: 3274840616757862013, guid: 58425e93727d8a64fae74355b4e510fc, type: 3}
       propertyPath: m_Name
       value: FishSellingChest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628027723568718552, guid: 58425e93727d8a64fae74355b4e510fc, type: 3}
+      propertyPath: m_Size.x
+      value: 5.3960805
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628027723568718552, guid: 58425e93727d8a64fae74355b4e510fc, type: 3}
+      propertyPath: m_Center.x
+      value: 1.1980401
       objectReference: {fileID: 0}
     - target: {fileID: 4284458762708462062, guid: 58425e93727d8a64fae74355b4e510fc, type: 3}
       propertyPath: cartUI
