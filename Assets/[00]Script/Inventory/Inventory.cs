@@ -6,6 +6,7 @@ using System.ComponentModel;
 using KinematicCharacterController.Examples;
 using Unity.Cinemachine;
 using UnityEngine.EventSystems;
+using TableForge.Equipment.Fishing;
 
 public class Inventory : MonoBehaviour
 {
@@ -491,7 +492,7 @@ public class Inventory : MonoBehaviour
     }
 
     #region UpdateCarriedItem
-    private void UpdateCarriedItem()
+    public void UpdateCarriedItem()
     {
         // 1. Destroy model เก่า
         if (_currentCarriedModel != null)
@@ -540,6 +541,96 @@ public class Inventory : MonoBehaviour
                 UpdateHotBarOpacity();
                 UpdateCarriedItem();
             }
+        }
+    }
+
+    /// <summary>
+    /// Finds a rod in hotbar or inventory and returns the item, its current level, and the slot it's in.
+    /// Checks hotbar first, then inventory.
+    /// </summary>
+    public (ItemSO rodItem, int currentLevel, Slot slot) FindRodInHotbarOrInventory()
+    {
+        // First check hotbar slots
+        for (int i = 0; i < hotbarSlots.Count; i++)
+        {
+            Slot slot = hotbarSlots[i];
+            if (slot.HasItem())
+            {
+                ItemSO item = slot.GetItem();
+                int level = GetRodLevelFromItem(item);
+                if (level > 0)
+                {
+                    return (item, level, slot);
+                }
+            }
+        }
+
+        // Then check inventory slots
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            Slot slot = inventorySlots[i];
+            if (slot.HasItem())
+            {
+                ItemSO item = slot.GetItem();
+                int level = GetRodLevelFromItem(item);
+                if (level > 0)
+                {
+                    return (item, level, slot);
+                }
+            }
+        }
+
+        return (null, 0, null);
+    }
+
+    /// <summary>
+    /// Determines the rod level by matching the item's prefab against RodStats level prefabs.
+    /// </summary>
+    public int GetRodLevelFromItem(ItemSO item)
+    {
+        if (item == null) return 0;
+        
+        // Need to access RodStats from UpgradeManager
+        if (UpgradeManager.Instance != null && UpgradeManager.Instance.rodStats != null)
+        {
+            RodStats rodStats = UpgradeManager.Instance.rodStats;
+            
+            // Check handItemPrefab first (what the player holds)
+            if (item.handItemPrefab != null)
+            {
+                for (int i = 0; i < rodStats.levelRod.Count; i++)
+                {
+                    if (rodStats.levelRod[i].prefabRod == item.handItemPrefab)
+                    {
+                        return i + 1; // Levels are 1-indexed
+                    }
+                }
+            }
+            
+            // Fallback to itemPrefab
+            if (item.itemPrefab != null)
+            {
+                for (int i = 0; i < rodStats.levelRod.Count; i++)
+                {
+                    if (rodStats.levelRod[i].prefabRod == item.itemPrefab)
+                    {
+                        return i + 1;
+                    }
+                }
+            }
+        }
+        
+        return 0;
+    }
+    
+    /// <summary>
+    /// Updates the slot visual - can be called after item data changes
+    /// </summary>
+    public void UpdateSlotVisual(Slot slot)
+    {
+        if (slot != null)
+        {
+            slot.UpdateSlot();
         }
     }
 }
