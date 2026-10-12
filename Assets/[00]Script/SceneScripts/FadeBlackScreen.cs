@@ -119,19 +119,4 @@ public class FadeBlackScreen : MonoBehaviour
 
         canvasGroup.alpha = to;
     }
-
-    private IEnumerator WaitThenFadeOut(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        FadeOut();
-    }
-
-    public void FadeInThenMove(Transform target, Vector3 destination, float moveDuration)
-    {
-        FadeIn(() =>
-        {
-            target.position = destination; // หรือ Lerp ถ้าอยากเห็นการเคลื่อนไหวจริงระหว่างจอดำ
-            StartCoroutine(WaitThenFadeOut(moveDuration));
-        });
-    }
 }
