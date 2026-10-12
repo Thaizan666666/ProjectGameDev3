@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -73,13 +74,27 @@ public class TeleportTrigger : MonoBehaviour, IInteractable
             return;
         }
 
+        FadeBlackScreen.Instance.FadeIn(() =>
+        {
+            teleporter.TryTeleport(player);
+            // FadeBlackScreen.SnapCinemachineCameras();
+            FadeBlackScreen.Instance.FadeOut();
+        });
+
+
         // Execute teleport using the fixed KCC pattern
-        teleporter.TryTeleport(player);
+        // waitFadeInEnd(1.0f);
 
         // Set cooldown guard
         canTeleport = false;
         StartCoroutine(TeleportCooldown());
     }
+
+    // private IEnumerator waitFadeInEnd(float seconds)
+    // {
+    //     yield return new WaitForSeconds(seconds);
+    //     teleporter.TryTeleport(player);
+    // }
 
     /// <summary>Called by PlayerInteract to show/hide highlight UI</summary>
     public void SetHighlighted(bool isHighlighted)

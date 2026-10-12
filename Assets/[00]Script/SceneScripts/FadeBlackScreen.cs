@@ -60,7 +60,7 @@ public class FadeBlackScreen : MonoBehaviour
 
     // กันกล้อง Cinemachine "วาป"/ไหลเข้าตำแหน่งจริงให้เห็นระหว่าง FadeOut — บอก Cinemachine ว่า
     // state ก่อนหน้าใช้ไม่ได้แล้ว (ฉากใหม่โหลดมา) ให้ snap เข้าตำแหน่ง/มุมจริงทันทีเฟรมเดียว ไม่ damping ไหลให้เห็น
-    private static void SnapCinemachineCameras()
+    public static void SnapCinemachineCameras()
     {
         foreach (var cam in Object.FindObjectsByType<CinemachineVirtualCameraBase>(FindObjectsSortMode.None))
         {
@@ -70,6 +70,7 @@ public class FadeBlackScreen : MonoBehaviour
 
     public void FadeOut(System.Action onComplete = null)
     {
+        SnapCinemachineCameras();
         StopAllCoroutines();
         StartCoroutine(FadeRoutine(canvasGroup.alpha, 0f, fadeOutDuration, () =>
         {
@@ -101,5 +102,20 @@ public class FadeBlackScreen : MonoBehaviour
         }
 
         canvasGroup.alpha = to;
+    }
+
+    private IEnumerator WaitThenFadeOut(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        FadeOut();
+    }
+
+    public void FadeInThenMove(Transform target, Vector3 destination, float moveDuration)
+    {
+        FadeIn(() =>
+        {
+            target.position = destination; // หรือ Lerp ถ้าอยากเห็นการเคลื่อนไหวจริงระหว่างจอดำ
+            StartCoroutine(WaitThenFadeOut(moveDuration));
+        });
     }
 }
