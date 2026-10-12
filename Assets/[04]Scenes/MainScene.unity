@@ -8727,7 +8727,7 @@ Transform:
   m_GameObject: {fileID: 1959566329864940892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 288.09998, y: 51.044003, z: 312.37}
+  m_LocalPosition: {x: 233, y: 50.9, z: 202.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8750,7 +8750,7 @@ Transform:
   m_GameObject: {fileID: 617936239236781577}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 227.7, y: 52.63, z: 341.4}
+  m_LocalPosition: {x: 169.3, y: 50.9, z: 159}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8930,7 +8930,7 @@ Transform:
   m_GameObject: {fileID: 4505344944899827929}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 271.97, y: 51.044003, z: 241.73}
+  m_LocalPosition: {x: 169.3, y: 50.9, z: 159}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9189,7 +9189,7 @@ Transform:
   m_GameObject: {fileID: 4594105254255475956}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 237.09999, y: 52.440002, z: 194.97}
+  m_LocalPosition: {x: 244.95, y: 50.9, z: 244.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9204,7 +9204,7 @@ Transform:
   m_GameObject: {fileID: 5889047305229005579}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 212.1, y: 51.09, z: 214.2}
+  m_LocalPosition: {x: 169.3, y: 50.9, z: 159}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9287,7 +9287,7 @@ Transform:
   m_GameObject: {fileID: 3444968471452785843}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 221.29999, y: 51.044003, z: 338.16998}
+  m_LocalPosition: {x: 201.7, y: 50.9, z: 265.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9584,15 +9584,42 @@ MonoBehaviour:
   wanderRadius: 15
   idleTimeAtPoint: 1
   graphNodes:
+  - point: {fileID: 8201449316447079496}
+    neighbors: 010000000300000006000000
+  - point: {fileID: 4259430318276474712}
+    neighbors: 020000000000000007000000
+  - point: {fileID: 1525489246557765400}
+    neighbors: 01000000030000000f000000
+  - point: {fileID: 4478018697359960853}
+    neighbors: 000000000200000010000000
+  - point: {fileID: 5285915242872443492}
+    neighbors: 100000000f0000000d000000
+  - point: {fileID: 1598713630905204657}
+    neighbors: 10000000060000000e000000
+  - point: {fileID: 8175834575591434851}
+    neighbors: 070000000a0000000500000000000000
+  - point: {fileID: 714594362968293844}
+    neighbors: 080000000f00000006000000
+  - point: {fileID: 3882756480506046154}
+    neighbors: 070000000b00000009000000
+  - point: {fileID: 5869740997858952693}
+    neighbors: 0a000000080000000b000000
+  - point: {fileID: 919941460670321043}
+    neighbors: 0900000006000000
+  - point: {fileID: 9186489852839112733}
+    neighbors: 0c0000000900000008000000
   - point: {fileID: 8060350554130831888}
-    neighbors: 0000000001000000
+    neighbors: 0b0000000d000000
   - point: {fileID: 2987491245104897568}
-    neighbors: 0100000002000000
+    neighbors: 0e00000004000000
   - point: {fileID: 5200249946883861836}
-    neighbors: 0200000003000000
+    neighbors: 0d00000006000000
   - point: {fileID: 8529479047773852155}
-    neighbors: 0300000004000000
+    neighbors: 0400000007000000
+  - point: {fileID: 2845592610224752267}
+    neighbors: 030000000400000005000000
   allowedNodeIndices: 
+  startNodeIndex: 5
   debugGoToPoint: {x: 0, y: 0, z: 0}
   debugApplyGoTo: 0
 --- !u!4 &2845592610224752267
@@ -9604,7 +9631,7 @@ Transform:
   m_GameObject: {fileID: 4660495900211568439}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 226.5, y: 51.044003, z: 156.37}
+  m_LocalPosition: {x: 237.15, y: 50.9, z: 275.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9735,7 +9762,7 @@ Transform:
   m_GameObject: {fileID: 5050062417637361442}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 202.59999, y: 51.044003, z: 314.27}
+  m_LocalPosition: {x: 285.8, y: 52.1, z: 313.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10284,7 +10311,7 @@ Transform:
   m_GameObject: {fileID: 8692142416216425997}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 317.7, y: 51.044003, z: 184.56999}
+  m_LocalPosition: {x: 233, y: 50.9, z: 177.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10299,7 +10326,7 @@ Transform:
   m_GameObject: {fileID: 3330403400224920474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 165.3, y: 51.4, z: 151.9}
+  m_LocalPosition: {x: 201.7, y: 50.9, z: 265.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10537,7 +10564,7 @@ Transform:
   m_GameObject: {fileID: 69379765001756999}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 167.09999, y: 51.044003, z: 156.47}
+  m_LocalPosition: {x: 232.79, y: 50.9, z: 234.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10577,14 +10604,41 @@ MonoBehaviour:
   idleTimeAtPoint: 0.3
   graphNodes:
   - point: {fileID: 8201449316447079496}
-    neighbors: 0000000001000000
+    neighbors: 010000000300000006000000
   - point: {fileID: 4259430318276474712}
-    neighbors: 0100000002000000
+    neighbors: 020000000000000007000000
   - point: {fileID: 1525489246557765400}
-    neighbors: 0200000003000000
+    neighbors: 01000000030000000f000000
   - point: {fileID: 4478018697359960853}
-    neighbors: 0300000004000000
+    neighbors: 000000000200000010000000
+  - point: {fileID: 5285915242872443492}
+    neighbors: 100000000f0000000d000000
+  - point: {fileID: 1598713630905204657}
+    neighbors: 10000000060000000e000000
+  - point: {fileID: 8175834575591434851}
+    neighbors: 070000000a0000000500000000000000
+  - point: {fileID: 714594362968293844}
+    neighbors: 080000000f00000006000000
+  - point: {fileID: 3882756480506046154}
+    neighbors: 070000000b00000009000000
+  - point: {fileID: 5869740997858952693}
+    neighbors: 0a000000080000000b000000
+  - point: {fileID: 919941460670321043}
+    neighbors: 0900000006000000
+  - point: {fileID: 9186489852839112733}
+    neighbors: 0c0000000900000008000000
+  - point: {fileID: 8060350554130831888}
+    neighbors: 0b0000000d000000
+  - point: {fileID: 2987491245104897568}
+    neighbors: 0e00000004000000
+  - point: {fileID: 5200249946883861836}
+    neighbors: 0d00000006000000
+  - point: {fileID: 8529479047773852155}
+    neighbors: 0400000007000000
+  - point: {fileID: 2845592610224752267}
+    neighbors: 030000000400000005000000
   allowedNodeIndices: 
+  startNodeIndex: 5
   debugGoToPoint: {x: 0, y: 0, z: 0}
   debugApplyGoTo: 0
 --- !u!4 &4370563926154613825
@@ -10644,7 +10698,7 @@ Transform:
   m_GameObject: {fileID: 893052366796929584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 222.09999, y: 51.044003, z: 153.67}
+  m_LocalPosition: {x: 234.59, y: 50.9, z: 251.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10757,7 +10811,7 @@ Transform:
   m_GameObject: {fileID: 6246646762236061380}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 234, y: 51.09, z: 171.6}
+  m_LocalPosition: {x: 185.5, y: 50.9, z: 242.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10844,7 +10898,7 @@ Transform:
   m_GameObject: {fileID: 8720163636934687044}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 166.07999, y: 51.044003, z: 235.44}
+  m_LocalPosition: {x: 220.1, y: 52.1, z: 337.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10923,7 +10977,7 @@ Transform:
   m_GameObject: {fileID: 2732028116244334366}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 200.59999, y: 51.044003, z: 266.66998}
+  m_LocalPosition: {x: 248.51, y: 50.9, z: 275.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10944,15 +10998,42 @@ MonoBehaviour:
   wanderRadius: 15
   idleTimeAtPoint: 1
   graphNodes:
+  - point: {fileID: 8201449316447079496}
+    neighbors: 010000000300000006000000
+  - point: {fileID: 4259430318276474712}
+    neighbors: 020000000000000007000000
+  - point: {fileID: 1525489246557765400}
+    neighbors: 01000000030000000f000000
+  - point: {fileID: 4478018697359960853}
+    neighbors: 000000000200000010000000
   - point: {fileID: 5285915242872443492}
-    neighbors: 0000000001000000
+    neighbors: 100000000f0000000d000000
   - point: {fileID: 1598713630905204657}
-    neighbors: 0100000002000000
+    neighbors: 10000000060000000e000000
   - point: {fileID: 8175834575591434851}
-    neighbors: 0200000003000000
+    neighbors: 070000000a0000000500000000000000
   - point: {fileID: 714594362968293844}
-    neighbors: 0300000004000000
+    neighbors: 080000000f00000006000000
+  - point: {fileID: 3882756480506046154}
+    neighbors: 070000000b00000009000000
+  - point: {fileID: 5869740997858952693}
+    neighbors: 0a000000080000000b000000
+  - point: {fileID: 919941460670321043}
+    neighbors: 0900000006000000
+  - point: {fileID: 9186489852839112733}
+    neighbors: 0c0000000900000008000000
+  - point: {fileID: 8060350554130831888}
+    neighbors: 0b0000000d000000
+  - point: {fileID: 2987491245104897568}
+    neighbors: 0e00000004000000
+  - point: {fileID: 5200249946883861836}
+    neighbors: 0d00000006000000
+  - point: {fileID: 8529479047773852155}
+    neighbors: 0400000007000000
+  - point: {fileID: 2845592610224752267}
+    neighbors: 030000000400000005000000
   allowedNodeIndices: 
+  startNodeIndex: 6
   debugGoToPoint: {x: 0, y: 0, z: 0}
   debugApplyGoTo: 0
 --- !u!33 &5361293284531185154
@@ -11101,7 +11182,7 @@ Transform:
   m_GameObject: {fileID: 7654954173580313942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 328.7, y: 51.044003, z: 261.57}
+  m_LocalPosition: {x: 218.7, y: 50.9, z: 154.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11326,15 +11407,42 @@ MonoBehaviour:
   wanderRadius: 15
   idleTimeAtPoint: 1
   graphNodes:
-  - point: {fileID: 714594362968293844}
-    neighbors: 0000000001000000
+  - point: {fileID: 8201449316447079496}
+    neighbors: 010000000300000006000000
+  - point: {fileID: 4259430318276474712}
+    neighbors: 020000000000000007000000
   - point: {fileID: 1525489246557765400}
-    neighbors: 0100000002000000
-  - point: {fileID: 9186489852839112733}
-    neighbors: 0200000003000000
+    neighbors: 01000000030000000f000000
+  - point: {fileID: 4478018697359960853}
+    neighbors: 000000000200000010000000
+  - point: {fileID: 5285915242872443492}
+    neighbors: 100000000f0000000d000000
+  - point: {fileID: 1598713630905204657}
+    neighbors: 10000000060000000e000000
+  - point: {fileID: 8175834575591434851}
+    neighbors: 070000000a0000000500000000000000
+  - point: {fileID: 714594362968293844}
+    neighbors: 080000000f00000006000000
   - point: {fileID: 3882756480506046154}
-    neighbors: 0300000004000000
+    neighbors: 070000000b00000009000000
+  - point: {fileID: 5869740997858952693}
+    neighbors: 0a000000080000000b000000
+  - point: {fileID: 919941460670321043}
+    neighbors: 0900000006000000
+  - point: {fileID: 9186489852839112733}
+    neighbors: 0c0000000900000008000000
+  - point: {fileID: 8060350554130831888}
+    neighbors: 0b0000000d000000
+  - point: {fileID: 2987491245104897568}
+    neighbors: 0e00000004000000
+  - point: {fileID: 5200249946883861836}
+    neighbors: 0d00000006000000
+  - point: {fileID: 8529479047773852155}
+    neighbors: 0400000007000000
+  - point: {fileID: 2845592610224752267}
+    neighbors: 030000000400000005000000
   allowedNodeIndices: 
+  startNodeIndex: 6
   debugGoToPoint: {x: 0, y: 0, z: 0}
   debugApplyGoTo: 0
 --- !u!1 &7243848336708741732
@@ -11379,7 +11487,7 @@ Transform:
   m_GameObject: {fileID: 5011838147557708871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 202.4, y: 51.41, z: 261.6}
+  m_LocalPosition: {x: 185.5, y: 50.9, z: 242.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11421,7 +11529,7 @@ Transform:
   m_GameObject: {fileID: 2963035234088356786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 172.9, y: 51.032, z: 268.2}
+  m_LocalPosition: {x: 201.7, y: 50.9, z: 265.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11533,15 +11641,42 @@ MonoBehaviour:
   wanderRadius: 15
   idleTimeAtPoint: 1
   graphNodes:
-  - point: {fileID: 2845592610224752267}
-    neighbors: 0000000001000000
+  - point: {fileID: 8201449316447079496}
+    neighbors: 010000000300000006000000
+  - point: {fileID: 4259430318276474712}
+    neighbors: 020000000000000007000000
+  - point: {fileID: 1525489246557765400}
+    neighbors: 01000000030000000f000000
+  - point: {fileID: 4478018697359960853}
+    neighbors: 000000000200000010000000
   - point: {fileID: 5285915242872443492}
-    neighbors: 0100000002000000
-  - point: {fileID: 9186489852839112733}
-    neighbors: 0200000003000000
+    neighbors: 100000000f0000000d000000
+  - point: {fileID: 1598713630905204657}
+    neighbors: 10000000060000000e000000
+  - point: {fileID: 8175834575591434851}
+    neighbors: 070000000a0000000500000000000000
+  - point: {fileID: 714594362968293844}
+    neighbors: 080000000f00000006000000
+  - point: {fileID: 3882756480506046154}
+    neighbors: 070000000b00000009000000
   - point: {fileID: 5869740997858952693}
-    neighbors: 0300000004000000
+    neighbors: 0a000000080000000b000000
+  - point: {fileID: 919941460670321043}
+    neighbors: 0900000006000000
+  - point: {fileID: 9186489852839112733}
+    neighbors: 0c0000000900000008000000
+  - point: {fileID: 8060350554130831888}
+    neighbors: 0b0000000d000000
+  - point: {fileID: 2987491245104897568}
+    neighbors: 0e00000004000000
+  - point: {fileID: 5200249946883861836}
+    neighbors: 0d00000006000000
+  - point: {fileID: 8529479047773852155}
+    neighbors: 0400000007000000
+  - point: {fileID: 2845592610224752267}
+    neighbors: 030000000400000005000000
   allowedNodeIndices: 
+  startNodeIndex: 10
   debugGoToPoint: {x: 0, y: 0, z: 0}
   debugApplyGoTo: 0
 --- !u!4 &7769377169549590200
@@ -11640,7 +11775,7 @@ Transform:
   m_GameObject: {fileID: 5715318576618129277}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 220.81, y: 51.044003, z: 242.17}
+  m_LocalPosition: {x: 333.5, y: 52.1, z: 253.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11704,7 +11839,7 @@ Transform:
   m_GameObject: {fileID: 9032698639039332771}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 249.2, y: 51.044003, z: 273.66998}
+  m_LocalPosition: {x: 185.5, y: 50.9, z: 242.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11737,7 +11872,7 @@ Transform:
   m_GameObject: {fileID: 6133831067563138745}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 170.5, y: 51.044003, z: 268.61}
+  m_LocalPosition: {x: 221.56, y: 50.9, z: 242.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11766,15 +11901,42 @@ MonoBehaviour:
   wanderRadius: 15
   idleTimeAtPoint: 1
   graphNodes:
+  - point: {fileID: 8201449316447079496}
+    neighbors: 010000000300000006000000
+  - point: {fileID: 4259430318276474712}
+    neighbors: 020000000000000007000000
+  - point: {fileID: 1525489246557765400}
+    neighbors: 01000000030000000f000000
+  - point: {fileID: 4478018697359960853}
+    neighbors: 000000000200000010000000
+  - point: {fileID: 5285915242872443492}
+    neighbors: 100000000f0000000d000000
+  - point: {fileID: 1598713630905204657}
+    neighbors: 10000000060000000e000000
+  - point: {fileID: 8175834575591434851}
+    neighbors: 070000000a0000000500000000000000
+  - point: {fileID: 714594362968293844}
+    neighbors: 080000000f00000006000000
   - point: {fileID: 3882756480506046154}
-    neighbors: 0000000001000000
+    neighbors: 070000000b00000009000000
   - point: {fileID: 5869740997858952693}
-    neighbors: 0100000002000000
+    neighbors: 0a000000080000000b000000
   - point: {fileID: 919941460670321043}
-    neighbors: 0200000003000000
+    neighbors: 0900000006000000
   - point: {fileID: 9186489852839112733}
-    neighbors: 0300000004000000
+    neighbors: 0c0000000900000008000000
+  - point: {fileID: 8060350554130831888}
+    neighbors: 0b0000000d000000
+  - point: {fileID: 2987491245104897568}
+    neighbors: 0e00000004000000
+  - point: {fileID: 5200249946883861836}
+    neighbors: 0d00000006000000
+  - point: {fileID: 8529479047773852155}
+    neighbors: 0400000007000000
+  - point: {fileID: 2845592610224752267}
+    neighbors: 030000000400000005000000
   allowedNodeIndices: 
+  startNodeIndex: 10
   debugGoToPoint: {x: 0, y: 0, z: 0}
   debugApplyGoTo: 0
 --- !u!33 &8222479589143811833
@@ -11895,7 +12057,7 @@ Transform:
   m_GameObject: {fileID: 391060066533437519}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 284.5, y: 51.044003, z: 232.87}
+  m_LocalPosition: {x: 268.7, y: 50.9, z: 244.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12104,7 +12266,7 @@ Transform:
   m_GameObject: {fileID: 8106008440987190589}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 235.5, y: 51.044003, z: 176.65}
+  m_LocalPosition: {x: 306.8, y: 50.9, z: 177.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

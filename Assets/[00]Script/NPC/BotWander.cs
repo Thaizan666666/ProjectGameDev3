@@ -25,6 +25,8 @@ public class BotWander : MonoBehaviour
     [SerializeField] private WaypointNode[] graphNodes;
     [Tooltip("จำกัดให้เดินได้เฉพาะ node index พวกนี้เท่านั้น (เช่น 5,6,10) — ปล่อยว่างได้ถ้าอยากเดินได้ทั้งกราฟตามปกติ")]
     [SerializeField] private int[] allowedNodeIndices;
+    [Tooltip("node index ที่จะเริ่มยืน/เริ่มคิดเส้นทางจริง ๆ (ตรงกับตำแหน่งจริงที่วางตัว Bot ไว้) — ปล่อย -1 ถ้าไม่ต้องกำหนด")]
+    [SerializeField] private int startNodeIndex = -1;
     private int currentNodeIndex = -1; // index ปัจจุบันใน graphNodes — -1 = ยังไม่เริ่ม
     private int previousNodeIndex = -1; // index ก่อนหน้า — ห้ามเดินถอยกลับจุดนี้ใน 1 รอบถัดไป
 
@@ -48,6 +50,7 @@ public class BotWander : MonoBehaviour
 
     private void Start()
     {
+        if (startNodeIndex >= 0) currentNodeIndex = startNodeIndex;
         PickNewDestination();
     }
 
