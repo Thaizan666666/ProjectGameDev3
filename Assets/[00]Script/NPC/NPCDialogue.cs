@@ -90,7 +90,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         if (Inventory.instance != null)
             Inventory.instance.hotbatObj.SetActive(false);
         _ = dialogueRunner.StartDialogue(yarnStartNode);
-        animatorNPC.SetBool("isGTalk", true);
+        // animatorNPC.SetBool("isGTalk", true);
     }
 
     private void HandleDialogueComplete()
@@ -108,7 +108,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
             }
 
             _playerTransform = null;
-            animatorNPC.SetBool("isGTalk", false);
+            // animatorNPC.SetBool("isGTalk", false);
         }
 
     public bool CanInteract()

@@ -25,6 +25,10 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/[04]Scenes/StartScene.unity
   - m_enabled: 1
+    m_path: Assets/[04]Scenes/Scene2.unity
+  - m_enabled: 1
+    m_path: Assets/[04]Scenes/Scene3.unity
+  - m_enabled: 1
     m_path: Assets/[04]Scenes/MainScene.unity
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []

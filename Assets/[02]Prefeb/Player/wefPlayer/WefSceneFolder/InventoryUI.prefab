@@ -360,7 +360,8 @@ MonoBehaviour:
   normalOpacity: 0.58
   HasBag: 0
   refItemCarry: {fileID: 0}
-  startingRod: {fileID: 11400000, guid: 48c4d211fff83c943b4e17e752bee7ef, type: 2}
+  startItem:
+  - {fileID: 11400000, guid: 48c4d211fff83c943b4e17e752bee7ef, type: 2}
 --- !u!1 &7627818428943851601
 GameObject:
   m_ObjectHideFlags: 0
