@@ -2709,6 +2709,10 @@ PrefabInstance:
       propertyPath: reelCamera
       value: 
       objectReference: {fileID: 2039051158}
+    - target: {fileID: 4329024778168893711, guid: 5eb5a3f607fad9f48993d1f437888a7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6848725520711427496, guid: 5eb5a3f607fad9f48993d1f437888a7d, type: 3}
       propertyPath: hookCamera
       value: 
@@ -2758,7 +2762,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2816093499526723921, guid: 5eb5a3f607fad9f48993d1f437888a7d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eb5a3f607fad9f48993d1f437888a7d, type: 3}

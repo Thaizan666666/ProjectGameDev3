@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 6136706459070724841}
   - component: {fileID: 6848725520711427496}
   - component: {fileID: 2930537180091743687}
+  - component: {fileID: 658054988441819907}
   m_Layer: 6
   m_Name: player(V3)
   m_TagString: Player
@@ -483,7 +484,6 @@ Transform:
   - {fileID: 6875276774661960359}
   - {fileID: 1078813633334523286}
   - {fileID: 2449297652575112798}
-  - {fileID: 6420787919969799963}
   - {fileID: 2467979555049178768}
   - {fileID: 5956271736553739974}
   - {fileID: 7679886527035036413}
@@ -785,6 +785,24 @@ MonoBehaviour:
   qteTolerance: 15
   roundsRequired: 3
   pullDuration: 0.5
+--- !u!114 &658054988441819907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2541255696201401613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1f7d84c1482db4380580b00b84135d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterSystem.WaterDisturbanceEmitter
+  ripplePrefab: {fileID: 1459068292352493138, guid: f1a0ddec9d1887d40b36d95a51770e59, type: 3}
+  splashPrefab: {fileID: 4841010653855159213, guid: ae3cb0bd42670c44a9bae9e56cd46fd8, type: 3}
+  waterManager: {fileID: 0}
+  moveSpeedThreshold: 0.5
+  waterSurfaceTolerance: 0.6
+  cooldown: 1
 --- !u!1 &2551240124105737235
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,12 +859,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2816093499526723921}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.46, y: 1.366, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.67238057, y: 0.69382507, z: 0.2407878, w: -0.0923717}
+  m_LocalPosition: {x: 0.6, y: 0.916, z: 0.37}
+  m_LocalScale: {x: 1.0416899, y: 9.96359, z: 7.1604233}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7406719909665675625}
+  m_Father: {fileID: 7174978333750892912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3084499889546016119
 GameObject:
@@ -2213,7 +2231,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1286738875481606616, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 6420787919969799963}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6bfde51049d1d543ac727532d9dcf2b, type: 3}
 --- !u!4 &7174978333750892912 stripped

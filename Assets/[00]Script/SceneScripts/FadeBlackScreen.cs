@@ -68,22 +68,6 @@ public class FadeBlackScreen : MonoBehaviour
         }
     }
 
-    /// <summary>Fade ดำ -> ย้ายตำแหน่ง target ทันที -> รอ moveDuration วินาที -> Fade ออก (ใช้กับ teleport)</summary>
-    public void FadeInThenMove(Transform target, Vector3 destination, float moveDuration)
-    {
-        FadeIn(() =>
-        {
-            target.position = destination;
-            StartCoroutine(WaitThenFadeOut(moveDuration));
-        });
-    }
-
-    private IEnumerator WaitThenFadeOut(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        FadeOut();
-    }
-
     public void FadeOut(System.Action onComplete = null)
     {
         SnapCinemachineCameras();

@@ -225,6 +225,7 @@ MonoBehaviour:
   seatPoint: {fileID: 7423402200702319651}
   walkSpeed: 3
   arriveDistance: 0.15
+  walkTimeout: 3
 --- !u!1 &5666148061399117244
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +272,7 @@ GameObject:
   - component: {fileID: 7804846964229225954}
   - component: {fileID: 8321150294399152652}
   - component: {fileID: 1397515157041840898}
+  - component: {fileID: 5234189630484835757}
   m_Layer: 2
   m_Name: Boat
   m_TagString: Untagged
@@ -445,6 +447,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BoatControll
   moveForce: 20
   turnTorque: 10
+--- !u!114 &5234189630484835757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954952342195958213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1f7d84c1482db4380580b00b84135d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterSystem.WaterDisturbanceEmitter
+  ripplePrefab: {fileID: 1459068292352493138, guid: f1a0ddec9d1887d40b36d95a51770e59, type: 3}
+  splashPrefab: {fileID: 4841010653855159213, guid: ae3cb0bd42670c44a9bae9e56cd46fd8, type: 3}
+  waterManager: {fileID: 0}
+  moveSpeedThreshold: 0.5
+  waterSurfaceTolerance: 0.6
+  cooldown: 1
 --- !u!1 &8502237366005532172
 GameObject:
   m_ObjectHideFlags: 0

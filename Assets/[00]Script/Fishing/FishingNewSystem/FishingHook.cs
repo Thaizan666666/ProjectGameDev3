@@ -27,6 +27,10 @@ namespace FishingNewSystem
         [SerializeField] private float floatHeightOffset = -0.1f;
         [Tooltip("WaterManager ในฉาก — ดึงชุดคลื่นมาคำนวณให้ Hook ลอย+เคลื่อนที่ตามคลื่นจริง (สูตรเดียวกับ BoatBuoyancy) ปล่อยว่างได้ถ้าอยากให้ลอยนิ่งที่ผิวน้ำเฉย ๆ")]
         [SerializeField] private WaterManager waterManager;
+        [Tooltip("Prefab ripple ที่จะ spawn ตอน Hook ชนผิวน้ำครั้งแรก — ปล่อยว่างได้ถ้ายังไม่อยากมี effect")]
+        [SerializeField] private WaterRipple ripplePrefab;
+        [Tooltip("Prefab ละอองน้ำกระฉูด (ParticleSystem) ที่จะ spawn พร้อม ripple ตอน Hook ชนผิวน้ำครั้งแรก — ปล่อยว่างได้ถ้ายังไม่อยากมี effect")]
+        [SerializeField] private GameObject splashPrefab;
 
         [Header("ควบคุมเองตอนลอยรอปลากิน (WASD)")]
         [Tooltip("ความเร็วขยับ Hook เอง (เมตร/วินาที) ตอนลอยอยู่ — คลื่นยังเหวี่ยงต่อจากจุดที่ขยับไปอยู่ดี")]
@@ -98,7 +102,12 @@ namespace FishingNewSystem
             bool isWater = hitObject.layer == LayerMask.NameToLayer("Water");
             Debug.Log($"[FishingHook] ชน \"{hitObject.name}\" (Layer: {LayerMask.LayerToName(hitObject.layer)}) — isWater = {isWater}");
 
-            if (isWater) StartFloating(hitCollider);
+            if (isWater)
+            {
+                StartFloating(hitCollider);
+                SpawnRipple();
+                SpawnSplash();
+            }
 
             owner?.OnHookLanded(isWater);
         }
@@ -122,6 +131,21 @@ namespace FishingNewSystem
 
             isFloating = true;
             StartCoroutine(WaitForBiteThenReel());
+        }
+
+        // ── spawn ripple ที่จุดกระทบน้ำจริง — ขยับตามคลื่นเดียวกับที่ Hook ใช้ลอย (ดู WaterRipple) ──
+        private void SpawnRipple()
+        {
+            if (ripplePrefab == null) return;
+            WaterRipple ripple = Instantiate(ripplePrefab, anchorPosition, Quaternion.identity);
+            ripple.Init(waterManager, baseWaterLevel, anchorPosition);
+        }
+
+        // ── spawn ละอองน้ำกระฉูดขึ้นจากจุดกระทบ (ParticleSystem เดี่ยว มี gravity ตกกลับเอง ไม่ต้องคุมตำแหน่งต่อเฟรมเหมือน ripple) ──
+        private void SpawnSplash()
+        {
+            if (splashPrefab == null) return;
+            Instantiate(splashPrefab, anchorPosition, Quaternion.identity);
         }
 
         // ── รอสุ่มเวลาจำลองปลากินเบ็ด (ยังไม่มี state ตรวจจับจริง) แล้วเริ่ม reel minigame ──

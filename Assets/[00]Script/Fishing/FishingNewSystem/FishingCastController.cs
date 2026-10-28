@@ -34,7 +34,7 @@ namespace FishingNewSystem
         [Header("Hook Throw")]
         [Tooltip("Prefab เบ็ด ต้องมี Rigidbody + Collider และติด component FishingHook")]
         [SerializeField] private GameObject hookPrefab;
-        [Tooltip("จุดปลายคัน/ปลายเบ็ด ที่ Hook จะ spawn ออกมา")]
+        [Tooltip("Fallback เฉย ๆ ถ้าหา child ชื่อ \"Spawn\" บน Rod model ที่ถืออยู่จริงไม่เจอ — ปกติระบบจะหา \"Spawn\" จาก Rod ที่ equip อยู่ให้อัตโนมัติ (ดู GetRodTip())")]
         [SerializeField] private Transform rodTip;
         [Tooltip("แรงโยนพื้นฐาน (ก่อนคูณด้วย power จากการกดค้าง)")]
         [SerializeField] private float throwForce = 8f;
@@ -135,6 +135,22 @@ namespace FishingNewSystem
             UpdateFishingLine();
         }
 
+        // หา "Spawn" (จุดปลายคัน) จาก Rod model ที่ถืออยู่จริง ณ ตอนนี้ก่อนเสมอ — กัน rodTip ที่ผูกไว้ตาย ๆ
+        // ชี้ค้างไปที่ instance Rod เก่าที่ถูก Destroy ไปแล้วตอนสลับของ/อัพเกรดคัน (Inventory.UpdateCarriedItem
+        // Instantiate รอบใหม่ทุกครั้งที่เปลี่ยนของที่ถือ) — fallback กลับไปใช้ rodTip ที่ผูกไว้ใน Inspector ถ้าหาไม่เจอ
+        private Transform GetRodTip()
+        {
+            GameObject carried = Inventory.instance != null ? Inventory.instance.CurrentCarriedModel : null;
+            if (carried != null)
+            {
+                foreach (Transform t in carried.GetComponentsInChildren<Transform>(true))
+                {
+                    if (t.name == "Spawn") return t;
+                }
+            }
+            return rodTip;
+        }
+
         // ── วาดสายเบ็ดจาก rodTip ไป Hook — หย่อน/โค้งตามปกติ ตึงเป็นเส้นตรงเฉพาะตอนปลากินเบ็ดแล้ว (isLineTaut) ──
         private void UpdateFishingLine()
         {
@@ -146,7 +162,7 @@ namespace FishingNewSystem
                 return;
             }
 
-            Vector3 start = rodTip.position;
+            Vector3 start = GetRodTip().position;
             Vector3 end = activeHook.transform.position;
 
             if (isLineTaut)
@@ -198,7 +214,7 @@ namespace FishingNewSystem
 
             // เช็คให้พร้อมโยนได้จริงก่อน ค่อยล็อกเดิน — ไม่งั้นถ้า hookPrefab/rodTip ไม่ได้ผูกไว้
             // จะล็อกเดินค้างตลอดไปโดยไม่มี Hook ให้ resolve กลับมาปลดล็อกเลย
-            if (hookPrefab == null || rodTip == null)
+            if (hookPrefab == null || GetRodTip() == null)
             {
                 Debug.LogWarning("[FishingCastController] ไม่ได้ผูก hookPrefab หรือ rodTip ใน Inspector — โยนเบ็ดไม่ได้ ไม่ล็อกเดิน");
                 return;
@@ -253,7 +269,7 @@ namespace FishingNewSystem
         private void ThrowHook(float powerMultiplier)
         {
             isLineTaut = false; // สายหย่อน/โค้งตั้งแต่โยน จนกว่าจะมีปลากินเบ็ด
-            activeHook = Instantiate(hookPrefab, rodTip.position, Quaternion.identity);
+            activeHook = Instantiate(hookPrefab, GetRodTip().position, Quaternion.identity);
 
             FishingHook hook = activeHook.GetComponent<FishingHook>();
             if (hook == null)

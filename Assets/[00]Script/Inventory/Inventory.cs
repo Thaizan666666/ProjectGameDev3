@@ -48,6 +48,9 @@ public class Inventory : MonoBehaviour
     private CartStorage _openCart = null;
     private GameObject _currentCarriedModel;
 
+    /// <summary>Model ของของที่กำลังถือ/carry อยู่จริงตอนนี้ (instance ล่าสุดจาก Instantiate ใน UpdateCarriedItem) — ใช้หา Transform ลูก (เช่น "Spawn") ที่ถูกต้องตามตัว Rod/ของที่ถืออยู่จริง ไม่ใช่ instance เก่าที่โดน Destroy ไปแล้ว</summary>
+    public GameObject CurrentCarriedModel => _currentCarriedModel;
+
     private void Awake()
     {
         instance = this;
