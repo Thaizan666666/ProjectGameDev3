@@ -53,6 +53,14 @@ namespace FishingNewSystem
         [Tooltip("ขนาดการขยับเมาส์ขั้นต่ำต่อเฟรม (px) ถึงจะนับว่ากำลังลากสวนทาง")]
         [SerializeField] private float counterMouseThreshold = 2f;
 
+        [Header("ปลาหนีหักทิศ — ตอนโดนดึงตรง ๆ ต่อเนื่อง จะกระตุกหักมุมฉากหนีเป็นช่วง ๆ (feel เหมือนปลามีไหวพริบ ไม่ใช่แค่ดึงตรง ๆ)")]
+        [Tooltip("ต้องโดนดึงด้วย alignment สูงกว่านี้ต่อเนื่อง (วินาที) ก่อนปลาจะเริ่มหนี")]
+        [SerializeField] private float evadeTriggerAfter = 0.35f;
+        [Tooltip("เวลาพักขั้นต่ำระหว่างการหนีแต่ละครั้ง (วินาที)")]
+        [SerializeField] private float evadeCooldown = 0.9f;
+        [Tooltip("แรงกระตุกหนีแต่ละครั้ง (สัดส่วนของ fishOffset magnitude)")]
+        [SerializeField] private float evadeStrength = 0.45f;
+
         [Header("ต้องอยู่ในวงเขียวนานแค่ไหนถึงเข้า QTE")]
         [SerializeField] private float holdTimeToTriggerQte = 1f;
         [Tooltip("รอเวลานี้ก่อน (วินาที) นับแต่เริ่มรอบ Centering ถึงจะเริ่มนับ hold ได้ — กัน QTE auto-trigger ทันทีตอนปลาเริ่มอยู่กลาง (fishOffset=0 ตอนเริ่ม) โดยไม่สนว่าปลาหลุดวงไปแล้วหรือยัง (กันเคสปลาสุ่ม drift ไม่หลุดวงเขียวเลยแล้วค้างไม่เข้า QTE ตลอดไป)")]
@@ -82,6 +90,8 @@ namespace FishingNewSystem
         private Unity.Cinemachine.CinemachineFollow reelCameraFollow; // cache ไว้ตั้งค่า FollowOffset หมุนเองทุกเฟรม
         private Vector2 fishOffset; // -1..1 ต่อแกน, magnitude 1 = ขอบวงใหญ่ — ใช้คำนวณตำแหน่งจริงของ Hook ด้วย
         private Vector2 driftDir;
+        private float sustainedPullTimer; // เวลาที่ถูกดึงต่อเนื่อง (alignment สูง) — ใช้ตัดสินว่าจะ trigger หนีหักทิศไหม
+        private float evadeCooldownTimer;
         private float driftTimer;
         private float holdTimer;
         private float qteTimer;
@@ -269,7 +279,10 @@ namespace FishingNewSystem
 
             fishOffset += driftDir * driftSpeed * Time.deltaTime;
 
+            if (evadeCooldownTimer > 0f) evadeCooldownTimer -= Time.deltaTime;
+
             var mouse = Mouse.current;
+            bool pullingWell = false;
             if (mouse != null && fishOffset.sqrMagnitude > 0.0001f)
             {
                 Vector2 mouseDelta = mouse.delta.ReadValue();
@@ -279,9 +292,28 @@ namespace FishingNewSystem
                     float alignment = Vector2.Dot(mouseDelta.normalized, towardCenter);
                     if (alignment > 0.3f)
                     {
+                        pullingWell = true;
                         fishOffset -= fishOffset.normalized * pullStrength * alignment * Time.deltaTime;
                     }
                 }
+            }
+
+            // ปลาหนีหักทิศ: โดนดึงตรง ๆ ต่อเนื่องนานพอ + คูลดาวน์หมดแล้ว -> กระตุกหักมุมฉากหนีแบบสุ่มซ้าย/ขวา
+            if (pullingWell)
+            {
+                sustainedPullTimer += Time.deltaTime;
+                if (sustainedPullTimer >= evadeTriggerAfter && evadeCooldownTimer <= 0f && fishOffset.sqrMagnitude > 0.0001f)
+                {
+                    Vector2 perp = new Vector2(-fishOffset.y, fishOffset.x).normalized;
+                    if (Random.value < 0.5f) perp = -perp;
+                    fishOffset += perp * fishOffset.magnitude * evadeStrength;
+                    sustainedPullTimer = 0f;
+                    evadeCooldownTimer = evadeCooldown;
+                }
+            }
+            else
+            {
+                sustainedPullTimer = 0f;
             }
 
             if (fishOffset.y < 0f) fishOffset.y = 0f; // กันไปทาง Player เด็ดขาด เผื่อ mouse-correction ดึงทะลุ 0 ไป
