@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5221397330342567497}
   - component: {fileID: 408995235895372566}
+  - component: {fileID: 6242767984045404748}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,3 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimeSystem
   realSecondsPerGameMinute: 0.5
+--- !u!114 &6242767984045404748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334372236449384627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902b362d720e562428b3e753bee8643f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
