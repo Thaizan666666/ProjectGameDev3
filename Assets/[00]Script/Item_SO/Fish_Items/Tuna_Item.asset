@@ -17,6 +17,8 @@ MonoBehaviour:
   maxStackSize: 99
   sellPrice: 1000
   itemPrefab: {fileID: 5329651924340414265, guid: f33df0d2cb40d6f4ebfebdb3c5402081, type: 3}
-  handItemPrefab: {fileID: 919132149155446097, guid: 173fc7b0aa253f14eb8eea899a11f8ee, type: 3}
+  handItemPrefab: {fileID: 5329651924340414265, guid: f33df0d2cb40d6f4ebfebdb3c5402081, type: 3}
   itemSize: 2
   itemType: 2
+  hookPullStrengthMultiplier: 1
+  hookHoldTimeReductionPercent: 0
