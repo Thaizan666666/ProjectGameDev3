@@ -252,6 +252,7 @@ namespace FishingNewSystem
 
             isCharging = true;
             chargeTimer = 0f;
+            isWaitingForBiteState = true; // กด F -> เล่น SSM_Fishing ทันที ไม่ต้องรอ Hook โดนน้ำ
         }
 
         private void ReleaseCast()
