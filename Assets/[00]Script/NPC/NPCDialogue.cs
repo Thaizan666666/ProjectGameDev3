@@ -89,6 +89,10 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         _isFacingPlayer = true;
         if (Inventory.instance != null)
             Inventory.instance.hotbatObj.SetActive(false);
+            
+        if (CameraController.Instance != null)
+                CameraController.Instance.SetCameraInput(false);
+            else Debug.Log("CameraController.Instance is null");
         _ = dialogueRunner.StartDialogue(yarnStartNode);
         // animatorNPC.SetBool("isGTalk", true);
     }
@@ -108,6 +112,8 @@ public class NPCDialogue : MonoBehaviour, IInteractable
             }
 
             _playerTransform = null;
+            if (CameraController.Instance != null)
+                CameraController.Instance.SetCameraInput(true);
             // animatorNPC.SetBool("isGTalk", false);
         }
 

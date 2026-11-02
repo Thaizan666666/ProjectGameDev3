@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Rod
   m_EditorClassIdentifier: Assembly-CSharp::TableForge.Equipment.Fishing.RodStats
   levelRod:
-  - prefabRod: {fileID: 4915167281176685968, guid: 625c2a08ed0a3e74185ab9d49ba31b71, type: 3}
+  - prefabRod: {fileID: 2356575178454205791, guid: 73ddfe49219fd3c408b3f25af6be8739, type: 3}
     upgradeCostRod: 0
     rodName: 0
     rodTier: 0
-  - prefabRod: {fileID: 8050763953741355947, guid: ce999e713d57c874db7148ff2388e0e4, type: 3}
+  - prefabRod: {fileID: 1056554559655147062, guid: e65f6341cf4b6584fbc9d9a58f0c968b, type: 3}
     upgradeCostRod: 1000
     rodName: 1
     rodTier: 1
-  - prefabRod: {fileID: 2728438858873162733, guid: b818520947ed9b74d8abd76d3dddd63f, type: 3}
+  - prefabRod: {fileID: 437708504961944695, guid: faec698db01a76d41b1e9243a6744a27, type: 3}
     upgradeCostRod: 2000
     rodName: 2
     rodTier: 2
-  - prefabRod: {fileID: 4232009826568880970, guid: 65952775c31d7de40b2deb5927b5f788, type: 3}
+  - prefabRod: {fileID: 241624247955814283, guid: ee65fd9f382202444a4c8cf2c851957a, type: 3}
     upgradeCostRod: 3000
     rodName: 3
     rodTier: 3

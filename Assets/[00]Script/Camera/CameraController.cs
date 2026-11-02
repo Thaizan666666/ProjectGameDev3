@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
     [SerializeField] private CinemachineCamera Cincamera;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     public void SetCameraInput(bool enabled)
     {

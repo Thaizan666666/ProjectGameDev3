@@ -11,7 +11,7 @@ using TableForge.Equipment.Fishing;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-    [SerializeField] private CameraController cameraController;
+    // [SerializeField] private CameraController cameraController;
 
     public ItemSO keyItem;
     public GameObject hotbatObj;
@@ -195,8 +195,9 @@ public class Inventory : MonoBehaviour
             _examplePlayer.Character.StopAllInputs();
         }
 
-        if (cameraController != null)
-            cameraController.SetCameraInput(false);
+        if (CameraController.Instance != null)
+            CameraController.Instance.SetCameraInput(false);
+            else Debug.Log("CameraController.Instance is null");
     }
 
     public void CloseInventory()
@@ -207,8 +208,8 @@ public class Inventory : MonoBehaviour
         if (_examplePlayer != null)
             _examplePlayer.SetControlEnabled(true);
 
-        if (cameraController != null)
-            cameraController.SetCameraInput(true);
+        if (CameraController.Instance != null)
+            CameraController.Instance.SetCameraInput(true);
     }
 
     public bool IsInventoryOpen() => container.activeInHierarchy;
