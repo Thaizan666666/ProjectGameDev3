@@ -50,7 +50,7 @@ public class BotWander : MonoBehaviour
 
     private void Start()
     {
-        if (startNodeIndex >= 0) currentNodeIndex = startNodeIndex;
+        currentNodeIndex = startNodeIndex >= 0 ? startNodeIndex : Random.Range(0, graphNodes.Length);
         PickNewDestination();
     }
 
